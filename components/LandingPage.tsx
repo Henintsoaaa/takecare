@@ -17,6 +17,7 @@ import {
   Menu, // Import Menu icon for the hamburger menu
   X, // Import X icon for closing the menu
 } from "lucide-react";
+import Link from "next/link";
 
 const TechHerLandingPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -136,12 +137,12 @@ const TechHerLandingPage: React.FC = () => {
             >
               À propos
             </a>
-            <a
-              href="#"
+            <Link
+              href="/login"
               className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition"
             >
               Connexion
-            </a>
+            </Link>
           </div>
           <div className="md:hidden">
             <button
