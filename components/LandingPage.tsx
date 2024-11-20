@@ -14,10 +14,13 @@ import {
   Globe,
   Star,
   Headphones,
+  Menu, // Import Menu icon for the hamburger menu
+  X, // Import X icon for closing the menu
 } from "lucide-react";
 
 const TechHerLandingPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,7 +57,7 @@ const TechHerLandingPage: React.FC = () => {
         "Bouton SOS pour support immédiat",
         "Ressources de bien-être mental",
       ],
-      image: "/Mindfulness-amico.svg", // Placeholder image for illustration
+      image: "/Mindfulness-amico.svg",
     },
     {
       icon: <Calendar className="w-12 h-12" />,
@@ -80,7 +83,6 @@ const TechHerLandingPage: React.FC = () => {
       ],
       image: "/Online connection-bro.svg",
     },
-    // Additional features
     {
       icon: <Users className="w-12 h-12" />,
       title: "Éducation",
@@ -115,7 +117,7 @@ const TechHerLandingPage: React.FC = () => {
             <Heart className="text-indigo-600 w-8 h-8" />
             <span className="text-xl font-bold text-indigo-900">Tech'Her</span>
           </div>
-          <div className="space-x-6">
+          <div className="hidden md:flex space-x-6">
             <a
               href="#"
               className="text-indigo-700 hover:text-indigo-900 transition"
@@ -141,7 +143,49 @@ const TechHerLandingPage: React.FC = () => {
               Connexion
             </a>
           </div>
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-indigo-700"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
+        {isMenuOpen && (
+          <div className="md:hidden bg-white shadow-md">
+            <div className="flex flex-col items-center py-4">
+              <a
+                href="#"
+                className="text-indigo-700 hover:text-indigo-900 transition py-2"
+              >
+                Accueil
+              </a>
+              <a
+                href="#"
+                className="text-indigo-700 hover:text-indigo-900 transition py-2"
+              >
+                Fonctionnalités
+              </a>
+              <a
+                href="#"
+                className="text-indigo-700 hover:text-indigo-900 transition py-2"
+              >
+                À propos
+              </a>
+              <a
+                href="#"
+                className="text-indigo-600 px-4 py-2 rounded-full hover:bg-indigo-700 transition"
+              >
+                Connexion
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -217,7 +261,7 @@ const TechHerLandingPage: React.FC = () => {
                 ${
                   activeTab === index
                     ? "bg-white shadow-2xl border-2 border-indigo-600"
-                    : "bg-white/50 hover:bg-white/80 border border-transparent"
+                    : "bg-white/50 hover:bg -white/80 border border-transparent"
                 }
               `}
             >
@@ -265,8 +309,8 @@ const TechHerLandingPage: React.FC = () => {
             </div>
             <div>
               <img
-                src={featuresTabs[activeTab].image} // Use the image property for the active tab
-                alt={`${featuresTabs[activeTab].title} Illustration`} // Update alt text for accessibility
+                src={featuresTabs[activeTab].image}
+                alt={`${featuresTabs[activeTab].title} Illustration`}
                 className="rounded-2xl shadow-lg w-full max-h-80"
               />
             </div>
