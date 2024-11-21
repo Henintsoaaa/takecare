@@ -112,7 +112,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:text-gray-500"
             placeholder="Enter your password"
           />
           <label
@@ -127,7 +127,7 @@ export default function LoginPage() {
             value={userType}
             onChange={(e) => setUserType(e.target.value)}
             required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:text-gray-500"
           >
             <option value="" className="text-gray-700">
               -- Sélectionnez un type --

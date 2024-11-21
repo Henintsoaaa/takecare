@@ -68,7 +68,7 @@ const EmotionForm: React.FC<{
   };
 
   return (
-    <Card className="bg-white shadow-lg max-w-xs md:max-w-xl mx-auto md:max-h-screen h-full ">
+    <Card className="rounded-lg overflow-hidden bg-white shadow-lg md:max-w-xl md:max-h-screen md:h-full ">
       {" "}
       {/* Adjusted max-width for web */}
       <CardHeader>

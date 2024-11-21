@@ -7,7 +7,7 @@ export function useAuth() {
   const login = async (email: string, password: string, userType: string) => {
     try {
       const response = await fetch(
-        "http://localhost/Devoi_socila_media/src/backend/controllers/users/login.php",
+        "http://localhost/hacker-back/users/create",
         {
           method: "POST",
           headers: {
@@ -20,7 +20,7 @@ export function useAuth() {
 
       if (response.ok) {
         const sessionResponse = await fetch(
-          "http://localhost/Devoi_socila_media/src/backend/controllers/users/check_session.php",
+          "http://localhost/hacker-back/users",
           {
             method: "GET",
             credentials: "include", // Include cookies in this request as well
@@ -52,7 +52,7 @@ export function useAuth() {
   ) => {
     try {
       const response = await fetch(
-        "http://localhost/Devoi_socila_media/src/backend/controllers/users/signup.php",
+        "http://localhost/hacker-back/users/create",
         {
           method: "POST",
           headers: {

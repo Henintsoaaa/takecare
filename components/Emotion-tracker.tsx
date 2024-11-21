@@ -59,7 +59,7 @@ const EmotionTracker = () => {
             />
             <div
               ref={formRef} // Attach ref to the EmotionForm container
-              className="z-30 fixed bottom-4 right-2 left-2 top-48"
+              className="z-30 fixed bottom-4  top-48"
             >
               <EmotionForm
                 selectedEmotion={selectedEmotion}
@@ -77,7 +77,7 @@ const EmotionTracker = () => {
             </div>
           </>
         )}
-        <div className="md:hidden">
+        <div className="md:hidden sm:block">
           <label htmlFor="entrie" className="text-gray-600 md:hidden">
             Comment vous sentez vous aujourd'hui?
           </label>
