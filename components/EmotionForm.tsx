@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios"; // Import axios
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import EmotionList from "./EmotionList"; // Adjust the import path as necessary
@@ -34,7 +34,6 @@ const EmotionForm: React.FC<{
   const handleSubmission = (e: React.FormEvent) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
-    // Convert isAnonymous to 1 or 0
     const anonymousValue = isAnonymous ? 1 : 0;
 
     console.log("data:", {
@@ -43,10 +42,9 @@ const EmotionForm: React.FC<{
       note: notes,
       well_being_score: wellbeingLevel,
       user_id: userId,
-      anonymous: anonymousValue, // Include the converted anonymity value in the submission data
+      anonymous: anonymousValue,
     });
 
-    // Send data to the specified endpoint
     axios
       .post("http://localhost:8080/entries/create.php", {
         emotion: selectedEmotion,
@@ -54,16 +52,15 @@ const EmotionForm: React.FC<{
         note: notes,
         well_being_score: wellbeingLevel,
         user_id: userId,
-        isAnonyme: anonymousValue, // Include the converted anonymity value in the request
+        isAnonyme: anonymousValue,
       })
       .then((response) => {
         console.log("Response:", response);
-        // Optionally reset the form after submission
         setSelectedEmotion("");
         setWellbeingLevel(3);
         setPositiveMoment("");
         setNotes("");
-        setIsAnonymous(false); // Reset anonymity checkbox
+        setIsAnonymous(false);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -71,30 +68,32 @@ const EmotionForm: React.FC<{
   };
 
   return (
-    <Card className="bg-white shadow-lg">
+    <Card className="bg-white shadow-lg max-w-xs md:max-w-xl mx-auto md:max-h-screen h-full ">
+      {" "}
+      {/* Adjusted max-width for web */}
       <CardHeader>
-        <CardTitle className="flex items-center">
+        <CardTitle className="text-sm md:text-lg font-semibold">
+          {" "}
+          {/* Adjusted font size for web */}
           Comment vous sentez-vous aujourd'hui ?
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmission} className="space-y-6 flex flex-col">
-          {/* Sélection d'émotion */}
+        <form onSubmit={handleSubmission} className="space-y-4 flex flex-col">
           <EmotionList
             selectedEmotion={selectedEmotion}
             onSelectEmotion={setSelectedEmotion}
           />
-          {/* Échelle de bien-être */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-xs md:text-sm font-medium text-gray-700">
               Niveau de bien-être
             </label>
             <div className="flex justify-between">
               {[1, 2, 3, 4, 5].map((level) => (
                 <button
                   key={level}
-                  type="button" // Ensure buttons don't submit the form
-                  className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  type="button"
+                  className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center ${
                     wellbeingLevel === level
                       ? "bg-indigo-600 text-white"
                       : "bg-gray-100 hover:bg-gray-100 text-gray-700"
@@ -107,42 +106,29 @@ const EmotionForm: React.FC<{
             </div>
           </div>
 
-          {/* Positive Moment */}
-          {/* <div>
-            <label className="text-sm font-medium text-gray-700">
-              Moment positif
-            </label>
-            <input
-              className="w-full p-3 border rounded-lg h-12 outline-none bg-white"
-              value={positiveMoment}
-              onChange={(e) => setPositiveMoment(e.target.value)}
-            />
-          </div> */}
-          {/* Notes */}
           <div>
             <textarea
-              className="w-full p-3 border rounded-lg h-24 outline-none bg-white"
-              placeholder="Notez vos pensées..." // Corrected placeholder usage
+              className="w-full p-2 md:p-3 border rounded-lg h-16 md:h-24 outline-none bg-white" // Adjusted height for web
+              placeholder="Notez vos pensées..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
             />
           </div>
-          {/* Anonymity Checkbox */}
-          <div className="flex items-center">
+          <div className="flex items-center text-xs md:text-sm">
             <input
               type="checkbox"
               id="anonymous"
               checked={isAnonymous}
               onChange={() => setIsAnonymous(!isAnonymous)}
-              className="mr-2"
+              className="mr-1"
             />
-            <label htmlFor="anonymous" className="text-sm text-gray-700">
+            <label htmlFor="anonymous" className="text-gray-700">
               Soumettre anonymement
             </label>
           </div>
           <button
             type="submit"
-            className="w-full py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+            className="w-full py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 text-sm md:text-base"
           >
             Enregistrer
           </button>

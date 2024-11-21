@@ -3,12 +3,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 interface Emotion {
-  emotion_id: number; // Matches the API response
-  emotion_name: string; // Matches the API response
-  emoji: string; // Added emoji property
+  emotion_id: number;
+  emotion_name: string;
+  emoji: string;
 }
 
-// Mapping of emotion names to emojis
 const emojiMapping: { [key: string]: string } = {
   Heureuse: "😊",
   Triste: "😢",
@@ -27,13 +26,12 @@ const EmotionList: React.FC<{
   const fetchEmotions = async () => {
     try {
       const response = await axios.get<{ status: string; data: Emotion[] }>(
-        "http://localhost:8080/emotion/read.php" // Ensure this URL is correct
+        "http://localhost:8080/emotion/read.php"
       );
       if (response.data.status === "success") {
-        // Map the fetched emotions to include emojis
         const emotionsWithEmojis = response.data.data.map((emotion) => ({
           ...emotion,
-          emoji: emojiMapping[emotion.emotion_name] || "😊", // Default emoji if not found
+          emoji: emojiMapping[emotion.emotion_name] || "😊",
         }));
         setEmotions(emotionsWithEmojis);
       }
@@ -47,20 +45,24 @@ const EmotionList: React.FC<{
   }, []);
 
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div className="grid grid-cols-3 gap-2 md:grid-cols-3">
+      {" "}
+      {/* Adjusted grid for web */}
       {emotions.map((emotion) => (
         <span
-          key={emotion.emotion_id} // Using emotion_id as the key
-          className={`p-3 rounded-lg flex flex-col items-center transition-all duration-200 ${
+          key={emotion.emotion_id}
+          className={`p-2 rounded-lg flex flex-col items-center transition-all duration-200 ${
             selectedEmotion === emotion.emotion_name
-              ? "bg-indigo-200 border-2 border-indigo-600 text-gray-600" // Highlight selected emotion
-              : "bg-gray-50 hover:bg-gray-100 text-gray-600" // Default theme
+              ? "bg-indigo-200 border-2 border-indigo-600 text-gray-600"
+              : "bg-gray-50 hover:bg-gray-100 text-gray-600"
           }`}
-          onClick={() => onSelectEmotion(emotion.emotion_name)} // Allow selection
+          onClick={() => onSelectEmotion(emotion.emotion_name)}
         >
-          <span className="text-2xl mb-1">{emotion.emoji}</span>{" "}
-          {/* Displaying the emoji */}
-          <span className="text-sm">{emotion.emotion_name}</span>
+          <span className="text-xl mb-1">{emotion.emoji}</span>
+          <span className="text-xs md:text-sm">
+            {emotion.emotion_name}
+          </span>{" "}
+          {/* Adjusted font size for web */}
         </span>
       ))}
     </div>

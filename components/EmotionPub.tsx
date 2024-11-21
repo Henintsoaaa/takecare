@@ -82,7 +82,7 @@ const EmotionShare = () => {
   };
 
   return (
-    <div className="p-5 max-w-xl flex flex-col gap-4">
+    <div className="p-5 w-3xl flex flex-col gap-4">
       {loading && (
         <p className="text-center text-lg text-gray-600">Loading posts...</p>
       )}
@@ -91,7 +91,7 @@ const EmotionShare = () => {
       {posts.map((post) => (
         <Card
           key={post.entry_id}
-          className="bg-white border border-gray-300 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+          className="bg-white border border-gray-300 rounded-lg shadow-lg "
         >
           <CardContent className="p-4">
             <div>
