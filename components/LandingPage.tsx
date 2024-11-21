@@ -208,12 +208,18 @@ const TechHerLandingPage: React.FC = () => {
             votre bien-être physique, mental et émotionnel.
           </p>
           <div className="flex space-x-4">
-            <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center">
+            <Link
+              href="/login"
+              className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center"
+            >
               Commencer <ArrowRight className="ml-2" />
-            </button>
-            <button className="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-50 transition">
+            </Link>
+            <Link
+              href="/login"
+              className="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-50 transition"
+            >
               Découvrir
-            </button>
+            </Link>
           </div>
         </motion.div>
 
@@ -377,9 +383,12 @@ const TechHerLandingPage: React.FC = () => {
               autonomise.
             </p>
             <div className="flex justify-center space-x-4">
-              <button className="bg-white text-indigo-700 px-8 py-3 rounded-lg hover:bg-purple-50 transition">
+              <Link
+                href="/login"
+                className="bg-white text-indigo-700 px-8 py-3 rounded-lg hover:bg-purple-50 transition"
+              >
                 S'inscrire Gratuitement
-              </button>
+              </Link>
               <button className="border border-white text-white px-8 py-3 rounded-lg hover:bg-indigo-700/20 transition">
                 En savoir plus
               </button>

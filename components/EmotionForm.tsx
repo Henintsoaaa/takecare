@@ -78,7 +78,7 @@ const EmotionForm: React.FC<{
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmission} className="space-y-6">
+        <form onSubmit={handleSubmission} className="space-y-6 flex flex-col">
           {/* Sélection d'émotion */}
           <EmotionList
             selectedEmotion={selectedEmotion}
@@ -97,7 +97,7 @@ const EmotionForm: React.FC<{
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     wellbeingLevel === level
                       ? "bg-indigo-600 text-white"
-                      : "bg-gray-100 hover:bg-gray-200"
+                      : "bg-gray-100 hover:bg-gray-100 text-gray-700"
                   }`}
                   onClick={() => setWellbeingLevel(level)}
                 >
@@ -108,7 +108,7 @@ const EmotionForm: React.FC<{
           </div>
 
           {/* Positive Moment */}
-          <div>
+          {/* <div>
             <label className="text-sm font-medium text-gray-700">
               Moment positif
             </label>
@@ -117,7 +117,7 @@ const EmotionForm: React.FC<{
               value={positiveMoment}
               onChange={(e) => setPositiveMoment(e.target.value)}
             />
-          </div>
+          </div> */}
           {/* Notes */}
           <div>
             <textarea

@@ -26,7 +26,9 @@ export const CardHeader = ({ children }: CardHeaderProps) => (
 );
 
 export const CardTitle = ({ children, className }: CardTitleProps) => (
-  <h2 className={`text-lg font-semibold ${className}`}>{children}</h2>
+  <h2 className={`text-lg font-semibold text-gray-600 ${className}`}>
+    {children}
+  </h2>
 );
 
 export const CardContent = ({ children, className }: CardContentProps) => (

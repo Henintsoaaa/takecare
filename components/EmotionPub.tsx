@@ -96,13 +96,17 @@ const EmotionShare = () => {
           <CardContent className="p-4">
             <div>
               {post.isAnonyme !== 1 ? (
-                <span className="font-bold text-xl text-indigo-600">
-                  {post.username}
-                </span>
+                <div>
+                  <span className="font-bold text-xl text-indigo-600">
+                    {post.username}
+                  </span>
+                </div>
               ) : (
-                <span className="font-bold text-xl text-indigo-600">
-                  Anonymous
-                </span>
+                <div>
+                  <span className="font-bold text-xl text-indigo-600">
+                    Anonymous
+                  </span>
+                </div>
               )}
               <p className="mt-2 text-gray-800">{post.notes}</p>
               <small className="text-gray-500">

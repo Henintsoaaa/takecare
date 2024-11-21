@@ -22,15 +22,15 @@ const EmotionTracker = () => {
   return (
     <div className=" md:max-w-6xl mx-auto p-4 space-y-6">
       {/* Redirect Button */}
-      <div className="text-right">
+      {/* <div className="text-right">
         <button
           onClick={handleRedirect}
           className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-200"
         >
           Évaluer mon bien-être
         </button>
-      </div>
-      <div className="text-center mb-8">
+      </div> */}
+      <div className="text-center mb-8 sticky top-7 left-20">
         <h1 className="text-3xl font-bold text-indigo-800 mb-2">
           Partager vos idées, soyez à l'écoute !
         </h1>
@@ -38,13 +38,13 @@ const EmotionTracker = () => {
       </div>
 
       {/* Section principale */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="flex flex-col md:flex-row md:justify-between gap-6">
         {/* Scrollable container for EmotionShare */}
         <div className="overflow-y-auto max-h-screen">
           <EmotionShare />
         </div>
         {/* Scrollable container for EmotionForm */}
-        <div className="overflow-y-auto max-h-screen">
+        <div className="fixed right-8 bottom-3 max-h-screen">
           <EmotionForm
             selectedEmotion={selectedEmotion}
             setSelectedEmotion={setSelectedEmotion}
