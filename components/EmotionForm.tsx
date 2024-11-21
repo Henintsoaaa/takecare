@@ -46,7 +46,7 @@ const EmotionForm: React.FC<{
     });
 
     axios
-      .post("http://localhost:8080/entries/create.php", {
+      .post("http://localhost/hacker-back/posts/create", {
         emotion: selectedEmotion,
         positive_moment: positiveMoment,
         note: notes,
@@ -108,7 +108,7 @@ const EmotionForm: React.FC<{
 
           <div>
             <textarea
-              className="w-full p-2 md:p-3 border rounded-lg h-16 md:h-24 outline-none bg-white" // Adjusted height for web
+              className="w-full p-2 md:p-3 border rounded-lg h-16 md:h-24 outline-none bg-white focus:text-gray-700" // Adjusted height for web
               placeholder="Notez vos pensées..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}

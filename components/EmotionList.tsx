@@ -26,8 +26,10 @@ const EmotionList: React.FC<{
   const fetchEmotions = async () => {
     try {
       const response = await axios.get<{ status: string; data: Emotion[] }>(
-        "http://localhost:8080/emotion/read.php"
+        "http://localhost/hacker-back/emotion"
       );
+      console.log(response);
+
       if (response.data.status === "success") {
         const emotionsWithEmojis = response.data.data.map((emotion) => ({
           ...emotion,

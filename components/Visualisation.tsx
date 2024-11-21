@@ -1,9 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios"; // Import axios
-import { LineChart } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Line,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+  LineChart,
+} from "recharts";
 
 // Accept userId as a prop
 interface VisualisationProps {
@@ -19,7 +25,7 @@ const Visualisation: React.FC<VisualisationProps> = ({ userId }) => {
     const fetchMoodData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/entries/getData.php?user_id=${userId}` // Use userId from props
+          `http://localhost/entries/read.php?user_id=${userId}` // Use userId from props
         );
         setMoodData(response.data as { date: string; niveau: number }[]); // Set moodData with the response data
       } catch (error) {

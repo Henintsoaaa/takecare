@@ -6,7 +6,6 @@ import EmotionMoyen from "./EmotionMoyen";
 import WellBeingScoreMoyen from "./WellBeingScoreMoyen";
 import { Card, CardContent } from "@/components/ui/card";
 import { BellRing, LockKeyhole } from "lucide-react";
-import Sidebar from "./Sidebar"; // Import the Sidebar component
 
 const EmotionEvaluation = () => {
   const userId = 2;
@@ -19,7 +18,6 @@ const EmotionEvaluation = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <Sidebar activePath="/emotion-tracker" />
 
       {/* Main Content Area */}
       <div className="flex-1 p-8 ml-64">

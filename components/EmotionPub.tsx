@@ -29,10 +29,9 @@ const EmotionShare = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/entries/fetchData.php"
-        );
-        setPosts(response.data as Post[]); // Set the fetched data to state
+        const response = await axios.get("http://localhost/hacker-back/posts");
+
+        setPosts(response.data.data as Post[]); // Set the fetched data to state
       } catch (error) {
         setError("Error fetching data. Please try again later.");
         console.error("Error fetching data:", error);
