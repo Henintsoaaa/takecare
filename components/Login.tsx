@@ -25,10 +25,13 @@ const Login = () => {
 
     if (formType === "login") {
       // send login request with email and password, if  successful, get a cookie from the server and create a session with it
-      const response = axios.post("http://192.168.1.54/hacker-back/signIn", {
-        email,
-        password,
-      });
+      const response = axios.post(
+        "${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/signIn",
+        {
+          email,
+          password,
+        }
+      );
 
       // if successful, create a session with the cookie
       const val = await response;
@@ -45,12 +48,15 @@ const Login = () => {
         setError(val.data.message);
       }
     } else {
-      const response = axios.post("http://192.168.1.54/hacker-back/signUp", {
-        username: username,
-        email: email,
-        password: password,
-        role: userType,
-      });
+      const response = axios.post(
+        "${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/signUp",
+        {
+          username: username,
+          email: email,
+          password: password,
+          role: userType,
+        }
+      );
 
       const val = await response;
       // console.log(val);

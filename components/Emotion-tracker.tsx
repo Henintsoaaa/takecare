@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"; // Import useRouter for navigation
 import EmotionForm from "./EmotionForm";
 import EmotionShare from "./EmotionPub";
 import { Smile } from "lucide-react";
+import PublicationStyle from "./PublicationStyle";
 
 const userId = 2;
 
@@ -92,8 +93,11 @@ const EmotionTracker = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col md:w-full">
+        <div className="flex flex-col md:w-full md:flex-row">
           {/* Scrollable container for EmotionShare */}
+          <div>
+            <PublicationStyle />
+          </div>
           <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto">
             {" "}
             {/* Adjusted width for web */}

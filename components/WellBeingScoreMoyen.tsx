@@ -10,7 +10,7 @@ const WellBeingScoreMoyen = ({ userId }: { userId: number }) => {
   const fetchWellBeingScores = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.1.54/entries/read.php?user_id=${userId}`
+        `${process.env.NEXT_PUBLIC_IP_KEY}/entries/read.php?user_id=${userId}`
       );
       const moodData = response.data as { date: string; niveau: number }[];
 
