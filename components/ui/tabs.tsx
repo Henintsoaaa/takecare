@@ -76,14 +76,15 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({
 }) => (
   <button
     className={`${className} ${
-      activeTab === value ? "data-[state=active]:bg-purple-100" : ""
-    }`}
+      activeTab === value
+        ? "bg-purple-200 text-black font-semibold"
+        : "hover:bg-purple-100 text-gray-700"
+    } p-3 rounded-lg transition-all duration-200`}
     onClick={() => setActiveTab(value)}
   >
     {children}
   </button>
 );
-
 interface TabsContentProps {
   value: string;
   children: React.ReactNode;

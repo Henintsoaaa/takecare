@@ -63,6 +63,8 @@ const Login = () => {
         // create a session with the cookie
         const cookie: cookieData = val.data.data;
         document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
+        // log the session cookie
+        console.log(document.cookie);
         // redirect to /emotion-tracker
         console.log("redirecting to /emotion-tracker");
         redirect("/emotion-tracker");
