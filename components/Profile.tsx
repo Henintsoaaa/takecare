@@ -39,7 +39,7 @@ const Profile = ({ userId }: ProfileProps) => {
       try {
         // Fetch user data
         const response = await axios.get(
-          `http://192.168.1.54/hacker-back/users?userId=${userId}`
+          `${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/users?userId=${userId}`
         );
         const userData = response.data.data.find(
           (user: UserData) => user.id === parseInt(userId)
@@ -50,7 +50,7 @@ const Profile = ({ userId }: ProfileProps) => {
 
         // Fetch about data
         const response2 = await axios.get(
-          `http://192.168.1.54/hacker-back/about?userId=${userId}`
+          `${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/about?userId=${userId}`
         );
         const aboutData = response2.data.data.find(
           (about: AboutData) => about.user_id === parseInt(userId)
@@ -61,14 +61,14 @@ const Profile = ({ userId }: ProfileProps) => {
 
         // Fetch contact data
         const response3 = await axios.get(
-          `http://192.168.1.54/hacker-back/contact?userId=${userId}`
+          `${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/contact?userId=${userId}`
         );
         const contactData = response3.data.data as ContactData;
         setContact(contactData.contact);
 
         // Fetch profile picture data
         const response4 = await axios.get(
-          `http://192.168.1.54/hacker-back/profile-picture?userId=${userId}`
+          `${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/profile-picture?userId=${userId}`
         );
         const profilePictureData = response4.data.data as ProfilePictureData;
         setProfilePicture(profilePictureData.profilePicture);
