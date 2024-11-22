@@ -20,7 +20,7 @@ const EmotionMoyen = ({ userId }: { userId: number }) => {
   const fetchEmotionMoyen = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.154/entries/getData.php?user_id=${userId}`
+        `http://192.168.1.54/entries/getData.php?user_id=${userId}`
       );
       const moodData = response.data as { date: string; emotion: string }[];
 

@@ -33,25 +33,25 @@ const Profile = ({ userId }: ProfileProps) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://192.168.154/hacker-back/users?userId=${userId}`
+        `http://192.168.1.54/hacker-back/users?userId=${userId}`
       );
       const userData = response.data.data as UserData;
       setUsername(userData.username);
 
       const response2 = await axios.get(
-        `http://192.168.154/hacker-back/about?userId=${userId}`
+        `http://192.168.1.54/hacker-back/about?userId=${userId}`
       );
       const aboutData = response2.data.data as AboutData;
       setAbout(aboutData.about);
 
       const response3 = await axios.get(
-        `http://192.168.154/hacker-back/contact?userId=${userId}`
+        `http://192.168.1.54/hacker-back/contact?userId=${userId}`
       );
       const contactData = response3.data.data as ContactData;
       setContact(contactData.contact);
 
       const response4 = await axios.get(
-        `http://192.168.154/hacker-back/profile-picture?userId=${userId}`
+        `http://192.168.1.54/hacker-back/profile-picture?userId=${userId}`
       );
       const profilePictureData = response4.data.data as ProfilePictureData;
       setProfilePicture(profilePictureData.profilePicture);

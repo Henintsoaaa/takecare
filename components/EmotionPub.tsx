@@ -30,7 +30,7 @@ const EmotionShare = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.154/hacker-back/posts"
+          "http://192.168.1.54/hacker-back/posts"
         );
 
         setPosts(response.data.data as Post[]); // Set the fetched data to state

@@ -39,7 +39,7 @@ const UserEmotionList: React.FC<UserEmotionListProps> = ({ userId }) => {
             positive_moment: string;
             emotion: string;
           }[]
-        >(`http://192.168.154/entries/read.php?user_id=${userId}`)
+        >(`http://192.168.1.54/entries/read.php?user_id=${userId}`)
         .then((response) => {
           setUserEmotion(response.data);
         })
