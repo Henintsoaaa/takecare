@@ -25,7 +25,7 @@ const Visualisation: React.FC<VisualisationProps> = ({ userId }) => {
     const fetchMoodData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost/entries/read.php?user_id=${userId}` // Use userId from props
+          `http://192.168.154/entries/read.php?user_id=${userId}` // Use userId from props
         );
         setMoodData(response.data as { date: string; niveau: number }[]); // Set moodData with the response data
       } catch (error) {

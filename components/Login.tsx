@@ -25,7 +25,7 @@ const Login = () => {
 
     if (formType === "login") {
       // send login request with email and password, if  successful, get a cookie from the server and create a session with it
-      const response = axios.post("http://localhost/hacker-back/signIn", {
+      const response = axios.post("http://192.168.154/hacker-back/signIn", {
         email,
         password,
       });
@@ -45,7 +45,7 @@ const Login = () => {
         setError(val.data.message);
       }
     } else {
-      const response = axios.post("http://localhost/hacker-back/signUp", {
+      const response = axios.post("http://192.168.154/hacker-back/signUp", {
         username: username,
         email: email,
         password: password,
@@ -104,7 +104,7 @@ const Login = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
                   placeholder="Enter your username"
                 />
               </motion.div>

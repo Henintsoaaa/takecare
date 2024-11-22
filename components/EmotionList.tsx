@@ -26,7 +26,7 @@ const EmotionList: React.FC<{
   const fetchEmotions = async () => {
     try {
       const response = await axios.get<{ status: string; data: Emotion[] }>(
-        "http://localhost/hacker-back/emotion"
+        "http://192.168.154/hacker-back/emotion"
       );
       console.log(response);
 

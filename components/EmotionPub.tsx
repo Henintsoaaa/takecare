@@ -29,7 +29,9 @@ const EmotionShare = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost/hacker-back/posts");
+        const response = await axios.get(
+          "http://192.168.154/hacker-back/posts"
+        );
 
         setPosts(response.data.data as Post[]); // Set the fetched data to state
       } catch (error) {
