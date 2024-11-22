@@ -44,7 +44,7 @@ const PublicationStyle = () => {
   return (
     <div className="space-y-6 p-6 rounded-lg">
       <div className="text-center shadow-lg hidden md:block">
-        <h2 className="text-3xl font-bold text-indigo-600 mb-2">Quizz</h2>
+        <h2 className="text-2xl font-bold text-indigo-600 mb-2">Quizz</h2>
         <p className="text-lg text-gray-700">
           Participer à des quiz intéressants
         </p>
@@ -56,7 +56,7 @@ const PublicationStyle = () => {
         </button>
       </div>
       <div className="text-center shadow-lg hidden md:block">
-        <h2 className="text-3xl font-bold text-indigo-600 mb-2">Assistance</h2>
+        <h2 className="text-2xl font-bold text-indigo-600 mb-2">Assistance</h2>
         <p className="text-lg text-gray-700">
           Bénéficier d'une assistance personnelle
         </p>

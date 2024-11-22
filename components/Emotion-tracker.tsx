@@ -88,7 +88,7 @@ const EmotionTracker = () => {
           <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto">
             <EmotionShare />
           </div>
-          <div className="fixed bottom-9 right-3 z-10 hidden">
+          <div className="fixed bottom-9 right-3 z-10 hidden md:block">
             <EmotionForm
               selectedEmotion={selectedEmotion}
               setSelectedEmotion={setSelectedEmotion}
