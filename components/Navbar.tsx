@@ -7,15 +7,17 @@ import UserMenu from "./UserMenu"; // Import the UserMenu component
 const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-4 bg-gray-300 shadow-md md:px-9 px-1">
-      <div className="flex gap-4 justify-center items-center">
-        <Heart
-          size={40}
-          className="text-indigo-600 hover:text-indigo-700 md:w-[40px] md:h-[40px]"
-        />
-        <span className="text-xl font-bold hidden md:block text-indigo-700">
-          Tech'her
-        </span>
-      </div>
+      <Link href="/emotion-tracker">
+        <div className="flex gap-4 justify-center items-center">
+          <Heart
+            size={40}
+            className="text-indigo-600 hover:text-indigo-700 md:w-[40px] md:h-[40px]"
+          />
+          <span className="text-xl font-bold hidden md:block text-indigo-700">
+            Tech'her
+          </span>
+        </div>
+      </Link>
       <div className="flex space-x-4 items-center">
         <Link
           href="#"

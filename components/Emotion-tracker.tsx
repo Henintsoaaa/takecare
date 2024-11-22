@@ -87,13 +87,10 @@ const EmotionTracker = () => {
           </div>
         </div>
         <div className="flex flex-col md:w-full md:flex-row z-0">
-          <div className="flex-1 p-4">
-            <PublicationStyle />
-          </div>
           <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto z-0">
             <EmotionShare />
           </div>
-          <div className="fixed bottom-2 right-3 z-10">
+          <div className="fixed bottom-9 right-3 z-10">
             <EmotionForm
               selectedEmotion={selectedEmotion}
               setSelectedEmotion={setSelectedEmotion}

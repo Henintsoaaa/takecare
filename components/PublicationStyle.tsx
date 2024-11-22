@@ -1,5 +1,6 @@
-// PublicationStyle.js
-import React from "react";
+"use client";
+import { useState } from "react";
+import { redirect } from "next/navigation";
 
 const PublicationStyle = () => {
   const quotes = [
@@ -15,7 +16,7 @@ const PublicationStyle = () => {
     },
     {
       id: 3,
-      text: "Le bonheur n 'est pas quelque chose de prêt à l'emploi. Il vient de vos propres actions.",
+      text: "Le bonheur n'est pas quelque chose de prêt à l'emploi. Il vient de vos propres actions.",
       author: "Dalai Lama",
     },
     {
@@ -30,23 +31,75 @@ const PublicationStyle = () => {
     },
   ];
 
+  const [showAll, setShowAll] = useState(false);
+
+  const handleClick = () => {
+    redirect("/quizz");
+  };
+
+  const redirectToAssistance = () => {
+    redirect("/assistance");
+  };
+
   return (
-    <div className="space-y-4 p-4 bg-gray-100 rounded-lg shadow-md z-10">
-      <h2 className="text-2xl font-bold text-indigo-600 mb-4">
-        Inspiration du Jour
-      </h2>
-      <div className="grid grid-cols-1 gap-4">
-        {quotes.map((quote) => (
-          <div
-            key={quote.id}
-            className="border border-indigo-300 rounded-lg p-4 bg-white shadow-lg transition-transform transform hover:scale-105"
+    <div className="space-y-6 p-6 rounded-lg z-10">
+      <div className="text-center shadow-lg">
+        <h2 className="text-3xl font-bold text-indigo-600 mb-2">Quizz</h2>
+        <p className="text-lg text-gray-700">
+          Participer à des quiz intéressants
+        </p>
+        <button
+          onClick={handleClick}
+          className="my-4 w-4/5 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
+        >
+          Commencer le Quizz
+        </button>
+      </div>
+      <div className="text-center shadow-lg">
+        <h2 className="text-3xl font-bold text-indigo-600 mb-2">Assistance</h2>
+        <p className="text-lg text-gray-700">
+          Bénéficier d'une assistance personnelle
+        </p>
+        <button
+          onClick={redirectToAssistance}
+          className="my-4 w-4/5 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
+        >
+          Demarer
+        </button>
+      </div>
+      <div className="shadow-lg">
+        <h2 className="text-2xl font-semibold text-indigo-600 text-center mb-4">
+          Inspiration du Jour
+        </h2>
+        <div className="grid grid-cols-1 gap-6">
+          {quotes.slice(0, showAll ? quotes.length : 2).map((quote) => (
+            <div
+              key={quote.id}
+              className="border border-indigo-300 rounded-lg p-6 bg-white shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl"
+            >
+              <p className="text-lg italic text-gray-800">"{quote.text}"</p>
+              <p className="text-right text-sm text-gray-500 mt-4">
+                - {quote.author}
+              </p>
+            </div>
+          ))}
+        </div>
+        {!showAll && (
+          <button
+            onClick={() => setShowAll(true)}
+            className="mt-4 w-full py-2  text-indigo-600 font-semibold rounded-lg shadow-md hover:underline 0 transition duration-300"
           >
-            <p className="text-lg italic text-gray-800">"{quote.text}"</p>
-            <p className="text-right text-sm text-gray-500 mt-2">
-              - {quote.author}
-            </p>
-          </div>
-        ))}
+            Voir Plus
+          </button>
+        )}
+        {showAll && (
+          <button
+            onClick={() => setShowAll(false)}
+            className="mt-4 w-full py-2  text-indigo-600 font-semibold rounded-lg shadow-md hover:underline 0 transition duration-300"
+          >
+            Voir moins
+          </button>
+        )}
       </div>
     </div>
   );
