@@ -49,7 +49,6 @@ const Login = () => {
     } else {
       const response = axios.post(
         `${process.env.NEXT_PUBLIC_IP_KEY}/hacker-back/signUp`,
-        `${process.env.NEXT_PUBLIC_IP_KEY}/hacker-back/signUp`,
         {
           username: username,
           email: email,
