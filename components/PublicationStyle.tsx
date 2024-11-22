@@ -15,7 +15,7 @@ const PublicationStyle = () => {
     },
     {
       id: 3,
-      text: "Le bonheur n'est pas quelque chose de prêt à l'emploi. Il vient de vos propres actions.",
+      text: "Le bonheur n 'est pas quelque chose de prêt à l'emploi. Il vient de vos propres actions.",
       author: "Dalai Lama",
     },
     {
@@ -31,7 +31,7 @@ const PublicationStyle = () => {
   ];
 
   return (
-    <div className="space-y-4 p-4 bg-gray-100 rounded-lg shadow-md">
+    <div className="space-y-4 p-4 bg-gray-100 rounded-lg shadow-md z-10">
       <h2 className="text-2xl font-bold text-indigo-600 mb-4">
         Inspiration du Jour
       </h2>
