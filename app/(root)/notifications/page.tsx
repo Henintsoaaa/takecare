@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import {
   Bell,
   MessageSquare,
@@ -8,6 +8,11 @@ import {
   FilePlus,
   MessageCircle,
 } from "lucide-react"; // Import Lucid Icons
+
+interface Actor {
+  id: number;
+  name: string;
+}
 
 interface Notification {
   id: number;
@@ -39,7 +44,7 @@ const _notifications: Notification[] = [
   {
     id: 2,
     user_id: 1,
-    actor_id: 2,
+    actor_id: 3,
     user_name: "user1",
     type: "comment",
     is_read: false,
@@ -51,7 +56,7 @@ const _notifications: Notification[] = [
   {
     id: 3,
     user_id: 1,
-    actor_id: 2,
+    actor_id: 4,
     user_name: "user1",
     type: "reaction",
     is_read: false,
@@ -74,6 +79,19 @@ const _notifications: Notification[] = [
   },
 ];
 
+const fetchActors = async (actorIds: number[]): Promise<Actor[]> => {
+  // Simulate fetching actor names from an API
+  return new Promise<Actor[]>((resolve) => {
+    setTimeout(() => {
+      resolve([
+        { id: 2, name: "acteur2" },
+        { id: 3, name: "acteur3" },
+        { id: 4, name: "acteur4" },
+      ]);
+    }, 1000);
+  });
+};
+
 const NotificationIcon = ({ type }: { type: Notification["type"] }) => {
   switch (type) {
     case "new_post":
@@ -89,7 +107,27 @@ const NotificationIcon = ({ type }: { type: Notification["type"] }) => {
   }
 };
 
-const NotificationItem = ({ notification }: { notification: Notification }) => {
+const NotificationItem = ({
+  notification,
+  actorName,
+}: {
+  notification: Notification;
+  actorName: string;
+}) => {
+  const description = {
+    new_post: `${actorName} a créé un nouveau post.`,
+    comment: `${actorName} a commenté votre post.`,
+    reaction: `${actorName} a réagi à votre post.`,
+    comment_reaction: `${actorName} a réagi à votre commentaire.`,
+  };
+
+  const title = {
+    new_post: "Nouveau Post",
+    comment: "Commentaire",
+    reaction: "Réaction",
+    comment_reaction: "Réaction un Commentaire",
+  };
+
   return (
     <div
       className={`flex items-center p-4 border-b ${
@@ -98,9 +136,9 @@ const NotificationItem = ({ notification }: { notification: Notification }) => {
     >
       <NotificationIcon type={notification.type} />
       <div className="ml-3">
-        <p className="font-semibold">{notification.user_name}</p>
+        <p className="font-semibold">{title[notification.type]}</p>
         <p className="text-sm text-gray-600">
-          {notification.type.replace("_", " ")}
+          {description[notification.type]}
         </p>
         <p className="text-xs text-gray-400">
           {notification.created_at.toLocaleTimeString()}
@@ -113,14 +151,26 @@ const NotificationItem = ({ notification }: { notification: Notification }) => {
 const NotificationsList = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
+  const [actors, setActors] = useState<{ [key: number]: string }>({});
 
   useEffect(() => {
-    setNotifications(_notifications);
-    setLoading(false);
+    const loadNotifications = async () => {
+      // Simulate fetching notifications from an API
+      setNotifications(_notifications);
+      const actorIds = _notifications.map((n) => n.actor_id);
+      const fetchedActors = await fetchActors(actorIds);
+      const actorMap = Object.fromEntries(
+        fetchedActors.map((actor) => [actor.id, actor.name])
+      );
+      setActors(actorMap);
+      setLoading(false);
+    };
+
+    loadNotifications();
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading notifications...</div>;
   }
 
   return (
@@ -130,7 +180,11 @@ const NotificationsList = () => {
       </div>
       <div>
         {notifications.map((notification) => (
-          <NotificationItem key={notification.id} notification={notification} />
+          <NotificationItem
+            key={notification.id}
+            notification={notification}
+            actorName={actors[notification.actor_id] || "Acteur Inconnu"}
+          />
         ))}
       </div>
     </div>
@@ -140,7 +194,9 @@ const NotificationsList = () => {
 const Page = () => {
   return (
     <div className="p-4">
-      <NotificationsList />
+      <Suspense fallback={<div>Loading notifications...</div>}>
+        <NotificationsList />
+      </Suspense>
     </div>
   );
 };
