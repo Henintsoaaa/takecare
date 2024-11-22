@@ -17,35 +17,29 @@ const EmotionShare = () => {
   const [loading, setLoading] = useState<boolean>(true); // Loading state
   const [error, setError] = useState<string | null>(null); // Error state
 
-  // State for comments
   const [comments, setComments] = useState<{ [key: number]: string }>({});
-
-  // State for comment visibility
   const [showCommentInput, setShowCommentInput] = useState<{
     [key: number]: boolean;
   }>({});
 
-  // Fetch data when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_IP_KEY}/hacker-back/posts`
         );
-
-        setPosts(response.data.data as Post[]); // Set the fetched data to state
+        setPosts(response.data.data as Post[]);
       } catch (error) {
         setError("Error fetching data. Please try again later.");
         console.error("Error fetching data:", error);
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, []); // Empty dependency array means this runs once when the component mounts
+  }, []);
 
-  // Handle comment change
   const handleCommentChange = (entryId: number, value: string) => {
     setComments((prevComments) => ({
       ...prevComments,
@@ -53,28 +47,22 @@ const EmotionShare = () => {
     }));
   };
 
-  // Handle share action
   const handleShare = (entryId: number) => {
     console.log(`Shared post with ID: ${entryId}`);
-    // Implement actual share functionality here
   };
 
-  // Handle comment submission
   const handleCommentSubmit = (entryId: number) => {
     console.log(`Comment on post ${entryId}: ${comments[entryId]}`);
-    // Implement actual comment submission logic here
-    // Reset the comment input after submission
     setComments((prevComments) => ({
       ...prevComments,
       [entryId]: "",
     }));
     setShowCommentInput((prev) => ({
       ...prev,
-      [entryId]: false, // Optionally hide the input after submitting
+      [entryId]: false,
     }));
   };
 
-  // Toggle comment input visibility
   const toggleCommentInput = (entryId: number) => {
     setShowCommentInput((prev) => ({
       ...prev,
@@ -83,7 +71,7 @@ const EmotionShare = () => {
   };
 
   return (
-    <div className="p-5 w-3xl flex flex-col gap-4">
+    <div className="p-5 w-3xl flex flex-col gap-4 z-0">
       {loading && (
         <p className="text-center text-lg text-gray-600">Loading posts...</p>
       )}
@@ -92,22 +80,18 @@ const EmotionShare = () => {
       {posts.map((post) => (
         <Card
           key={post.entry_id}
-          className="bg-white border border-gray-300 rounded-lg shadow-lg "
+          className="bg-white border border-gray-300 rounded-lg shadow-lg z-0"
         >
           <CardContent className="p-4">
             <div>
               {post.isAnonyme !== 1 ? (
-                <div>
-                  <span className="font-bold text-xl text-indigo-600">
-                    {post.username}
-                  </span>
-                </div>
+                <span className="font-bold text-xl text-indigo-600">
+                  {post.username}
+                </span>
               ) : (
-                <div>
-                  <span className="font-bold text-xl text-indigo-600">
-                    Anonymous
-                  </span>
-                </div>
+                <span className="font-bold text-xl text-indigo-600">
+                  Anonymous
+                </span>
               )}
               <p className="mt-2 text-gray-800">{post.notes}</p>
               <small className="text-gray-500">
@@ -120,7 +104,6 @@ const EmotionShare = () => {
             </div>
             <div className="flex items-center mt-4 justify-between">
               <div className="flex">
-                {/* Comment Icon */}
                 <FaComment
                   className="text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
                   onClick={() => toggleCommentInput(post.entry_id)}
@@ -132,14 +115,11 @@ const EmotionShare = () => {
                   Add Comment
                 </span>
               </div>
-
-              {/* Share Icon */}
               <FaShareAlt
                 className="ml-4 text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
                 onClick={() => handleShare(post.entry_id)}
               />
             </div>
-            {/* Conditional Comment Input Field */}
             {showCommentInput[post.entry_id] && (
               <div className="mt-2 flex items-center">
                 <textarea
