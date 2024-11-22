@@ -2,10 +2,14 @@
 import { usePathname } from "next/navigation";
 
 interface post {
-  id: number;
-  content: string;
-  emotion_name: string;
-  niveau: number;
+  entry_id: number;
+  user_id: number;
+  emotion_id: string;
+  well_being_score: number;
+  notes: string;
+  positive_moment: string;
+  created_at: Date;
+  isAnonyme: boolean;
 }
 
 interface contact {
