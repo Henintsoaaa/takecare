@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { MessageCircle, Bell, User, Heart } from "lucide-react"; // Importing icons from lucide-react
+import Notification from "./Notification";
 
 const Navbar = () => {
   return (
@@ -22,13 +23,7 @@ const Navbar = () => {
           <MessageCircle size={24} className="md:w-[30px] md:h-[30px]" />
           <span className="hidden md:block">Message</span>
         </Link>
-        <Link
-          href="#"
-          className="text-indigo-600 hover:text-indigo-700  transition-colors duration-200 flex gap-2 justify-center items-center"
-        >
-          <Bell size={24} className="md:w-[30px] md:h-[30px]" />
-          <span className="hidden md:block">Notification</span>
-        </Link>
+        <Notification />
         <Link
           href="#"
           className="text-indigo-600 hover:text-indigo-700 transition-colors duration-200 flex gap-2 justify-center items-center"

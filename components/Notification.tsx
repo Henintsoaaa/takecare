@@ -125,7 +125,7 @@ const NotificationItem = ({
     new_post: "Nouveau Post",
     comment: "Commentaire",
     reaction: "Réaction",
-    comment_reaction: "Réaction un Commentaire",
+    comment_reaction: "Réaction au Commentaire",
   };
 
   return (
@@ -148,14 +148,14 @@ const NotificationItem = ({
   );
 };
 
-const NotificationsList = () => {
+const NotificationsDropdown = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [actors, setActors] = useState<{ [key: number]: string }>({});
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const loadNotifications = async () => {
-      // Simulate fetching notifications from an API
       setNotifications(_notifications);
       const actorIds = _notifications.map((n) => n.actor_id);
       const fetchedActors = await fetchActors(actorIds);
@@ -169,36 +169,51 @@ const NotificationsList = () => {
     loadNotifications();
   }, []);
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   if (loading) {
     return <div>Loading notifications...</div>;
   }
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="bg-gray-100 p-4">
-        <h2 className="font-bold text-xl">Notifications</h2>
-      </div>
+    <div className="relative inline-block text-left">
       <div>
-        {notifications.map((notification) => (
-          <NotificationItem
-            key={notification.id}
-            notification={notification}
-            actorName={actors[notification.actor_id] || "Acteur Inconnu"}
-          />
-        ))}
+        <button
+          onClick={toggleDropdown}
+          className="text-indigo-600 hover:text-indigo-700  transition-colors duration-200 flex gap-2 justify-center items-center"
+        >
+          <Bell size={24} className="md:w-[30px] md:h-[30px]" />
+          <span className="ml-2">Notifications</span>
+        </button>
       </div>
+
+      {isOpen && (
+        <div className="absolute right-0 z-10 w-64 mt-2 bg-white shadow-lg rounded-md">
+          <div className="max-h-60 overflow-y-auto">
+            {notifications.map((notification) => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+                actorName={actors[notification.actor_id] || "Acteur Inconnu"}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-const Page = () => {
+const Notification = () => {
   return (
     <div className="p-4">
       <Suspense fallback={<div>Loading notifications...</div>}>
-        <NotificationsList />
+        <NotificationsDropdown />
       </Suspense>
     </div>
   );
 };
 
-export default Page;
+export default Notification;
