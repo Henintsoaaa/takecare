@@ -1,8 +1,8 @@
-import Quiz from "@/components/Quiz";
+import Procedure from "@/components/Procedure";
 const Page = () => {
   return (
     <div>
-      <Quiz />
+      <Procedure />
     </div>
   );
 };

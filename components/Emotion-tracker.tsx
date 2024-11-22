@@ -37,7 +37,7 @@ const EmotionTracker = () => {
 
   return (
     <div className="md:max-w-6xl mx-auto p-4 space-y-6">
-      <div className="text-center mb-8 sticky top-5 left-20 z-10">
+      <div className="text-center mb-8 sticky top-5 left-20">
         <h1 className="text-3xl font-bold text-indigo-800 mb-2">
           Partager vos idées, soyez à l'écoute !
         </h1>
