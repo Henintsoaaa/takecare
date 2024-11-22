@@ -51,7 +51,7 @@ const StatCard = ({
   icon: React.ComponentType<any>;
   trend?: string;
 }) => (
-  <Card className="p-6">
+  <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
     <div className="flex items-center justify-between">
       <div>
         <p className="text-sm font-medium text-muted-foreground">{title}</p>
@@ -74,7 +74,7 @@ const StatCard = ({
 
 export default function ComplaintsDashboard() {
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto space-y-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
@@ -120,7 +120,7 @@ export default function ComplaintsDashboard() {
 
           <TabsContent value="overview" className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
-              <Card className="p-6">
+              <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
                 <h3 className="font-semibold mb-4">Complaints by Status</h3>
                 <div className="h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -145,7 +145,7 @@ export default function ComplaintsDashboard() {
                 </div>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
                 <h3 className="font-semibold mb-4">Monthly Trend</h3>
                 <div className="h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -167,7 +167,7 @@ export default function ComplaintsDashboard() {
               </Card>
             </div>
 
-            <Card className="p-6">
+            <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
               <h3 className="font-semibold mb-4">Recent Complaints</h3>
               <div className="relative overflow-x-auto">
                 <table className="w-full text-sm text-left">
@@ -211,7 +211,10 @@ export default function ComplaintsDashboard() {
                         priority: "High",
                       },
                     ].map((complaint) => (
-                      <tr key={complaint.id} className="border-b">
+                      <tr
+                        key={complaint.id}
+                        className="border-b hover:bg-gray-100 transition-colors duration-200"
+                      >
                         <td className="px-6 py-4 font-medium">
                           {complaint.id}
                         </td>
@@ -254,7 +257,7 @@ export default function ComplaintsDashboard() {
           </TabsContent>
 
           <TabsContent value="trends">
-            <Card className="p-6">
+            <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
               <h3 className="font-semibold mb-4">Complaint Resolution Time</h3>
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
