@@ -1,10 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { User, AlertTriangle, LogOut } from "lucide-react"; // Import Lucid Icons
+import { redirect } from "next/navigation";
 
 const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); // Create a ref for the dropdown
+
+  console.log(document.cookie);
+  const user_id = document.cookie.split(",")[1].split("=")[1];
+  console.log(user_id);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -12,7 +17,7 @@ const UserMenu: React.FC = () => {
 
   const handleProfileClick = () => {
     // Navigate to user profile page
-    console.log("Navigate to user profile");
+    redirect(`/user/${user_id}`);
   };
 
   const handleSOSClick = () => {

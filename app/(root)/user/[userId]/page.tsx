@@ -117,7 +117,7 @@ const Page = () => {
       try {
         /*
         const response = await axios.get<UserProfileResponse>(
-          `${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/user-profile?userId=${userId}`
+          `${process.env.NEXT_PUBLIC_IP_KEY}Hack4Her/user-profile?userId=${userId}`
         );
         */
         const response = _response;

@@ -46,7 +46,7 @@ const EmotionForm: React.FC<{
     });
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/posts/create`, {
+      .post(`${process.env.NEXT_PUBLIC_IP_KEY}Hack4Her/posts/create`, {
         emotion: selectedEmotion,
         positive_moment: positiveMoment,
         note: notes,

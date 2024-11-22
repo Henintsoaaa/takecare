@@ -26,7 +26,7 @@ const EmotionShare = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_IP_KEY}/hacker-back/posts`
+          `${process.env.NEXT_PUBLIC_IP_KEY}/Hack4Her/posts`
         );
         setPosts(response.data.data as Post[]);
       } catch (error) {
