@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "./ui/tabs";
 import { Calendar, Heart, Book } from "lucide-react"; // Assuming you're using lucide-react for icons
+import Contact from "./Contact";
 
 interface UserData {
   id: number;
@@ -143,7 +144,7 @@ const Profile = ({ userId }: ProfileProps) => {
           </TabsContent>
           <TabsContent value="contact" activeTab={activeTab}>
             <div className="p-4 bg-white rounded-lg shadow-md">
-              <p>{contact}</p>
+              <Contact />
             </div>
           </TabsContent>
           <TabsContent value="statistique" activeTab={activeTab}>
