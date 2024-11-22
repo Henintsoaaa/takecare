@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import { MessageCircle, Heart } from "lucide-react"; // Importing icons from lucide-react

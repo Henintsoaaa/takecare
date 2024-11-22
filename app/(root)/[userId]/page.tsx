@@ -14,17 +14,23 @@ interface contact {
   profilePicture: string;
 }
 
-interface userProfile {
-  id: number;
-  username: string;
-  userType: string;
-  about: string;
-  email: string;
-  created_at: Date;
+interface userProfileResponse {
+  status: string;
+  user: {
+    id: number;
+    username: string;
+    userType: string;
+    email: string;
+    created_at: Date;
+    profilePicture: string;
+    coverPicture: string;
+  };
+  about: {
+    user_id: number;
+    description: string;
+  };
   allPots: post[];
   contact: contact[];
-  profilePicture: string;
-  coverPicture: string;
 }
 
 const Page = () => {
