@@ -25,17 +25,16 @@ const Login = () => {
 
     if (formType === "login") {
       // send login request with email and password, if  successful, get a cookie from the server and create a session with it
-      const response = axios.post(
-        `${process.env.NEXT_PUBLIC_IP_KEY}/hacker-back/signIn`,
-        {
-          email,
-          password,
-        }
-      );
+      const endPoint = `${process.env.NEXT_PUBLIC_IP_KEY}/hacker-back/signIn`;
+      console.log(endPoint);
+
+      const response = axios.post(endPoint, {
+        email,
+        password,
+      });
 
       // if successful, create a session with the cookie
       const val = await response;
-
       if (val.data.status === "success") {
         // create a session with the cookie
         const cookie: cookieData = val.data.data;

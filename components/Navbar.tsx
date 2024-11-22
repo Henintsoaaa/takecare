@@ -25,7 +25,7 @@ const Navbar = () => {
           <span className="hidden md:block">Message</span>
         </Link>
         <Notification />
-        <UserMenu /> {/* Add the UserMenu component here */}
+        <UserMenu />
       </div>
     </div>
   );
