@@ -46,10 +46,10 @@ const EmotionForm: React.FC<{
     });
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_IP_KEY}hacker-back/posts/create`, {
+      .post(`${process.env.NEXT_PUBLIC_IP_KEY}/posts/create`, {
         emotion: selectedEmotion,
         positive_moment: positiveMoment,
-        note: notes,
+        notes: notes,
         well_being_score: wellbeingLevel,
         user_id: userId,
         isAnonyme: anonymousValue,
