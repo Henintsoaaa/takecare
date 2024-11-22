@@ -1,14 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Make sure to import axios
-import { Card, CardContent } from "./ui/card"; // Assuming you have a Card component
+import axios from "axios";
+import { Card, CardContent } from "./ui/card";
 import {
   FaComment,
   FaShareAlt,
   FaPaperPlane,
-  FaHeart, // Filled heart
-  FaRegHeart, // Empty heart
-} from "react-icons/fa"; // Import icons
+  FaHeart,
+  FaRegHeart,
+} from "react-icons/fa";
 
 interface Post {
   entry_id: number;
@@ -19,16 +19,13 @@ interface Post {
 }
 
 const EmotionShare = () => {
-  const [posts, setPosts] = useState<Post[]>([]); // State to hold the posts
-  const [loading, setLoading] = useState<boolean>(true); // Loading state
-  const [error, setError] = useState<string | null>(null); // Error state
-
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [comments, setComments] = useState<{ [key: number]: string }>({});
   const [showCommentInput, setShowCommentInput] = useState<{
     [key: number]: boolean;
   }>({});
-
-  // State to hold reactions
   const [likes, setLikes] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
@@ -79,16 +76,15 @@ const EmotionShare = () => {
     }));
   };
 
-  // Function to handle reactions
-  const handleReaction = (entryId: number, userId: number) => {
+  const handleReaction = (entryId: number) => {
     setLikes((prevLikes) => ({
       ...prevLikes,
-      [entryId]: !prevLikes[entryId], // Toggle like state
+      [entryId]: !prevLikes[entryId],
     }));
   };
 
   return (
-    <div className="p-5 w-3xl flex flex-col gap-4 z-0">
+    <div className="p-5 w-full flex flex-col gap-4">
       {loading && (
         <p className="text-center text-lg text-gray-600">Loading posts...</p>
       )}
@@ -97,7 +93,7 @@ const EmotionShare = () => {
       {posts.map((post) => (
         <Card
           key={post.entry_id}
-          className="bg-white border border-gray-300 rounded-lg shadow-lg z-0"
+          className="bg-white border border-gray-300 rounded-lg shadow-lg"
         >
           <CardContent className="p-4">
             <div>
@@ -120,25 +116,24 @@ const EmotionShare = () => {
               </small>
             </div>
             <div className="flex gap-2 items-center justify-between">
-              {/* Reaction field with heart icon */}
               <div className="flex gap-2">
                 <div className="mt-4 flex items-center">
                   {likes[post.entry_id] ? (
                     <FaHeart
                       className="text-red-600 cursor-pointer hover:text-red-800 transition duration-200"
-                      onClick={() => handleReaction(post.entry_id, 2)}
+                      onClick={() => handleReaction(post.entry_id)}
                     />
                   ) : (
                     <FaRegHeart
                       className="text-gray-600 cursor-pointer hover:text-red-800 transition duration-200"
-                      onClick={() => handleReaction(post.entry_id, 2)}
+                      onClick={() => handleReaction(post.entry_id)}
                     />
                   )}
                 </div>
                 <div className="flex items-center mt-4 justify-between">
                   <div className="flex">
                     <FaComment
-                      className="text-indigo-600 cursor-pointer hover:text-indigo -800 transition duration-200"
+                      className="text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
                       onClick={() => toggleCommentInput(post.entry_id)}
                     />
                     <span

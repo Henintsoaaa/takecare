@@ -42,8 +42,8 @@ const PublicationStyle = () => {
   };
 
   return (
-    <div className="space-y-6 p-6 rounded-lg z-10">
-      <div className="text-center shadow-lg">
+    <div className="space-y-6 p-6 rounded-lg">
+      <div className="text-center shadow-lg hidden md:block">
         <h2 className="text-3xl font-bold text-indigo-600 mb-2">Quizz</h2>
         <p className="text-lg text-gray-700">
           Participer à des quiz intéressants
@@ -55,7 +55,7 @@ const PublicationStyle = () => {
           Commencer le Quizz
         </button>
       </div>
-      <div className="text-center shadow-lg">
+      <div className="text-center shadow-lg hidden md:block">
         <h2 className="text-3xl font-bold text-indigo-600 mb-2">Assistance</h2>
         <p className="text-lg text-gray-700">
           Bénéficier d'une assistance personnelle
@@ -87,7 +87,7 @@ const PublicationStyle = () => {
         {!showAll && (
           <button
             onClick={() => setShowAll(true)}
-            className="mt-4 w-full py-2  text-indigo-600 font-semibold rounded-lg shadow-md hover:underline 0 transition duration-300"
+            className="mt-4 w-full py-2 text-indigo-600 font-semibold rounded-lg shadow-md hover:underline transition duration-300"
           >
             Voir Plus
           </button>
@@ -95,7 +95,7 @@ const PublicationStyle = () => {
         {showAll && (
           <button
             onClick={() => setShowAll(false)}
-            className="mt-4 w-full py-2  text-indigo-600 font-semibold rounded-lg shadow-md hover:underline 0 transition duration-300"
+            className="mt-4 w-full py-2 text-indigo-600 font-semibold rounded-lg shadow-md hover:underline transition duration-300"
           >
             Voir moins
           </button>

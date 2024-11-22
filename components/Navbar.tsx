@@ -20,7 +20,7 @@ const Navbar = () => {
       </Link>
       <div className="flex space-x-4 items-center">
         <Link
-          href="#"
+          href="/message"
           className="text-indigo-600 hover:text-indigo-700 transition-colors duration-200 flex gap-2 justify-center items-center"
         >
           <MessageCircle size={24} className="md:w-[30px] md:h-[30px]" />

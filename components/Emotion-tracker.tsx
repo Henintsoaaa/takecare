@@ -3,9 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import EmotionForm from "./EmotionForm";
 import EmotionShare from "./EmotionPub";
 import { Smile } from "lucide-react";
-import PublicationStyle from "./PublicationStyle";
 
-console.log(document.cookie);
 const userId = 2;
 
 const EmotionTracker = () => {
@@ -36,15 +34,15 @@ const EmotionTracker = () => {
   }, []);
 
   return (
-    <div className="md:max-w-6xl mx-auto p-4 space-y-6">
-      <div className="text-center mb-8 sticky top-5 left-20">
+    <div className="max-w-screen-lg mx-auto p-4 space-y-6">
+      <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-indigo-800 mb-2">
           Partager vos idées, soyez à l'écoute !
         </h1>
         <p className="text-gray-600">Suivez votre bien-être jour après jour</p>
       </div>
-
-      <div className="flex md:flex-row relative z-0">
+      {/* when */}
+      <div className="flex flex-col md:flex-row relative z-0">
         {isAppear && (
           <>
             <div
@@ -53,7 +51,7 @@ const EmotionTracker = () => {
             />
             <div
               ref={formRef}
-              className="z-30 fixed bottom-4 top-48 bg-white rounded-lg shadow-lg p-4"
+              className="z-30 fixed bottom-4 md:bottom-10 bg-white rounded-lg shadow-lg p-4 w-full md:max-w-md right-2 left-1"
             >
               <EmotionForm
                 selectedEmotion={selectedEmotion}
@@ -71,8 +69,8 @@ const EmotionTracker = () => {
             </div>
           </>
         )}
-        <div className="md:hidden sm:block z-10">
-          <label htmlFor="entrie" className="text-gray-600 md:hidden">
+        <div className="md:hidden">
+          <label htmlFor="entrie" className="text-gray-600">
             Comment vous sentez-vous aujourd'hui?
           </label>
           <div className="flex gap-2 justify-center items-center">
@@ -81,16 +79,16 @@ const EmotionTracker = () => {
               type="text"
               name="entrie"
               placeholder="Comment vous sentez-vous aujourd'hui?"
-              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
               onClick={handleClick}
             />
           </div>
         </div>
-        <div className="flex flex-col md:w-full md:flex-row z-0">
-          <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto z-0">
+        <div className="flex flex-col md:flex-row flex-grow">
+          <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto">
             <EmotionShare />
           </div>
-          <div className="fixed bottom-9 right-3 z-10">
+          <div className="fixed bottom-9 right-3 z-10 hidden">
             <EmotionForm
               selectedEmotion={selectedEmotion}
               setSelectedEmotion={setSelectedEmotion}

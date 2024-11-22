@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios"; // Import axios
+import axios from "axios";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import EmotionList from "./EmotionList"; // Adjust the import path as necessary
+import EmotionList from "./EmotionList";
 
 const EmotionForm: React.FC<{
   selectedEmotion: string;
@@ -29,21 +29,12 @@ const EmotionForm: React.FC<{
   setSelectedDate,
   userId,
 }) => {
-  const [isAnonymous, setIsAnonymous] = useState(false); // State for anonymity checkbox
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
   const handleSubmission = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
 
     const anonymousValue = isAnonymous ? 1 : 0;
-
-    console.log("data:", {
-      emotion: selectedEmotion,
-      positive_moment: positiveMoment,
-      note: notes,
-      well_being_score: wellbeingLevel,
-      user_id: userId,
-      anonymous: anonymousValue,
-    });
 
     axios
       .post(`${process.env.NEXT_PUBLIC_IP_KEY}/posts/create`, {
@@ -55,7 +46,6 @@ const EmotionForm: React.FC<{
         isAnonyme: anonymousValue,
       })
       .then((response) => {
-        console.log("Response:", response);
         setSelectedEmotion("");
         setWellbeingLevel(3);
         setPositiveMoment("");
@@ -68,13 +58,9 @@ const EmotionForm: React.FC<{
   };
 
   return (
-    <Card className="rounded-lg overflow-hidden bg-white shadow-lg md:max-w-xl md:max-h-screen md:h-full ">
-      {" "}
-      {/* Adjusted max-width for web */}
+    <Card className="rounded-lg overflow-hidden bg-white shadow-lg w-full">
       <CardHeader>
         <CardTitle className="text-sm md:text-lg font-semibold">
-          {" "}
-          {/* Adjusted font size for web */}
           Comment vous sentez-vous aujourd'hui ?
         </CardTitle>
       </CardHeader>
@@ -108,7 +94,7 @@ const EmotionForm: React.FC<{
 
           <div>
             <textarea
-              className="w-full p-2 md:p-3 border rounded-lg h-16 md:h-24 outline-none bg-white focus:text-gray-700" // Adjusted height for web
+              className="w-full p-2 md:p-3 border rounded-lg h-16 md:h-24 outline-none bg-white focus:text-gray-700"
               placeholder="Notez vos pensées..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
