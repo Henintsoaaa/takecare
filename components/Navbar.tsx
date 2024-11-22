@@ -15,7 +15,7 @@ const Navbar = () => {
           Tech'her
         </span>
       </div>
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 items-center">
         <Link
           href="#"
           className="text-indigo-600 hover:text-indigo-700  transition-colors duration-200 flex gap-2 justify-center items-center"

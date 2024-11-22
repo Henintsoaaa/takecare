@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Bell,
   MessageSquare,
@@ -148,11 +148,12 @@ const NotificationItem = ({
   );
 };
 
-const NotificationsDropdown = () => {
+const Notification = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [actors, setActors] = useState<{ [key: number]: string }>({});
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null); // Create a ref for the dropdown
 
   useEffect(() => {
     const loadNotifications = async () => {
@@ -173,25 +174,36 @@ const NotificationsDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  if (loading) {
-    return <div>Loading notifications...</div>;
-  }
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="relative inline-block text-left">
-      <div>
-        <button
-          onClick={toggleDropdown}
-          className="text-indigo-600 hover:text-indigo-700  transition-colors duration-200 flex gap-2 justify-center items-center"
-        >
-          <Bell size={24} className="md:w-[30px] md:h-[30px]" />
-          <span className="ml-2">Notifications</span>
-        </button>
-      </div>
+    <div className="relative inline-block text-left" ref={dropdownRef}>
+      <button
+        onClick={toggleDropdown}
+        className="text-indigo-600 hover:text-indigo-700 transition-colors duration-200 flex gap-2 justify-center items-center"
+      >
+        <Bell size={24} className="md:w-[30px] md:h-[30px]" />
+        <span>Notifications</span>
+      </button>
 
       {isOpen && (
-        <div className="absolute right-0 z-10 w-64 mt-2 bg-white shadow-lg rounded-md">
-          <div className="max-h-60 overflow-y-auto">
+        <div className="absolute right-0 z-10 w-80 md:w-96 mt-2 bg-white shadow-lg rounded-xl">
+          <div className="max-h-96 overflow-y-auto rounded-xl">
             {notifications.map((notification) => (
               <NotificationItem
                 key={notification.id}
@@ -202,16 +214,6 @@ const NotificationsDropdown = () => {
           </div>
         </div>
       )}
-    </div>
-  );
-};
-
-const Notification = () => {
-  return (
-    <div className="p-4">
-      <Suspense fallback={<div>Loading notifications...</div>}>
-        <NotificationsDropdown />
-      </Suspense>
     </div>
   );
 };
