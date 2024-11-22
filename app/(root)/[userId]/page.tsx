@@ -1,6 +1,6 @@
 import { usePathname } from "next/navigation";
 const Page = () => {
-  return <div>const currentPath = usePathname();</div>;
+  return <div></div>;
 };
 
 export default Page;
