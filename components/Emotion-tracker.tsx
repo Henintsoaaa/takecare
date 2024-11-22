@@ -5,6 +5,7 @@ import EmotionShare from "./EmotionPub";
 import { Smile } from "lucide-react";
 import PublicationStyle from "./PublicationStyle";
 
+console.log(document.cookie);
 const userId = 2;
 
 const EmotionTracker = () => {
@@ -91,6 +92,21 @@ const EmotionTracker = () => {
           </div>
           <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto z-0">
             <EmotionShare />
+          </div>
+          <div className="fixed bottom-2 right-3 z-10">
+            <EmotionForm
+              selectedEmotion={selectedEmotion}
+              setSelectedEmotion={setSelectedEmotion}
+              wellbeingLevel={wellbeingLevel}
+              setWellbeingLevel={setWellbeingLevel}
+              positiveMoment={positiveMoment}
+              setPositiveMoment={setPositiveMoment}
+              notes={notes}
+              setNotes={setNotes}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              userId={userId}
+            />
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ const EmotionList: React.FC<{
   const fetchEmotions = async () => {
     try {
       const response = await axios.get<{ status: string; data: Emotion[] }>(
-        `${process.env.NEXT_PUBLIC_IP_KEY}/Hack4Her/emotion`
+        `${process.env.NEXT_PUBLIC_IP_KEY}/emotion`
       );
       console.log(response);
 
