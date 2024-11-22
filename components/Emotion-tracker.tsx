@@ -93,11 +93,13 @@ const EmotionTracker = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col md:w-full">
+        <div className="flex flex-col md:w-full md:flex-row">
           {/* Scrollable container for EmotionShare */}
+          <div>
+            <PublicationStyle />
+          </div>
           <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto">
             {" "}
-            <PublicationStyle />
             {/* Adjusted width for web */}
             <EmotionShare />
           </div>
