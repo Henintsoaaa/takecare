@@ -159,11 +159,7 @@ const Page = () => {
       </div>
       <div className="w-full">
         <Tabs defaultValue="posts">
-          <TabsList
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            className="grid w-full grid-cols-3 bg-purple-50 rounded-lg shadow-md mb-4"
-          >
+          <TabsList className="grid w-full grid-cols-3 bg-purple-50 rounded-lg shadow-md mb-4">
             {[
               {
                 value: "posts",
@@ -186,8 +182,7 @@ const Page = () => {
                     ? "bg-purple-200 text-black font-semibold"
                     : "hover:bg-purple-100 text-gray-700"
                 }`}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                onClick={() => setActiveTab(tab.value)}
               >
                 {tab.icon}
                 <span className="ml-2 hidden md:inline">
@@ -196,7 +191,7 @@ const Page = () => {
               </TabsTrigger>
             ))}
           </TabsList>
-          <TabsContent value="posts" activeTab={activeTab}>
+          <TabsContent value="posts">
             <div className="p-4 bg-white rounded-lg shadow-md">
               {allPosts.length > 0 ? (
                 allPosts.map((post) => (
@@ -212,7 +207,7 @@ const Page = () => {
               )}
             </div>
           </TabsContent>
-          <TabsContent value="contacts" activeTab={activeTab}>
+          <TabsContent value="contacts">
             <div className="p-4 bg-white rounded-lg shadow-md">
               {contacts.length > 0 ? (
                 contacts.map((contact) => (
@@ -232,7 +227,7 @@ const Page = () => {
               )}
             </div>
           </TabsContent>
-          <TabsContent value="statistics" activeTab={activeTab}>
+          <TabsContent value="statistics">
             <div className="p-4 bg-white rounded-lg shadow-md">
               <p>Statistics will be displayed here.</p>
             </div>
