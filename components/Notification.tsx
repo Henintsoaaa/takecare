@@ -198,7 +198,7 @@ const Notification = () => {
         className="text-indigo-600 hover:text-indigo-700 transition-colors duration-200 flex gap-2 justify-center items-center"
       >
         <Bell size={24} className="md:w-[30px] md:h-[30px]" />
-        <span>Notifications</span>
+        <span className=" hidden md:block">Notifications</span>
       </button>
 
       {isOpen && (
