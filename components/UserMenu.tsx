@@ -7,11 +7,13 @@ const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); // Create a ref for the dropdown
 
+  let user_id: string | undefined;
+
   if (!document.cookie) {
     // Redirect to login page if user is not logged in
     redirect("/login");
   } else {
-    const user_id = document.cookie.split(",")[1].split("=")[1];
+    user_id = document.cookie.split(",")[1].split("=")[1];
   }
 
   const toggleDropdown = () => {
@@ -20,7 +22,7 @@ const UserMenu: React.FC = () => {
 
   const handleProfileClick = () => {
     // Navigate to user profile page
-    redirect(`/user/${user_id || "null"}`);
+    redirect(`/user/${user_id}`);
   };
 
   const handleSOSClick = () => {
