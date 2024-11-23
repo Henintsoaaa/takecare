@@ -6,6 +6,7 @@ import PublicationStyle from "@/components/PublicationStyle";
 
 const Page = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  // console.log(document.cookie);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
