@@ -5,12 +5,15 @@ import Terminale from "@/components/Terminale";
 import LandingPage from "@/components/LandingPage";
 
 const Welcome = () => {
-  const [isLoading, setLoading] = useState(true);
-
+  const isFirstTime = localStorage.getItem("isFirstTime"); // true | false | logout
+  // if it's the first time or logout, show the terminal
+  const [isLoading, setLoading] = useState(isFirstTime !== "false");
   useEffect(() => {
-    setTimeout(() => setLoading(false), 8000);
+    setTimeout(() => {
+      setLoading(false);
+      localStorage.setItem("isFirstTime", "false");
+    }, 8000);
   });
-
   return (
     <>
       {isLoading && <Terminale />}

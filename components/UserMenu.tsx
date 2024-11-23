@@ -33,8 +33,12 @@ const UserMenu: React.FC = () => {
 
   const handleLogoutClick = () => {
     // Handle logout logic
-    // remove user cookie
-    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // clear the cookie
+    document.cookie =
+      "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // Redirect to login page
+    localStorage.setItem("isFirstTime", "logout");
+    redirect("/");
   };
 
   // Close dropdown when clicking outside

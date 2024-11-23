@@ -28,7 +28,7 @@ const EmotionList: React.FC<{
       const response = await axios.get<{ status: string; data: Emotion[] }>(
         `${process.env.NEXT_PUBLIC_IP_KEY}/emotion`
       );
-      console.log(response);
+      // console.log(response);
 
       if (response.data.status === "success") {
         const emotionsWithEmojis = response.data.data.map((emotion) => ({
