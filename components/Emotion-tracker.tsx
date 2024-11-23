@@ -34,7 +34,7 @@ const EmotionTracker = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-lg mx-auto p-4 space-y-6">
+    <div className="max-w-screen-lg p-4 space-y-6">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-indigo-800 mb-2">
           Partager vos idées, soyez à l'écoute !
@@ -85,7 +85,7 @@ const EmotionTracker = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row flex-grow">
-          <div className="overflow-y-auto max-h-screen w-full md:max-w-3xl mx-auto">
+          <div className="overflow-y-auto max-h-screen w-full mx-auto">
             <EmotionShare />
           </div>
           <div className="fixed bottom-9 right-3 z-10 hidden md:block">

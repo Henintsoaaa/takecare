@@ -1,8 +1,9 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 interface cookieData {
   user_id: number;
@@ -11,13 +12,28 @@ interface cookieData {
   token: string;
 }
 
+const empoweringQuotes = [
+  "Embrace your power and potential.",
+  "You are capable of amazing things.",
+  "Your voice matters in tech and beyond.",
+  "Believe in yourself and you will be unstoppable.",
+  "Every day is a chance to make a difference.",
+];
+
 const Login = () => {
+  const [quote, setQuote] = useState("");
   const [formType, setFormType] = useState("login");
   const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
+
+  useEffect(() => {
+    const randomQuote =
+      empoweringQuotes[Math.floor(Math.random() * empoweringQuotes.length)];
+    setQuote(randomQuote);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,53 +91,60 @@ const Login = () => {
     <AnimatePresence>
       <motion.div
         layout
-        className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-600"
+        className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 to-purple-400"
       >
-        <form
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-8"
+        >
+          <h2 className="text-4xl font-bold text-white mb-4">Tech'her</h2>
+          <p className="text-white text-xl italic">&quot;{quote}&quot;</p>
+        </motion.div>
+        <motion.form
           onSubmit={handleSubmit}
           className="bg-white p-8 rounded-lg shadow-lg md:w-96 w-80"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-gray-600 mb-8">
-            Bivenue sur Tech'her
+          <h1 className="text-3xl font-bold text-purple-600 mb-8">
+            Bienvenue sur Tech'her
           </h1>
-          <div className="flex justify-between mt-6 gap-2">
+          <div className="flex justify-between mt-6 gap-2 bg-gray-100 p-1 rounded-full">
             <button
               type="button"
               onClick={() => setFormType("login")}
-              className={`w-1/2 p-2 rounded-md relative ${
-                formType === "login" ? " text-gray-600" : " text-gray-700"
+              className={`w-1/2 p-2 rounded-full relative ${
+                formType === "login"
+                  ? "bg-white text-purple-600 shadow-md"
+                  : "text-gray-600"
               }`}
             >
-              {formType === "login" && (
-                <motion.div
-                  layoutId="login"
-                  className=" absolute inset-0 rounded-md z-10"
-                />
-              )}
               <span className="relative z-10">Log in</span>
             </button>
             <button
               type="button"
               onClick={() => setFormType("signup")}
-              className={`w-1/2 p-2 rounded-md relative ${
-                formType === "signup" ? " text-gray-600" : " text-gray-700"
+              className={`w-1/2 p-2 rounded-full relative ${
+                formType === "signup"
+                  ? "bg-white text-purple-600 shadow-md"
+                  : "text-gray-600"
               }`}
             >
-              {formType === "signup" && (
-                <motion.div
-                  layoutId="signup"
-                  className=" absolute inset-0 rounded-md"
-                />
-              )}
               <span className="relative z-10">Signup</span>
             </button>
           </div>
-          {error && <p className="text-red-500 mb-4">{error}</p>}{" "}
-          {/* Display error */}
+          {error && (
+            <p className="text-red-500 mb-4" role="alert">
+              {error}
+            </p>
+          )}
           <AnimatePresence>
             {formType === "signup" && (
               <motion.div
-                key="username-field" // Unique key for the username field
+                key="username-field"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -129,7 +152,7 @@ const Login = () => {
               >
                 <label
                   htmlFor="username"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700 mt-4"
                 >
                   Username:
                 </label>
@@ -140,7 +163,7 @@ const Login = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
                   placeholder="Enter your username"
                 />
               </motion.div>
@@ -159,7 +182,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
             placeholder="Enter your email"
           />
           <label
@@ -175,7 +198,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:text-gray-500"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
             placeholder="Enter your password"
           />
           <label
@@ -190,7 +213,7 @@ const Login = () => {
             value={userType}
             onChange={(e) => setUserType(e.target.value)}
             required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:text-gray-500"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
           >
             <option value="" className="text-gray-700">
               -- Sélectionnez un type --
@@ -207,11 +230,34 @@ const Login = () => {
           </select>
           <button
             type="submit"
-            className="mt-4 w-full p-2 bg-indigo-700 text-white rounded-md hover:bg-indigo-800 transition duration-200"
+            className="mt-6 w-full p-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition duration-200 shadow-md"
           >
             {formType === "login" ? "Log in" : "Sign up"}
           </button>
-        </form>
+        </motion.form>
+        <div className="mt-8 flex justify-center space-x-4">
+          <Image
+            src="/placeholder.svg?height=40&width=40"
+            alt="Partner Logo 1"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <Image
+            src="/placeholder.svg?height=40&width=40"
+            alt="Partner Logo 2"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <Image
+            src="/placeholder.svg?height=40&width=40"
+            alt="Partner Logo 3"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+        </div>
       </motion.div>
     </AnimatePresence>
   );
