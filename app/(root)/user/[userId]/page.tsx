@@ -3,8 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Heart, Book } from "lucide-react"; // Assuming you're using lucide-react for icons
-import { usePathname } from "next/navigation";
+import { Calendar, Heart, Book, FilePenLine } from "lucide-react"; // Assuming you're using lucide-react for icons
+import { usePathname, redirect } from "next/navigation";
 
 interface Post {
   entry_id: number;
@@ -42,69 +42,75 @@ interface UserProfileResponse {
   contact: Contact[];
 }
 
-// generic data
-const data: UserProfileResponse = {
-  status: "success",
-  user: {
-    id: 1,
-    username: "John Doe",
-    userType: "admin",
-    email: "john@gmail.com",
-    created_at: new Date(),
-    profilePicture: "/profile.jpg",
-    coverPicture: "/cover.jpg",
-  },
-  about: {
-    user_id: 1,
-    description: "I am a software engineer",
-  },
-  allPosts: [
-    {
-      entry_id: 1,
-      user_id: 1,
-      emotion_id: "happy",
-      well_being_score: 5,
-      notes: "I am happy today",
-      positive_moment: "I got a new job",
-      created_at: new Date(),
-      isAnonyme: false,
-    },
-    {
-      entry_id: 2,
-      user_id: 1,
-      emotion_id: "sad",
-      well_being_score: 2,
-      notes: "I am sad today",
-      positive_moment: "I lost my job",
-      created_at: new Date(),
-      isAnonyme: false,
-    },
-  ],
-  contact: [
-    {
-      id: 1,
-      username: "Jane Doe",
-      profilePicture: "/jane.jpg",
-    },
-    {
-      id: 2,
-      username: "Alice",
-      profilePicture: "/alice.jpg",
-    },
-    {
-      id: 3,
-      username: "Bob",
-      profilePicture: "/bob.jpg",
-    },
-  ],
-};
-
+// Mock data for testing
 const _response = {
-  data: data,
+  data: {
+    status: "success",
+    user: {
+      id: 1,
+      username: "John Doe",
+      userType: "admin",
+      email: "john@gmail.com",
+      created_at: new Date(),
+      profilePicture: "/profile.jpg",
+      coverPicture: "/cover.jpg",
+    },
+    about: {
+      user_id: 1,
+      description: "I am a software engineer",
+    },
+    allPosts: [
+      {
+        entry_id: 1,
+        user_id: 1,
+        emotion_id: "happy",
+        well_being_score: 5,
+        notes: "I am happy today",
+        positive_moment: "I got a new job",
+        created_at: new Date(),
+        isAnonyme: false,
+      },
+      {
+        entry_id: 2,
+        user_id: 1,
+        emotion_id: "sad",
+        well_being_score: 2,
+        notes: "I am sad today",
+        positive_moment: "I lost my job",
+        created_at: new Date(),
+        isAnonyme: false,
+      },
+    ],
+    contact: [
+      {
+        id: 1,
+        username: "Jane Doe",
+        profilePicture: "/jane.jpg",
+      },
+      {
+        id: 2,
+        username: "Alice",
+        profilePicture: "/alice.jpg",
+      },
+      {
+        id: 3,
+        username: "Bob",
+        profilePicture: "/bob.jpg",
+      },
+    ],
+  },
 };
 
 const Page = () => {
-  const userId = usePathname().split("/")[1];
+  const pathname = usePathname();
+  const userId = pathname.split("/")[2]; // Assuming the userId is the first segment of the path
+
+  let user_id: number = 0;
+  // console.log(document.cookie); // session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzIzNTUxNzEsImV4cCI6MTczNTk1NTE3MSwiZW1haWwiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJ1c2VyX2lkIjoxM30.ZtdwTl2iKty464_kMvWc2ivOuzpAwWipVY33OZy8RrE, user_id=13, email=teste@gmail.com, username=Mins
+
+  if (document.cookie) {
+    user_id = parseInt(document.cookie.split(",")[1].split("=")[1]);
+  }
   const [username, setUsername] = useState<string>("");
   const [about, setAbout] = useState<string>("");
   const [profilePicture, setProfilePicture] = useState<string>("");
@@ -115,12 +121,13 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Uncomment for real API call
         /*
         const response = await axios.get<UserProfileResponse>(
           `${process.env.NEXT_PUBLIC_IP_KEY}Hack4Her/user-profile?userId=${userId}`
         );
         */
-        const response = _response;
+        const response = _response; // Use mock data for testing
 
         const userData = response.data.user;
         const aboutData = response.data.about;
@@ -140,6 +147,10 @@ const Page = () => {
     fetchData();
   }, [userId]);
 
+  const onClickChangeProfile = () => {
+    redirect(`/user/${user_id}/edit`);
+  };
+
   return (
     <div className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-lg max-w-lg mx-auto">
       <div className="flex items-center mb-4">
@@ -152,6 +163,13 @@ const Page = () => {
             className="rounded-full"
           />
         </div>
+        {/* Conditionally render the edit profile button */}
+        {parseInt(userId) === user_id && (
+          <button className="flex mt-2" onClick={onClickChangeProfile}>
+            <FilePenLine />
+            <p className="hidden md:block">Modifier mon profile</p>
+          </button>
+        )}
         <div className="ml-4 text-black">
           <h2 className="text-2xl font-bold">{username}</h2>
           <p className="text-sm text-gray-600">{about}</p>

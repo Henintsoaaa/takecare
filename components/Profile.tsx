@@ -3,8 +3,10 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "./ui/tabs";
-import { Calendar, Heart, Book } from "lucide-react"; // Assuming you're using lucide-react for icons
+import { Calendar, Heart, Book, FilePenLine } from "lucide-react"; // Assuming you're using lucide-react for icons
 import Contact from "./Contact";
+import EmotionEvaluation from "./EmotionEvaluation"; // Import EmotionEvaluation
+import { redirect } from "next/navigation";
 
 interface UserData {
   id: number;
@@ -26,9 +28,10 @@ interface ProfilePictureData {
 
 interface ProfileProps {
   userId: string;
+  currentUserId: number; // New prop for the current user's ID
 }
 
-const Profile = ({ userId }: ProfileProps) => {
+const Profile = ({ userId, currentUserId }: ProfileProps) => {
   const [username, setUsername] = useState<string>("");
   const [about, setAbout] = useState<string>("");
   const [profilePicture, setProfilePicture] = useState<string>("");
@@ -81,6 +84,10 @@ const Profile = ({ userId }: ProfileProps) => {
     fetchData();
   }, [userId]);
 
+  const onClickChangeProfile = () => {
+    redirect("/editprofile");
+  };
+
   return (
     <div className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-lg max-w-lg mx-auto">
       <div className="flex items-center mb-4">
@@ -92,6 +99,13 @@ const Profile = ({ userId }: ProfileProps) => {
             height={100}
             className="rounded-full"
           />
+          {/* Conditionally render the edit profile button */}
+          {/* {parseInt(userId) === currentUserId && ( */}
+          <button className="flex mt-2" onClick={onClickChangeProfile}>
+            <FilePenLine />
+            <p className="hidden md:block">Modifier mon profile</p>
+          </button>
+          {/*  )} */}
         </div>
         <div className="ml-4 text-black">
           <h2 className="text-2xl font-bold">{username}</h2>
@@ -103,7 +117,7 @@ const Profile = ({ userId }: ProfileProps) => {
           <TabsList
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            className="grid w-full grid-cols-3 bg-purple-50 rounded-lg shadow-md mb-4"
+            className="grid w-full grid-cols-4 bg-purple-50 rounded-lg shadow-md mb-4" // Increased column count for new tab
           >
             {[
               {
@@ -111,12 +125,16 @@ const Profile = ({ userId }: ProfileProps) => {
                 icon: <Calendar className="h-4 w-4" />,
               },
               {
-                value: "contact ",
+                value: "contact",
                 icon: <Heart className="h-4 w-4" />,
               },
               {
                 value: "statistique",
                 icon: <Book className="h-4 w-4" />,
+              },
+              {
+                value: "emotion-evaluation", // New tab for EmotionEvaluation
+                icon: <Book className="h-4 w-4" />, // You can use a different icon if needed
               },
             ].map((tab) => (
               <TabsTrigger
@@ -150,6 +168,12 @@ const Profile = ({ userId }: ProfileProps) => {
           <TabsContent value="statistique" activeTab={activeTab}>
             <div className="p-4 bg-white rounded-lg shadow-md">
               <p>Here is the statistique of the user</p>
+            </div>
+          </TabsContent>
+          <TabsContent value="emotion-evaluation" activeTab={activeTab}>
+            <div className="p-4 bg-white rounded-lg shadow-md">
+              <EmotionEvaluation userId={parseInt(userId)} />{" "}
+              {/* Pass userId to EmotionEvaluation */}
             </div>
           </TabsContent>
         </Tabs>
