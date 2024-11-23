@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
+import { redirect } from "next/navigation"; // Import useRouter to handle navigation
 import {
   prepareData,
   getSpecificRecommendations,
@@ -7,6 +8,7 @@ import {
   trainModel,
   predictRecommendations,
 } from "./model";
+import { ArrowLeft } from "lucide-react"; // Import an arrow icon
 
 const Recommandation = () => {
   const [problemType, setProblemType] = useState("");
@@ -39,55 +41,38 @@ const Recommandation = () => {
       ...specificRecommendations,
     });
   };
+  const handleBack = () => {
+    redirect("/emotion-tracker");
+  };
 
   return (
-    <div
-      style={{
-        fontFamily: "'Roboto', sans-serif",
-        backgroundColor: "#f9f9f9",
-        padding: "20px",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "600px",
-          margin: "0 auto",
-          backgroundColor: "#ffffff",
-          borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          padding: "20px",
-        }}
-      >
-        <h1
-          style={{ color: "#333", textAlign: "center", marginBottom: "20px" }}
+    <div className="font-sans bg-gray-100 p-6">
+      <div className="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
+        {/* Back Button */}
+        <button
+          onClick={handleBack}
+          className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
         >
+          <ArrowLeft className="mr-2" />
+          Retour à Emotion Tracker
+        </button>
+
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
           Système de Recommandations
         </h1>
-        <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>
+        <p className="text-center text-gray-600 mb-4">
           Obtenez des conseils et du support personnalisés pour les femmes.
         </p>
 
         {/* Formulaire */}
         <div>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "8px",
-              fontWeight: "bold",
-            }}
-          >
+          <label className="block text-gray-700 font-semibold mb-1">
             Type de problème :
           </label>
           <select
             value={problemType}
             onChange={(e) => setProblemType(e.target.value)}
-            style={{
-              padding: "10px",
-              width: "100%",
-              marginBottom: "15px",
-              borderRadius: "5px",
-              border: "1px solid #ddd",
-            }}
+            className="w-full p-2 border border-gray-300 rounded-md mb-4"
           >
             <option value="">-- Sélectionnez un type --</option>
             <option value="verbal">Harcèlement verbal</option>
@@ -97,13 +82,7 @@ const Recommandation = () => {
             <option value="sexual">Harcèlement sexuel</option>
           </select>
 
-          <label
-            style={{
-              display: "block",
-              marginBottom: "8px",
-              fontWeight: "bold",
-            }}
-          >
+          <label className="block text-gray-700 font-semibold mb-1">
             Niveau de gravité (1-5) :
           </label>
           <input
@@ -112,27 +91,12 @@ const Recommandation = () => {
             max="5"
             value={severityLevel}
             onChange={(e) => setSeverityLevel(parseInt(e.target.value))}
-            style={{
-              padding: "10px",
-              width: "100%",
-              marginBottom: "15px",
-              borderRadius: "5px",
-              border: "1px solid #ddd",
-            }}
+            className="w-full p-2 border border-gray-300 rounded-md mb-4"
           />
 
           <button
             onClick={handleGetRecommendations}
-            style={{
-              backgroundColor: "#4CAF50",
-              color: "#ffffff",
-              border: "none",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              cursor: "pointer",
-              width: "100%",
-              fontSize: "16px",
-            }}
+            className="bg-green-500 text-white rounded-md py-2 hover:bg-green-600 transition duration-200 w-full font-semibold"
           >
             Obtenir des recommandations
           </button>
@@ -140,18 +104,11 @@ const Recommandation = () => {
 
         {/* Résultats */}
         {recommendations && (
-          <div
-            style={{
-              marginTop: "20px",
-              backgroundColor: "#f1f1f1",
-              borderRadius: "10px",
-              padding: "15px",
-            }}
-          >
-            <h3 style={{ color: "#333" }}>Recommandations :</h3>
-            <p style={{ color: "#666" }}>Conseil : {recommendations.advice}</p>
-            <p style={{ color: "#666" }}>Support : {recommendations.support}</p>
-            <p style={{ color: "#666" }}>Notice : {recommendations.notice}</p>
+          <div className="mt-6 bg-gray-200 rounded-lg p-4">
+            <h3 className="text-gray-800 font-semibold">Recommandations :</h3>
+            <p className="text-gray-700">Conseil : {recommendations.advice}</p>
+            <p className="text-gray-700">Support : {recommendations.support}</p>
+            <p className="text-gray-700">Notice : {recommendations.notice}</p>
           </div>
         )}
       </div>
