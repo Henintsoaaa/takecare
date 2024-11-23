@@ -11,7 +11,11 @@ interface EmotionEvaluationProps {
   userId: number;
 }
 
-const EmotionEvaluation = ({ userId }: EmotionEvaluationProps) => {
+const EmotionEvaluation = () => {
+  let userId: number = 0;
+  if (document.cookie) {
+    userId = parseInt(document.cookie.split(",")[0].split("=")[1]);
+  }
   // Handler for redirecting to emotion-tracker
   const handleRedirect = () => {
     redirect("/emotion-tracker");
