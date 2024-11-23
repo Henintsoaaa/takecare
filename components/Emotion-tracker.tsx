@@ -4,8 +4,6 @@ import EmotionForm from "./EmotionForm";
 import EmotionShare from "./EmotionPub";
 import { Smile } from "lucide-react";
 
-const userId = 2;
-
 const EmotionTracker = () => {
   const [selectedEmotion, setSelectedEmotion] = useState("");
   const [wellbeingLevel, setWellbeingLevel] = useState(3);
@@ -13,6 +11,12 @@ const EmotionTracker = () => {
   const [notes, setNotes] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [isAppear, setIsAppear] = useState(false);
+
+  let userId: string | undefined;
+  if (document.cookie) {
+    // Redirect to login page if user is not logged in
+    userId = document.cookie.split(",")[1].split("=")[1];
+  }
 
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -34,7 +38,7 @@ const EmotionTracker = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-lg p-4 space-y-6">
+    <div className="max-w-screen-lg w-1/2 p-4 space-y-6">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-indigo-800 mb-2">
           Partager vos idées, soyez à l'écoute !
@@ -64,7 +68,7 @@ const EmotionTracker = () => {
                 setNotes={setNotes}
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
-                userId={userId}
+                userId={userId || ""}
               />
             </div>
           </>
@@ -100,7 +104,7 @@ const EmotionTracker = () => {
               setNotes={setNotes}
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
-              userId={userId}
+              userId={userId || ""}
             />
           </div>
         </div>

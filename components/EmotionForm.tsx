@@ -15,7 +15,7 @@ const EmotionForm: React.FC<{
   setNotes: (notes: string) => void;
   selectedDate: string;
   setSelectedDate: (date: string) => void;
-  userId: number;
+  userId: string;
 }> = ({
   selectedEmotion,
   setSelectedEmotion,
