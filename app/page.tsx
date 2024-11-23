@@ -11,7 +11,7 @@ const Welcome = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-      localStorage.setItem("isFirstTime", "false");
+      localStorage.setItem("isFirstTime", "true");
     }, 8000);
   });
   return (
