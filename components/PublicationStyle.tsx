@@ -41,6 +41,10 @@ const PublicationStyle = () => {
     redirect("/assistance");
   };
 
+  const redirectToInspiration = () => {
+    redirect("/inspiration");
+  };
+
   return (
     <div className="space-y-6 p-6 rounded-lg">
       <div className="text-center shadow-lg hidden md:block">

@@ -15,6 +15,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import {
   ClipboardList,
   CheckCircle,
@@ -74,7 +75,7 @@ const StatCard = ({
 
 export default function ComplaintsDashboard() {
   return (
-    <div className="min-h-screen p-8">
+    <TooltipProvider>
       <div className="max-w-7xl mx-auto space-y-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
@@ -120,7 +121,7 @@ export default function ComplaintsDashboard() {
 
           <TabsContent value="overview" className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
-              <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+              <Card className="p- 6 hover:shadow-lg transition-shadow duration-200">
                 <h3 className="font-semibold mb-4">Complaints by Status</h3>
                 <div className="h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -291,6 +292,6 @@ export default function ComplaintsDashboard() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </TooltipProvider>
   );
 }
