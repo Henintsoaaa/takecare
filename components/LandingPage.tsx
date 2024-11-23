@@ -9,11 +9,9 @@ import {
   ShieldCheck,
   ArrowRight,
   Users,
-  Book,
   Smartphone,
   Globe,
   Star,
-  Headphones,
   Menu, // Import Menu icon for the hamburger menu
   X, // Import X icon for closing the menu
 } from "lucide-react";

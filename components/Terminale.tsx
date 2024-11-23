@@ -36,21 +36,27 @@ const Terminale = () => {
             {/* Chaque ligne de texte avec animation */}
             <p
               className="overflow-hidden whitespace-nowrap w-0 animate-typewriter"
+              style={{ animationDelay: "0s" }}
+            >
+              girly@girly:~ exit
+            </p>
+            <p
+              className="overflow-hidden whitespace-nowrap w-0 animate-typewriter"
               style={{ animationDelay: "2s" }}
             >
-              girly@girly:~ .......................
+              ............................
             </p>
             <p
               className="overflow-hidden whitespace-nowrap w-0 animate-typewriter"
-              style={{ animationDelay: "4s" }}
+              style={{ animationDelay: "3.5s" }}
             >
-              girly@girly:~ bye
+              ~~~~~~~~~~~ bye ~~~~~~~~~~~
             </p>
             <p
               className="overflow-hidden whitespace-nowrap w-0 animate-typewriter"
-              style={{ animationDelay: "6s" }}
+              style={{ animationDelay: "5s" }}
             >
-              girly@girly:~ .......................
+              ...........................
             </p>
           </div>
         </div>

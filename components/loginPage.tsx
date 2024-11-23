@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 
 interface cookieData {
   user_id: number;
@@ -235,29 +234,6 @@ const Login = () => {
             {formType === "login" ? "Log in" : "Sign up"}
           </button>
         </motion.form>
-        <div className="mt-8 flex justify-center space-x-4">
-          <Image
-            src="/placeholder.svg?height=40&width=40"
-            alt="Partner Logo 1"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <Image
-            src="/placeholder.svg?height=40&width=40"
-            alt="Partner Logo 2"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <Image
-            src="/placeholder.svg?height=40&width=40"
-            alt="Partner Logo 3"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-        </div>
       </motion.div>
     </AnimatePresence>
   );
