@@ -56,7 +56,9 @@ const Plainte = ({ userId }: { userId: string }) => {
       alert("An error occurred while submitting your complaint.");
     }
   };
-
+  const handleLangue = () => {
+    redirect("/langueSigne");
+  };
   const handleBack = () => {
     redirect("/emotion-tracker");
   };
@@ -76,6 +78,14 @@ const Plainte = ({ userId }: { userId: string }) => {
             Submit Your Complaint
           </h1>
           <p className="text-gray-500">Share your experience confidentially</p>
+        </div>
+        <div>
+          <button
+            onClick={handleLangue}
+            className="  p-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center"
+          >
+            Langue des signes
+          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
