@@ -21,9 +21,12 @@ const Plainte = ({ userId }: { userId: string }) => {
   const [aboutCountry, setAboutCountry] = useState("");
   const [aboutCity, setAboutCity] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [aboutDate, setAboutDate] = useState("");
+  const [fullName, setFullName] = useState("");
   const [activeMedia, setActiveMedia] = useState<"audio" | "video" | null>(
     null
   );
+  const [aboutHour, setAboutHour] = useState("");
 
   const handleFileChange = (event: FileChangeEvent) => {
     const selectedFile = event.target.files?.[0] || null;
@@ -89,6 +92,40 @@ const Plainte = ({ userId }: { userId: string }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Champ Nom Complet */}
+          <div className="mb-4">
+            <label className="font-normal text-3sm mb-2">Nom Complet :</label>
+            <input
+              type="text"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+              placeholder="Entrez votre nom complet"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
+          </div>
+          {/* Champ Date */}
+          <div className="mb-4">
+            <label className="mb-2 font-normal text-3sm">Date :</label>
+            <input
+              type="date"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+              value={aboutDate}
+              onChange={(e) => setAboutDate(e.target.value)}
+              required
+            />
+          </div>
+          {/* Champ Heure */}
+          <div className="mb-4">
+            <label className="mb-2 font-normal text-3sm">Heure :</label>
+            <input
+              type="time"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+              value={aboutHour}
+              onChange={(e) => setAboutHour(e.target.value)}
+              required
+            />
+          </div>
           <div className="space-y-2">
             <label className="flex items-center text-gray-700 font-semibold">
               <FileText className="mr-2 text-indigo-500" size={20} />

@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, Watch } from "lucide-react";
 import EmotionTracker from "@/components/Emotion-tracker";
 import PublicationStyle from "@/components/PublicationStyle";
+import SignalementBoard from "@/components/SignalementBoard";
+import WatchSignalement from "@/components/WatchSignalement";
 
 const Page = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,7 +42,9 @@ const Page = () => {
 
       {/* Emotion Tracker occupying the rest of the space */}
       <div className="flex-grow p-4 bg-gray-50">
-        <EmotionTracker />
+        {/* <EmotionTracker /> */}
+        <SignalementBoard />
+        <WatchSignalement signalementId={1} />
       </div>
     </div>
   );
