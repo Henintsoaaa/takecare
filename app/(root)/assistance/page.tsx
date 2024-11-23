@@ -1,9 +1,9 @@
-import Assistance from "@/components/Assistance";
+import Recommandation from "@/components/Assistance";
 
 const Page = () => {
   return (
     <div>
-      <Assistance />
+      <Recommandation />
     </div>
   );
 };

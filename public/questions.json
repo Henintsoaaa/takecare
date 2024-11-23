@@ -1,0 +1,144 @@
+{
+  "quiz": [
+    {
+      "domain": "domestique",
+      "level": "beginner",
+      "questions": [
+        {
+          "question": "Qu'est-ce qu'une forme courante de harcèlement domestique?",
+          "options": {
+            "0": "Des disputes régulières",
+            "1": "Un contrôle excessif des finances",
+            "2": "Partage des tâches ménagères",
+            "3": "Manque de communication"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Un contrôle excessif des finances"
+        },
+        {
+          "question": "Quelle action peut indiquer un abus émotionnel?",
+          "options": {
+            "0": "Critiquer avec bienveillance",
+            "1": "Rabaisser constamment le partenaire",
+            "2": "Exiger du respect mutuel",
+            "3": "Encourager les passions"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Rabaisser constamment le partenaire"
+        }
+      ]
+    },
+    {
+      "domain": "travail",
+      "level": "intermediate",
+      "questions": [
+        {
+          "question": "Quelle est une forme de harcèlement sexuel sur le lieu de travail?",
+          "options": {
+            "0": "Offrir un compliment professionnel",
+            "1": "Faire des blagues à caractère sexuel",
+            "2": "Partager des idées de projets",
+            "3": "Participer à des réunions"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Faire des blagues à caractère sexuel"
+        },
+        {
+          "question": "Que faire si un collègue fait des avances non sollicitées?",
+          "options": {
+            "0": "Les ignorer totalement",
+            "1": "En informer un supérieur ou le service RH",
+            "2": "Rire pour éviter la gêne",
+            "3": "Quitter immédiatement l'entreprise"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "En informer un supérieur ou le service RH"
+        }
+      ]
+    },
+    {
+      "domain": "en ligne",
+      "level": "advanced",
+      "questions": [
+        {
+          "question": "Quelle est une forme de harcèlement en ligne ciblant les femmes?",
+          "options": {
+            "0": "Recevoir des messages de soutien",
+            "1": "Des messages ou images inappropriés non sollicités",
+            "2": "Suivre des groupes de discussions",
+            "3": "Partager des posts éducatifs"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Des messages ou images inappropriés non sollicités"
+        },
+        {
+          "question": "Quelle est une bonne pratique pour se protéger contre le harcèlement en ligne?",
+          "options": {
+            "0": "Partager des informations personnelles librement",
+            "1": "Bloquer et signaler les harceleurs",
+            "2": "Ne pas répondre aux harceleurs mais ne rien signaler",
+            "3": "Supprimer ses comptes"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Bloquer et signaler les harceleurs"
+        }
+      ]
+    },
+    {
+      "domain": "public",
+      "level": "intermediate",
+      "questions": [
+        {
+          "question": "Quelle action est considérée comme du harcèlement dans un espace public?",
+          "options": {
+            "0": "Regarder quelqu'un avec respect",
+            "1": "Faire des remarques non sollicitées sur l'apparence",
+            "2": "Demander poliment une direction",
+            "3": "S'excuser après avoir bousculé quelqu'un"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Faire des remarques non sollicitées sur l'apparence"
+        },
+        {
+          "question": "Que pouvez-vous faire si vous êtes victime de harcèlement dans un espace public?",
+          "options": {
+            "0": "Ignorer et partir en silence",
+            "1": "Chercher de l'aide auprès des personnes autour",
+            "2": "Engager une discussion avec le harceleur",
+            "3": "Ne rien faire et rentrer chez soi"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Chercher de l'aide auprès des personnes autour"
+        }
+      ]
+    },
+    {
+      "domain": "juridique",
+      "level": "advanced",
+      "questions": [
+        {
+          "question": "Que dit la loi sur le harcèlement sexuel dans de nombreux pays?",
+          "options": {
+            "0": "C'est une infraction mineure sans conséquences",
+            "1": "C'est un crime puni par la loi",
+            "2": "C'est toléré dans certains lieux publics",
+            "3": "Cela dépend des normes culturelles"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "C'est un crime puni par la loi"
+        },
+        {
+          "question": "Quelle est la première étape pour signaler un harcèlement?",
+          "options": {
+            "0": "Confronter directement l'agresseur",
+            "1": "Rassembler des preuves ou témoins",
+            "2": "Attendre que la situation se calme",
+            "3": "En parler uniquement à des amis proches"
+          },
+          "correct_answer_index": 1,
+          "correct_answer": "Rassembler des preuves ou témoins"
+        }
+      ]
+    }
+  ]
+}
