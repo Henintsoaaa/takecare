@@ -12,11 +12,9 @@ const EmotionTracker = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [isAppear, setIsAppear] = useState(false);
 
-  let userId: string | undefined;
-  if (document.cookie) {
-    // Redirect to login page if user is not logged in
-    userId = document.cookie.split(",")[1].split("=")[1];
-  }
+  let userId = document.cookie
+    ? document.cookie.split(",")[1].split("=")[1]
+    : undefined;
 
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -38,15 +36,15 @@ const EmotionTracker = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-lg w-1/2 p-4 space-y-6">
-      <div className="text-center mb-8">
+    <div className="p-4 space-y-6 h-full">
+      {/* <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-indigo-800 mb-2">
           Partager vos idées, soyez à l'écoute !
         </h1>
         <p className="text-gray-600">Suivez votre bien-être jour après jour</p>
-      </div>
-      {/* when */}
-      <div className="flex flex-col md:flex-row relative z-0">
+      </div> */}
+
+      <div className="flex flex-col md:flex-row relative z-0 h-full">
         {isAppear && (
           <>
             <div
@@ -88,11 +86,11 @@ const EmotionTracker = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row flex-grow">
+        <div className="flex flex-col md:flex-row flex-grow w-full justify-between px-5">
           <div className="overflow-y-auto max-h-screen w-full mx-auto">
             <EmotionShare />
           </div>
-          <div className="fixed bottom-9 right-3 z-10 hidden md:block">
+          <div className="hidden md:block">
             <EmotionForm
               selectedEmotion={selectedEmotion}
               setSelectedEmotion={setSelectedEmotion}
