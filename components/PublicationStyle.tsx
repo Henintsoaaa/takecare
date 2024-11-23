@@ -89,27 +89,7 @@ const PublicationStyle = () => {
             </div>
           ))}
         </div>
-        <AnimatePresence>
-          <motion.div
-            layout
-            className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 to-purple-400"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-8"
-            >
-              <h2 className="text-4xl font-bold text-white mb-4">Tech'her</h2>
-              {quotes.map((quote) => (
-                <p key={quote.id} className="text-white text-xl italic">
-                  &quot;{quote.text}&quot;
-                </p>
-              ))}
-            </motion.div>
-            {/* ... (rest of your form JSX) */}
-          </motion.div>
-        </AnimatePresence>
+
         {!showAll && (
           <button
             onClick={() => setShowAll(true)}
