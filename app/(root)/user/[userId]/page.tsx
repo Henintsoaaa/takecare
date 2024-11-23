@@ -39,7 +39,11 @@ interface UserProfileResponse {
     description: string;
   };
   posts: Post[];
-  contact: Contact[];
+  contacts: Contact[];
+}
+interface ContactResponse {
+  status: string;
+  contacts: Contact[];
 }
 
 // generic data
@@ -80,7 +84,7 @@ const data: UserProfileResponse = {
       isAnonyme: false,
     },
   ],
-  contact: [
+  contacts: [
     {
       id: 1,
       username: "Jane Doe",
@@ -129,7 +133,10 @@ const Page = () => {
         const userData = response.data.user;
         const aboutData = response.data.about;
         const postsData = response.data.posts;
-        const contactsData = response.data.contact;
+        const responseContact = await axios.get<ContactResponse>(
+          `${process.env.NEXT_PUBLIC_IP_KEY}/contact?user_id=${userId}`
+        );
+        const contactsData = responseContact.data.contacts;
 
         setUsername(userData.username);
         setAbout(aboutData.description);
