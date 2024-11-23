@@ -105,7 +105,10 @@ const _response = {
 
 const Page = () => {
   const userId = usePathname().split("/")[2];
-  console.log(userId);
+
+  let user_id: number = 0; // Assuming the user is logged in
+  if (document.cookie)
+    user_id = parseInt(document.cookie.split(";")[0].split("=")[1]);
 
   const [username, setUsername] = useState<string>("");
   const [about, setAbout] = useState<string>("");
