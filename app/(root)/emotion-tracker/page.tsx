@@ -6,18 +6,16 @@ import PublicationStyle from "@/components/PublicationStyle";
 
 const Page = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  // console.log(document.cookie);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   return (
-    <div className="flex gap-2 relative ">
+    <div className="flex flex-col md:flex-row h-full">
       {/* Mobile Menu Icon */}
-      <div className="md:hidden">
+      <div className="md:hidden relative top-4">
         <button onClick={toggleMenu} className="p-2">
-          {/* Import a menu bar from lucide-react */}
           <Menu />
         </button>
         {menuOpen && (
@@ -35,10 +33,15 @@ const Page = () => {
         )}
       </div>
 
-      <div className="p-4 w-1/5 hidden md:block">
+      {/* Sidebar for PublicationStyle */}
+      <div className="p-4 w-full md:w-1/5 bg-gray-100 hidden md:block h-full overflow-y-auto">
         <PublicationStyle />
       </div>
-      <EmotionTracker />
+
+      {/* Emotion Tracker occupying the rest of the space */}
+      <div className="flex-grow p-4 bg-gray-50">
+        <EmotionTracker />
+      </div>
     </div>
   );
 };

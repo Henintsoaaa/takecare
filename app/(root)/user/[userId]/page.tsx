@@ -3,8 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Heart, Book } from "lucide-react"; // Assuming you're using lucide-react for icons
-import { usePathname } from "next/navigation";
+import { Calendar, Heart, Book, FilePenLine } from "lucide-react"; // Assuming you're using lucide-react for icons
+import { usePathname, redirect } from "next/navigation";
 
 interface Post {
   entry_id: number;
@@ -141,6 +141,10 @@ const Page = () => {
     fetchData();
   }, [userId]);
 
+  const onClickChangeProfile = () => {
+    redirect(`/user/${user_id}/edit`);
+  };
+
   return (
     <div className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-lg max-w-lg mx-auto">
       <div className="flex items-center mb-4">
@@ -153,6 +157,13 @@ const Page = () => {
             className="rounded-full"
           />
         </div>
+        {/* Conditionally render the edit profile button */}
+        {parseInt(userId) === user_id && (
+          <button className="flex mt-2" onClick={onClickChangeProfile}>
+            <FilePenLine />
+            <p className="hidden md:block">Modifier mon profile</p>
+          </button>
+        )}
         <div className="ml-4 text-black">
           <h2 className="text-2xl font-bold">{username}</h2>
           <p className="text-sm text-gray-600">{about}</p>

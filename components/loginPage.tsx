@@ -9,14 +9,17 @@ interface cookieData {
   email: string;
   username: string;
   token: string;
+  role: string;
 }
 
 const empoweringQuotes = [
-  "Embrace your power and potential.",
-  "You are capable of amazing things.",
-  "Your voice matters in tech and beyond.",
-  "Believe in yourself and you will be unstoppable.",
-  "Every day is a chance to make a difference.",
+  "Sois forte, on est avec vous.",
+  "Ne laissez pas le bruit des opinions des autres étouffer votre propre voix.",
+  "La solidarité féminine est une force. Ensemble, nous pouvons surmonter toute épreuve.",
+  "Rappelle-toi : personne n'a le droit de te diminuer. Tu mérites le respect et la dignité.",
+  "Chaque fois que tu dis 'non', tu éduques le monde sur ce qui est acceptable.",
+  "Le silence ne protège pas, mais ta voix peut changer les choses. Tu as le droit de t'exprimer.",
+  "Ton courage face à l'injustice inspire ceux qui t'entourent. Continue de te battre pour ce qui est juste.",
 ];
 
 const Login = () => {
@@ -56,7 +59,11 @@ const Login = () => {
         document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
         // redirect to /emotion-tracker
         console.log("redirecting to /emotion-tracker");
-
+        // if (cookie.role === "utilisateur") {
+        //   redirect("/emotion-tracker");
+        // } else if (cookie.role === "securite") {
+        //   redirect("/juridique");
+        // }
         redirect("/emotion-tracker");
       } else {
         setError(val.data.message);

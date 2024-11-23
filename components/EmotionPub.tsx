@@ -9,6 +9,7 @@ import {
   FaHeart,
   FaRegHeart,
 } from "react-icons/fa";
+import { Search } from "lucide-react";
 
 interface Post {
   entry_id: number;
@@ -27,6 +28,7 @@ const EmotionShare = () => {
     [key: number]: boolean;
   }>({});
   const [likes, setLikes] = useState<{ [key: number]: boolean }>({});
+  const [searchQuery, setSearchQuery] = useState<string>(""); // New state for search query
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,29 +85,40 @@ const EmotionShare = () => {
     }));
   };
 
+  // Filter posts based on the search query
+  const filteredPosts = posts.filter((post) =>
+    post.notes.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="p-5 w-full flex flex-col gap-4">
+      {/* Search Bar */}
+      <div className="mb-4 flex gap-6 items-center flex-nowrap">
+        <input
+          type="text"
+          placeholder="Search posts..."
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 hidden md:block"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <Search className="text-indigo-600 w-10 h-10 " />
+      </div>
+
       {loading && (
         <p className="text-center text-lg text-gray-600">Loading posts...</p>
       )}
       {error && <p className="text-center text-lg text-red-500">{error}</p>}
 
-      {posts.map((post) => (
+      {filteredPosts.map((post) => (
         <Card
           key={post.entry_id}
-          className="bg-white border border-gray-300 rounded-lg shadow-lg"
+          className="bg-white border border-gray-300 rounded-lg shadow-md"
         >
           <CardContent className="p-4">
             <div>
-              {post.isAnonyme !== 1 ? (
-                <span className="font-bold text-xl text-indigo-600">
-                  {post.username}
-                </span>
-              ) : (
-                <span className="font-bold text-xl text-indigo-600">
-                  Anonymous
-                </span>
-              )}
+              <span className="font-bold text-xl text-indigo-600">
+                {post.isAnonyme !== 1 ? post.username : "Anonymous"}
+              </span>
               <p className="mt-2 text-gray-800">{post.notes}</p>
               <small className="text-gray-500">
                 {new Date(post.created_at).toLocaleString("fr-FR", {
@@ -115,9 +128,9 @@ const EmotionShare = () => {
                 })}
               </small>
             </div>
-            <div className="flex gap-2 items-center justify-between">
-              <div className="flex gap-2">
-                <div className="mt-4 flex items-center">
+            <div className="flex gap-2 items-center justify-between mt-4">
+              <div className="flex gap-4">
+                <div className="flex items-center">
                   {likes[post.entry_id] ? (
                     <FaHeart
                       className="text-red-600 cursor-pointer hover:text-red-800 transition duration-200"
@@ -130,19 +143,17 @@ const EmotionShare = () => {
                     />
                   )}
                 </div>
-                <div className="flex items-center mt-4 justify-between">
-                  <div className="flex">
-                    <FaComment
-                      className="text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
-                      onClick={() => toggleCommentInput(post.entry_id)}
-                    />
-                    <span
-                      className="ml-2 text-gray-700 cursor-pointer"
-                      onClick={() => toggleCommentInput(post.entry_id)}
-                    >
-                      Add Comment
-                    </span>
-                  </div>
+                <div className="flex items-center">
+                  <FaComment
+                    className="text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
+                    onClick={() => toggleCommentInput(post.entry_id)}
+                  />
+                  <span
+                    className="ml-2 text-gray-700 cursor-pointer"
+                    onClick={() => toggleCommentInput(post.entry_id)}
+                  >
+                    Add Comment
+                  </span>
                 </div>
               </div>
               <FaShareAlt
@@ -153,7 +164,7 @@ const EmotionShare = () => {
             {showCommentInput[post.entry_id] && (
               <div className="mt-2 flex items-center">
                 <textarea
-                  className="w-full p-2 border border-gray-300 rounded-lg"
+                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   rows={3}
                   placeholder="Add a comment..."
                   value={comments[post.entry_id] || ""}
