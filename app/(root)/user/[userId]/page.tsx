@@ -20,7 +20,7 @@ interface Post {
 interface Contact {
   id: number;
   username: string;
-  profilePicture: string;
+  profilePhoto: string;
 }
 
 interface UserProfileResponse {
@@ -28,17 +28,17 @@ interface UserProfileResponse {
   user: {
     id: number;
     username: string;
-    userType: string;
     email: string;
     created_at: Date;
-    profilePicture: string;
-    coverPicture: string;
+    profilePhoto: string;
+    role: string;
+    coverPhoto: string;
   };
   about: {
     user_id: number;
     description: string;
   };
-  allPosts: Post[];
+  posts: Post[];
   contact: Contact[];
 }
 
@@ -48,17 +48,17 @@ const data: UserProfileResponse = {
   user: {
     id: 1,
     username: "John Doe",
-    userType: "admin",
+    role: "admin",
     email: "john@gmail.com",
     created_at: new Date(),
-    profilePicture: "/profile.jpg",
-    coverPicture: "/cover.jpg",
+    profilePhoto: "/profile.jpg",
+    coverPhoto: "/cover.jpg",
   },
   about: {
     user_id: 1,
     description: "I am a software engineer",
   },
-  allPosts: [
+  posts: [
     {
       entry_id: 1,
       user_id: 1,
@@ -84,17 +84,17 @@ const data: UserProfileResponse = {
     {
       id: 1,
       username: "Jane Doe",
-      profilePicture: "/jane.jpg",
+      profilePhoto: "/jane.jpg",
     },
     {
       id: 2,
       username: "Alice",
-      profilePicture: "/alice.jpg",
+      profilePhoto: "/alice.jpg",
     },
     {
       id: 3,
       username: "Bob",
-      profilePicture: "/bob.jpg",
+      profilePhoto: "/bob.jpg",
     },
   ],
 };
@@ -104,33 +104,34 @@ const _response = {
 };
 
 const Page = () => {
-  const userId = usePathname().split("/")[1];
+  const userId = usePathname().split("/")[2];
+  console.log(userId);
+
   const [username, setUsername] = useState<string>("");
   const [about, setAbout] = useState<string>("");
-  const [profilePicture, setProfilePicture] = useState<string>("");
+  const [profilePhoto, setprofilePhoto] = useState<string>("");
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [posts, setposts] = useState<Post[]>([]);
   const [activeTab, setActiveTab] = useState<string>("posts"); // State to manage the active tab
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        /*
         const response = await axios.get<UserProfileResponse>(
-          `${process.env.NEXT_PUBLIC_IP_KEY}Hack4Her/user-profile?userId=${userId}`
+          `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
         );
-        */
-        const response = _response;
+        // const response = _response;
+        console.log(response.data);
 
         const userData = response.data.user;
         const aboutData = response.data.about;
-        const postsData = response.data.allPosts;
+        const postsData = response.data.posts;
         const contactsData = response.data.contact;
 
         setUsername(userData.username);
         setAbout(aboutData.description);
-        setProfilePicture(userData.profilePicture);
-        setAllPosts(postsData);
+        setprofilePhoto(userData.profilePhoto);
+        setposts(postsData);
         setContacts(contactsData);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -145,7 +146,7 @@ const Page = () => {
       <div className="flex items-center mb-4">
         <div className="overflow-hidden rounded-full border-2 border-purple-300">
           <Image
-            src={profilePicture || "/profile.jpg"} // Use fetched profile picture or default image
+            src={profilePhoto || "/profile.jpg"} // Use fetched profile picture or default image
             alt="Profile picture"
             width={100}
             height={100}
@@ -193,8 +194,8 @@ const Page = () => {
           </TabsList>
           <TabsContent value="posts">
             <div className="p-4 bg-white rounded-lg shadow-md">
-              {allPosts.length > 0 ? (
-                allPosts.map((post) => (
+              {posts.length > 0 ? (
+                posts.map((post) => (
                   <div key={post.entry_id} className="mb-2">
                     <p>{post.notes}</p>
                     <p className="text-xs text-gray-400">
@@ -213,7 +214,7 @@ const Page = () => {
                 contacts.map((contact) => (
                   <div key={contact.id} className="flex items-center mb-2">
                     <Image
-                      src={contact.profilePicture || "/default-profile.jpg"}
+                      src={contact.profilePhoto || "/default-profile.jpg"}
                       alt={contact.username}
                       width={40}
                       height={40}
