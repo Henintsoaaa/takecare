@@ -1,10 +1,12 @@
+"use client";
 import Plainte from "@/components/Plainte";
-import React from "react";
 
 const Page = () => {
+  // Get the user id from the user cookie
+  const userId = document.cookie.split(",")[0].split("=")[1];
   return (
     <div>
-      <Plainte userId="1" />
+      <Plainte userId={userId} />
     </div>
   );
 };

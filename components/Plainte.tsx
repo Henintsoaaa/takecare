@@ -4,9 +4,16 @@ import axios from "axios";
 import AudioCapture from "./AudioCapture";
 import VideoCapture from "./VideoCapture";
 import { redirect } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  FileText,
+  MapPin,
+  Upload,
+  Mic,
+  Video,
+  Send,
+} from "lucide-react";
 
-// TypeScript interface for file change event
 interface FileChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
 
 const Plainte = ({ userId }: { userId: string }) => {
@@ -14,19 +21,13 @@ const Plainte = ({ userId }: { userId: string }) => {
   const [aboutCountry, setAboutCountry] = useState("");
   const [aboutCity, setAboutCity] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [activeMedia, setActiveMedia] = useState<"audio" | "video" | null>(
+    null
+  );
 
   const handleFileChange = (event: FileChangeEvent) => {
     const selectedFile = event.target.files?.[0] || null;
     setFile(selectedFile);
-
-    if (selectedFile && userId) {
-      console.log("Fichier sélectionné :", selectedFile);
-    } else {
-      console.error("ID utilisateur ou fichier non sélectionné.");
-      alert(
-        "Veuillez sélectionner un fichier et vous assurer que l'ID utilisateur est chargé."
-      );
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,12 +49,6 @@ const Plainte = ({ userId }: { userId: string }) => {
       });
 
       if (response.status === 200) {
-        alert("Complaint submitted successfully!");
-        setCause("");
-        setAboutCountry("");
-        setAboutCity("");
-        setFile(null);
-
         redirect("/procedure");
       }
     } catch (error) {
@@ -62,118 +57,133 @@ const Plainte = ({ userId }: { userId: string }) => {
     }
   };
 
-  const onClickLangue = () => {
-    redirect("/langueSigne");
-  };
-
   const handleBack = () => {
-    redirect("/emotion-tracker"); // Redirect to the emotion-tracker page
+    redirect("/emotion-tracker");
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg relative">
-      <button
-        onClick={handleBack}
-        className="absolute top-4 left-4 text-indigo-600 hover:text-indigo-800 transition duration-300"
-      >
-        <ArrowLeft className="h-6 w-6" />
-      </button>
-      <h1 className="text-2xl font-bold text-center mb-6">
-        Submit Your Complaint
-      </h1>
-      <div className="flex justify-between mb-4">
+    <div className=" h-screen bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-xl bg-white rounded-2xl shadow-2xl p-8 relative">
         <button
-          onClick={onClickLangue}
-          className="text-blue-500 hover:underline"
+          onClick={handleBack}
+          className="absolute top-6 left-6 text-indigo-600 hover:text-indigo-800 transition-all duration-300 p-2 rounded-full hover:bg-indigo-50"
         >
-          Commencer avec les langues des signes
+          <ArrowLeft className="h-6 w-6" />
         </button>
-      </div>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label
-            htmlFor="cause"
-            className="block mb-2 font-semibold text-gray-700"
-          >
-            Décrivez votre plainte
-          </label>
-          <input
-            type="text"
-            name="cause"
-            value={cause}
-            onChange={(e) => setCause(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Write your complaint here..."
-            required
-          />
+
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            Submit Your Complaint
+          </h1>
+          <p className="text-gray-500">Share your experience confidentially</p>
         </div>
 
-        <div>
-          <h2 className="font-semibold text-lg mb-2 text-gray-700">I'm from</h2>
-          <label
-            htmlFor="country"
-            className="block mb-2 font-normal text-gray-600"
-          >
-            Country:
-          </label>
-          <textarea
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Write your country here..."
-            value={aboutCountry}
-            onChange={(e) => setAboutCountry(e.target.value)}
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <label className="flex items-center text-gray-700 font-semibold">
+              <FileText className="mr-2 text-indigo-500" size={20} />
+              Describe Your Complaint
+            </label>
+            <textarea
+              value={cause}
+              onChange={(e) => setCause(e.target.value)}
+              className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-300 transition-all duration-300"
+              placeholder="Provide details about your complaint..."
+              rows={4}
+              required
+            />
+          </div>
 
-        <div>
-          <label
-            htmlFor="city"
-            className="block mb-2 font-normal text-gray-600"
-          >
-            City:
-          </label>
-          <textarea
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue -500"
-            placeholder="Write your city here..."
-            value={aboutCity}
-            onChange={(e) => setAboutCity(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="flex justify-between items-center mb-4">
-          <label className="flex gap-1 items-center bg-white py-1 px-2 rounded-md shadow-md cursor-pointer">
-            <input type="file" className="hidden" onChange={handleFileChange} />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M7.5 15V21h9V15M10.5 9V3h3v6m-7.5 4h3m5.25-9h4.5m-4.5 0l2.25-2.25m-2.25 2.25L15.75 3"
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="flex items-center text-gray-700 font-semibold">
+                <MapPin className="mr-2 text-green-500" size={20} />
+                Country
+              </label>
+              <input
+                type="text"
+                value={aboutCountry}
+                onChange={(e) => setAboutCountry(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-300 transition-all duration-300"
+                placeholder="Your country"
+                required
               />
-            </svg>
-            <span className="text-black">Upload</span>
-          </label>
-        </div>
+            </div>
+            <div className="space-y-2">
+              <label className="flex items-center text-gray-700 font-semibold">
+                <MapPin className="mr-2 text-blue-500" size={20} />
+                City
+              </label>
+              <input
+                type="text"
+                value={aboutCity}
+                onChange={(e) => setAboutCity(e.target.value)}
+                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-300"
+                placeholder="Your city"
+                required
+              />
+            </div>
+          </div>
 
-        <div className="mt-4 flex flex-col gap-4">
-          <AudioCapture />
-          <VideoCapture />
-        </div>
+          <div className="flex justify-between items-center space-x-4">
+            <label className="flex-1 cursor-pointer">
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleFileChange}
+              />
+              <div className="flex items-center justify-center p-3 border-2 border-dashed border-indigo-200 rounded-lg hover:bg-indigo-50 transition-all">
+                <Upload className="mr-2 text-indigo-500" />
+                <span className="text-gray-600">
+                  {file ? file.name : "Upload Document"}
+                </span>
+              </div>
+            </label>
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
-        >
-          Submit
-        </button>
-      </form>
+          <div className="flex space-x-4">
+            <button
+              type="button"
+              onClick={() =>
+                setActiveMedia(activeMedia === "audio" ? null : "audio")
+              }
+              className={`flex-1 flex items-center justify-center p-3 rounded-lg transition-all ${
+                activeMedia === "audio"
+                  ? "bg-green-500 text-white"
+                  : "bg-green-50 text-green-600 hover:bg-green-100"
+              }`}
+            >
+              <Mic className="mr-2" />
+              Audio Testimony
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setActiveMedia(activeMedia === "video" ? null : "video")
+              }
+              className={`flex-1 flex items-center justify-center p-3 rounded-lg transition-all ${
+                activeMedia === "video"
+                  ? "bg-blue-500 text-white"
+                  : "bg-blue-50 text-blue-600 hover:bg-blue-100"
+              }`}
+            >
+              <Video className="mr-2" />
+              Video Testimony
+            </button>
+          </div>
+
+          {activeMedia === "audio" && <AudioCapture />}
+          {activeMedia === "video" && <VideoCapture />}
+
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white p-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center"
+          >
+            <Send className="mr-2" />
+            Submit Complaint
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
