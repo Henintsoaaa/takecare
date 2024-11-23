@@ -7,9 +7,7 @@ const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); // Create a ref for the dropdown
 
-  // console.log(document.cookie);
-  // const user_id = document.cookie.split(",")[1].split("=")[1];
-  // console.log(user_id);
+  const user_id = document.cookie.split(",")[1].split("=")[1];
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
