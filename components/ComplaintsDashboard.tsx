@@ -23,6 +23,8 @@ import {
   AlertTriangle,
   TrendingUp,
 } from "lucide-react";
+// import axios from "axios"; // Import Axios (commented out)
+import React, { useEffect, useState } from "react"; // Import React and hooks
 
 const monthlyData = [
   { month: "Jan", complaints: 65 },
@@ -39,6 +41,38 @@ const statusData = [
   { name: "In Progress", value: 320, color: "#F59E0B" },
   { name: "Pending", value: 210, color: "#6366F1" },
   { name: "Escalated", value: 130, color: "#EF4444" },
+];
+
+// Mock complaints data
+const mockComplaintsData = [
+  {
+    id: "COM-2024-001",
+    subject: "Service Interruption",
+    status: "In Progress",
+    date: "2024-03-20",
+    priority: "High",
+  },
+  {
+    id: "COM-2024-002",
+    subject: "Billing Issue",
+    status: "Resolved",
+    date: "2024-03-19",
+    priority: "Medium",
+  },
+  {
+    id: "COM-2024-003",
+    subject: "Product Quality",
+    status: "Pending",
+    date: "2024-03-18",
+    priority: "Low",
+  },
+  {
+    id: "COM-2024-004",
+    subject: "Customer Support",
+    status: "Escalated",
+    date: "2024-03-17",
+    priority: "High",
+  },
 ];
 
 const StatCard = ({
@@ -74,6 +108,19 @@ const StatCard = ({
 );
 
 export default function ComplaintsDashboard() {
+  const [complaints, setComplaints] = useState<any[]>(mockComplaintsData); // Use mock data instead of fetching
+
+  // useEffect(() => {
+  //   // Fetch complaints data using Axios
+  //   axios.get("http://localhost:3003/api/complaints")
+  //     .then((response) => {
+  //       setComplaints(response.data); // Set the fetched data to state
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching complaints data:", error);
+  //     });
+  // }, []);
+
   return (
     <TooltipProvider>
       <div className="max-w-7xl mx-auto space-y-8">
@@ -89,25 +136,31 @@ export default function ComplaintsDashboard() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <StatCard
             title="Total Complaints"
-            value="1,200"
+            value={complaints.length.toString()} // Use the length of complaints
             icon={ClipboardList}
             trend="+12.5%"
           />
           <StatCard
             title="Resolved"
-            value="540"
+            value={complaints
+              .filter((c) => c.status === "Resolved")
+              .length.toString()} // Count resolved complaints
             icon={CheckCircle}
             trend="+8.2%"
           />
           <StatCard
             title="In Progress"
-            value="320"
+            value={complaints
+              .filter((c) => c.status === "In Progress")
+              .length.toString()} // Count in-progress complaints
             icon={Clock}
             trend="-3.1%"
           />
           <StatCard
             title="Escalated"
-            value="130"
+            value={complaints
+              .filter((c) => c.status === "Escalated")
+              .length.toString()} // Count escalated complaints
             icon={AlertTriangle}
             trend="+2.4%"
           />
@@ -121,7 +174,7 @@ export default function ComplaintsDashboard() {
 
           <TabsContent value="overview" className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
-              <Card className="p- 6 hover:shadow-lg transition-shadow duration-200">
+              <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
                 <h3 className="font-semibold mb-4">Complaints by Status</h3>
                 <div className="h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -182,36 +235,7 @@ export default function ComplaintsDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {[
-                      {
-                        id: "COM-2024-001",
-                        subject: "Service Interruption",
-                        status: "In Progress",
-                        date: "2024-03-20",
-                        priority: "High",
-                      },
-                      {
-                        id: "COM-2024-002",
-                        subject: "Billing Issue",
-                        status: "Resolved",
-                        date: "2024-03-19",
-                        priority: "Medium",
-                      },
-                      {
-                        id: "COM-2024-003",
-                        subject: "Product Quality",
-                        status: "Pending",
-                        date: "2024-03-18",
-                        priority: "Low",
-                      },
-                      {
-                        id: "COM-2024-004",
-                        subject: "Customer Support",
-                        status: "Escalated",
-                        date: "2024-03-17",
-                        priority: "High",
-                      },
-                    ].map((complaint) => (
+                    {complaints.map((complaint) => (
                       <tr
                         key={complaint.id}
                         className="border-b hover:bg-gray-100 transition-colors duration-200"
@@ -224,7 +248,7 @@ export default function ComplaintsDashboard() {
                           <span
                             className={`px-2 py-1 rounded-full text-xs ${
                               complaint.status === "Resolved"
-                                ? "bg-green-100 text-green-800"
+                                ? " bg-green-100 text-green-800"
                                 : complaint.status === "In Progress"
                                 ? "bg-yellow-100 text-yellow-800"
                                 : complaint.status === "Pending"
