@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import {
   fetchTotalPlaintes,
@@ -39,7 +40,7 @@ export default function Statistiques() {
   const [types, setTypes] = useState<TypeDeViolence[]>([]);
   const [parJour, setParJour] = useState<{ jour: string; count: number }[]>([]);
   const [tempsMoyen, setTempsMoyen] = useState<number>(0);
-  const [statusPlaintes, setStatusPlaintes] = useState<StatutPlainte[]>([]); // Ajout de l'état 'statusPlaintes'
+  const [statusPlaintes, setStatusPlaintes] = useState<StatutPlainte[]>([]);
 
   const statuses = [
     { label: "Reçu", color: "bg-blue-500" },
@@ -68,27 +69,28 @@ export default function Statistiques() {
     fetchTempsMoyen().then((data: { temps_moyen: number }) =>
       setTempsMoyen(data.temps_moyen)
     );
-    fetchTotalStatusPlaintes() // Appel de la nouvelle fonction
-      .then((data: StatutPlainte[]) => setStatusPlaintes(data)); // Met à jour l'état avec les données reçues
+    fetchTotalStatusPlaintes().then((data: StatutPlainte[]) =>
+      setStatusPlaintes(data)
+    );
   }, []);
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-2xl max-w-4xl mx-auto space-y-6">
-      <h1 className="text-4xl font-bold text-blue-600 mb-6 flex items-center justify-center">
+      <h1 className="text-4xl font-bold text-blue-600 mb-6 text-center">
         🌍 Statistiques Globales
       </h1>
 
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        <h2 className="text-2xl font-semibold text-gray-800">
           📊 Nombre total de plaintes
         </h2>
         <p className="text-xl text-gray-600">{total} plaintes signalées</p>
       </div>
 
-      <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
-        📊 Répartition des plaintes par statut
-      </h2>
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+        <h2 className="text-2xl font-semibold text-gray-800">
+          📊 Répartition des plaintes par statut
+        </h2>
         <ul>
           {statusPlaintes.map((status, index) => {
             const statusInfo = statuses.find(
@@ -102,7 +104,8 @@ export default function Statistiques() {
                   }`}
                 ></span>
                 <span>
-                  {status.current_status}: {status.count}
+                  {status.current_status}:{" "}
+                  <span className="font-bold">{status.count}</span>
                 </span>
               </li>
             );
@@ -110,9 +113,8 @@ export default function Statistiques() {
         </ul>
       </div>
 
-      {/* Répartition par région */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        <h2 className="text-2xl font-semibold text-gray-800">
           📍 Répartition par région
         </h2>
         <ul className="space-y-3">
@@ -125,9 +127,8 @@ export default function Statistiques() {
         </ul>
       </div>
 
-      {/* Types de violences */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        <h2 className="text-2xl font-semibold text-gray-800">
           🔴 Types de violences signalées
         </h2>
         <ul className="space-y-3">
@@ -140,9 +141,8 @@ export default function Statistiques() {
         </ul>
       </div>
 
-      {/* Statistiques par jour */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        <h2 className="text-2xl font-semibold text-gray-800">
           📅 Statistiques par jour
         </h2>
         <ul className="space-y-3">
@@ -155,9 +155,8 @@ export default function Statistiques() {
         </ul>
       </div>
 
-      {/* Temps moyen de traitement */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        <h2 className="text-2xl font-semibold text-gray-800">
           ⏱ Temps moyen de traitement
         </h2>
         <p className="text-xl text-gray-600">{tempsMoyen} minutes</p>

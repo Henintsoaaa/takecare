@@ -56,34 +56,56 @@ const Login = () => {
       if (val.data.status === "success") {
         // create a session with the cookie
         const cookie: cookieData = val.data.data;
-        document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
+        document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}, role=${cookie.role}`;
         // redirect to /emotion-tracker
-        console.log("redirecting to /emotion-tracker");
+        // if (document.cookie) {
+        //   let role = document.cookie.split(",")[4].split("=")[1];
+        //   if (role === "utilisateur") {
+        //     console.log("redirecting to /emotion-tracker");
+        //     redirect("/emotion-tracker");
+        //   } else if (role === "securite") {
+        //     console.log("redirecting to /juridique");
+        //     redirect("/juridique");
+        //   }
+        // } else {
+        //   setError(val.data.message);
+        // }
         redirect("/emotion-tracker");
       } else {
-        setError(val.data.message);
-      }
-    } else {
-      const response = axios.post(`${process.env.NEXT_PUBLIC_IP_KEY}/signUp`, {
-        username: username,
-        email: email,
-        password: password,
-        role: userType,
-      });
+        const response = axios.post(
+          `${process.env.NEXT_PUBLIC_IP_KEY}/signUp`,
+          {
+            username: username,
+            email: email,
+            password: password,
+            role: userType,
+          }
+        );
 
-      const val = await response;
-      // console.log(val);
-      if (val.data.status === "success") {
-        // create a session with the cookie
-        const cookie: cookieData = val.data.data;
-        document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
-        // log the session cookie
-        console.log(document.cookie);
-        // redirect to /emotion-tracker
-        console.log("redirecting to /emotion-tracker");
-        redirect("/emotion-tracker");
-      } else {
-        setError(val.data.message);
+        const val = await response;
+        // console.log(val);
+        if (val.data.status === "success") {
+          // create a session with the cookie
+          const cookie: cookieData = val.data.data;
+          document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}, role=${cookie.role}`;
+          // log the session cookie
+          console.log(document.cookie);
+          // if (document.cookie) {
+          //   let role = document.cookie.split(",")[4].split("=")[1];
+          //   if (role === "utilisateur") {
+          //     console.log("redirecting to /emotion-tracker");
+          //     redirect("/emotion-tracker");
+          //   } else if (role === "securite") {
+          //     console.log("redirecting to /juridique");
+          //     redirect("/juridique");
+          //   }
+          // } else {
+          //   setError(val.data.message);
+          // }
+          redirect("/emotion-tracker");
+        } else {
+          setError(val.data.message);
+        }
       }
     }
   };

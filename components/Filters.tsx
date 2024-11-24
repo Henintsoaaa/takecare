@@ -115,7 +115,7 @@ const ComplaintsBoard: React.FC = () => {
     /*
     const fetchComplaints = async () => {
       try {
-        const response = await axios.get('http://localhost/Devoi_socila_media/src/backend/api/signalement/signalementBoard.php');
+        const response = await axios.get('${process.env.NEXT_PUBLIC_IP_KEY}/signalement/signalementBoard.php');
         if (response.data.status === 'success' && Array.isArray(response.data.data)) {
           setComplaints(response.data.data);
           setFilteredComplaints(response.data.data);

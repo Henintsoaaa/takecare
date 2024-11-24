@@ -9,10 +9,12 @@ import {
   FaHeart,
   FaRegHeart,
 } from "react-icons/fa";
+import { redirect } from "next/navigation"; // Keep this for server-side context
 import { Search } from "lucide-react";
 
 interface Post {
   entry_id: number;
+  user_id: number;
   username: string;
   notes: string;
   created_at: string;
@@ -28,24 +30,33 @@ const EmotionShare = () => {
     [key: number]: boolean;
   }>({});
   const [likes, setLikes] = useState<{ [key: number]: boolean }>({});
-  const [searchQuery, setSearchQuery] = useState<string>(""); // New state for search query
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  let user_id: string | undefined;
+
+  if (!document.cookie) {
+    // Redirect to login page if user is not logged in
+    redirect("/login");
+  } else {
+    user_id = document.cookie.split(",")[1].split("=")[1];
+  }
+
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/posts`
+      );
+      setPosts(response.data.data.reverse() as Post[]);
+    } catch (error) {
+      setError("Error fetching data. Please try again later.");
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_IP_KEY}/posts`
-        );
-        setPosts(response.data.data as Post[]);
-      } catch (error) {
-        setError("Error fetching data. Please try again later.");
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    fetchPosts(); // Fetch posts when component mounts
   }, []);
 
   const handleCommentChange = (entryId: number, value: string) => {
@@ -78,21 +89,51 @@ const EmotionShare = () => {
     }));
   };
 
-  const handleReaction = (entryId: number) => {
+  const handleReaction = async (entryId: number) => {
+    const currentLikeState = likes[entryId];
+
     setLikes((prevLikes) => ({
       ...prevLikes,
-      [entryId]: !prevLikes[entryId],
+      [entryId]: !currentLikeState,
     }));
+
+    const reactionData = {
+      entry_id: entryId,
+      user_id: user_id,
+      reaction_type: currentLikeState ? "dislike" : "like",
+    };
+
+    console.log("Sending reaction data:", reactionData);
+
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/react`,
+        reactionData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error updating reaction:", error);
+      setLikes((prevLikes) => ({
+        ...prevLikes,
+        [entryId]: currentLikeState,
+      }));
+    }
   };
 
-  // Filter posts based on the search query
   const filteredPosts = posts.filter((post) =>
     post.notes.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleUsernameClick = (userId: number) => {
+    redirect(`/user/${userId}`); // Use redirect to navigate to user profile
+  };
+
   return (
     <div className="p-5 w-full flex flex-col gap-4">
-      {/* Search Bar */}
       <div className="mb-4 flex gap-6 items-center flex-nowrap">
         <input
           type="text"
@@ -116,7 +157,10 @@ const EmotionShare = () => {
         >
           <CardContent className="p-4">
             <div>
-              <span className="font-bold text-xl text-indigo-600">
+              <span
+                className="font-bold text-xl text-indigo-600 cursor-pointer"
+                onClick={() => handleUsernameClick(post.user_id)} // Add click handler
+              >
                 {post.isAnonyme !== 1 ? post.username : "Anonymous"}
               </span>
               <p className="mt-2 text-gray-800">{post.notes}</p>
