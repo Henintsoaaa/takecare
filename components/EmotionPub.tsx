@@ -70,18 +70,65 @@ const EmotionShare = () => {
     console.log(`Shared post with ID: ${entryId}`);
   };
 
-  const handleCommentSubmit = (entryId: number) => {
-    console.log(`Comment on post ${entryId}: ${comments[entryId]}`);
-    setComments((prevComments) => ({
-      ...prevComments,
-      [entryId]: "",
-    }));
-    setShowCommentInput((prev) => ({
-      ...prev,
-      [entryId]: false,
-    }));
-  };
+  const handleCommentSubmit = async (entryId: number) => {
+    const commentText = comments[entryId];
 
+    if (!commentText) {
+      console.error("Comment cannot be empty.");
+      return; // Prevent submitting an empty comment
+    }
+
+    console.log(`Comment on post ${entryId}: ${commentText}`);
+
+    // Prepare the data to send to the comment creation endpoint
+    const commentData = {
+      entry_id: entryId,
+      user_id: user_id, // The user who is commenting
+      content: commentText, // The actual comment text
+    };
+
+    try {
+      // Send the comment to the backend
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/comment/create`,
+        commentData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Optionally, you can send a notification to the post owner here
+      const notificationData = {
+        entry_id: entryId,
+        user_id: user_id, // The user who commented
+        notification_type: "comment", // Type of notification
+      };
+
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/notification/create`,
+        notificationData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Clear the comment input and hide the input area
+      setComments((prevComments) => ({
+        ...prevComments,
+        [entryId]: "",
+      }));
+      setShowCommentInput((prev) => ({
+        ...prev,
+        [entryId]: false,
+      }));
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+    }
+  };
   const toggleCommentInput = (entryId: number) => {
     setShowCommentInput((prev) => ({
       ...prev,
@@ -109,6 +156,23 @@ const EmotionShare = () => {
       await axios.post(
         `${process.env.NEXT_PUBLIC_IP_KEY}/react`,
         reactionData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Sending notification to post owner
+      const notificationData = {
+        entry_id: entryId,
+        user_id: user_id, // The user who reacted
+        notification_type: currentLikeState ? "dislike" : "like", // Type of notification
+      };
+
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/notification/create`,
+        notificationData,
         {
           headers: {
             "Content-Type": "application/json",

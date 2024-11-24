@@ -51,11 +51,12 @@ interface ContactResponse {
 }
 
 const Page = () => {
-  const userId = usePathname().split("/")[2];
+  const userId = parseInt(usePathname().split("/")[2]);
 
   let user_id: number = 0; // Assuming the user is logged in
-  if (document.cookie)
+  if (document.cookie) {
     user_id = parseInt(document.cookie.split(";")[0].split("=")[1]);
+  }
 
   console.log(userId, user_id);
 
@@ -113,10 +114,10 @@ const Page = () => {
           />
         </div>
         {/* Conditionally render the edit profile button */}
-        {parseInt(userId) === user_id && (
+        {userId === user_id && ( // Compare both as numbers
           <button className="flex mt-2" onClick={onClickChangeProfile}>
             <FilePenLine />
-            <p className="hidden md:block text-black">Modifier mon profile </p>
+            <p className="hidden md:block text-black">Modifier mon profil</p>
           </button>
         )}
         <div className="ml-4 text-black">

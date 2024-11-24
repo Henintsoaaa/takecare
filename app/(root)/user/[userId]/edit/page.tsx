@@ -11,7 +11,6 @@ import {
   Shield,
   Image as ImageIcon,
   Save,
-  X,
 } from "lucide-react";
 
 interface UserProfileData {
@@ -23,13 +22,15 @@ interface UserProfileData {
 }
 
 const EditProfile: React.FC = () => {
-  let userId: number;
-  if (document.cookie) {
-    userId = parseInt(document.cookie.split("=")[1]);
-  }
+  const [userId, setUserId] = useState<number | null>(null);
+  useEffect(() => {
+    if (document.cookie) {
+      setUserId(parseInt(document.cookie.split("=")[1]));
+    }
+  }, []);
   const router = useRouter();
   const [userData, setUserData] = useState<UserProfileData>({
-    id: 1,
+    id: 0,
     username: "",
     email: "",
     profilePicture: "",
@@ -50,25 +51,30 @@ const EditProfile: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   useEffect(() => {
-    // Fetch current user data
-    const fetchUserData = async () => {
-      try {
-        // Mock data - replace with actual API call
-        const mockData: UserProfileData = {
-          id: 1,
-          username: "JohnDoe",
-          email: "john.doe@example.com",
-          profilePicture: "/profile.jpg",
-          description: "Software Engineer passionate about technology",
-        };
-        setUserData(mockData);
-      } catch (error) {
-        console.error("Error fetching user data", error);
-      }
-    };
-
-    fetchUserData();
+    if (document.cookie) {
+      const id = parseInt(document.cookie.split("=")[1]);
+      setUserId(id);
+      console.log("User  ID:", id); // Log userId
+    }
   }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get<UserProfileData>(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
+      );
+      console.log("Fetched User Data:", response.data); // Log the fetched data
+      setUserData(response.data);
+    } catch (error) {
+      console.error("Error fetching user data", error);
+    }
+  };
+
+  useEffect(() => {
+    if (userId !== null) {
+      fetchUserData();
+    }
+  }, [userId]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -110,22 +116,44 @@ const EditProfile: React.FC = () => {
         return;
       }
 
-      // TODO: Implement file upload for profile picture
+      // Check if userData is populated
+      if (!userData || !userData.id) {
+        console.error("User  data is not available");
+        return;
+      }
+
+      // Prepare data for submission
       const formData = new FormData();
       formData.append("userId", userData.id.toString());
       formData.append("username", userData.username);
       formData.append("email", userData.email);
       formData.append("description", userData.description);
+      formData.append(
+        "isProfilePublic",
+        privacySettings.isProfilePublic.toString()
+      );
+      formData.append(
+        "showEmotionHistory",
+        privacySettings.showEmotionHistory.toString()
+      );
 
       if (selectedImage) {
         formData.append("profilePicture", selectedImage);
       }
 
-      // Uncomment and modify for actual API call
-      // const response = await axios.put('/api/profile', formData);
+      // Send the updated data to the backend
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/users/update`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      console.log("Profile Updated", userData);
-      router.push(`/profile/${userData.id}`);
+      console.log("Profile Updated", response.data);
+      router.push(`/user/${userData.id}`); // Redirect after successful update
     } catch (error) {
       console.error("Error updating profile", error);
     }
@@ -216,7 +244,7 @@ const EditProfile: React.FC = () => {
           {/* Password Change */}
           <div className="bg-gray-50 p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4 flex items-center">
-              <Lock className="mr-2" /> Change Password
+              <Lock className=" mr-2" /> Change Password
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
               <input

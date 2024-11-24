@@ -26,26 +26,27 @@ const Plainte = ({ userId }: { userId: string }) => {
   const [activeMedia, setActiveMedia] = useState<"audio" | "video" | null>(
     null
   );
+  const receiverId = 1; // Added receiverId state
   const [aboutHour, setAboutHour] = useState("");
-  const [receiverId, setReceiverId] = useState(""); // Added receiverId state
+  // const [receiverId, setReceiverId] = useState(0); // Added receiverId state
   const [searchQuery, setSearchQuery] = useState<string>(""); // Added search query state
   const [results, setResults] = useState<any[]>([]); // To store search results
   const [noResults, setNoResults] = useState<boolean>(false); // State to manage no results message
   const [securityUsers, setSecurityUsers] = useState<any[]>([]); // State to store users with "securite" role
 
-  useEffect(() => {
-    // Fetch users with role "securite" when the component mounts
-    const fetchSecurityUsers = async () => {
-      try {
-        const response = await axios.get(`/api/users?role=securite`);
-        setSecurityUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching security users:", error);
-      }
-    };
+  // useEffect(() => {
+  //   // Fetch users with role "securite" when the component mounts
+  //   const fetchSecurityUsers = async () => {
+  //     try {
+  //       const response = await axios.get(`/api/users?role=securite`);
+  //       setSecurityUsers(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching security users:", error);
+  //     }
+  //   };
 
-    fetchSecurityUsers();
-  }, []);
+  //   fetchSecurityUsers();
+  // }, []);
 
   const handleFileChange = (event: FileChangeEvent) => {
     const selectedFile = event.target.files?.[0] || null;
@@ -62,17 +63,21 @@ const Plainte = ({ userId }: { userId: string }) => {
     formData.append("fullName", fullName);
     formData.append("date", aboutDate);
     formData.append("hour", aboutHour);
-    formData.append("receiverId", receiverId); // Added receiverId to formData
+    formData.append("receiverId", receiverId.toString());
     if (file) {
       formData.append("file", file);
     }
 
     try {
-      const response = await axios.post("/api/submit-complaint", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/signalement/createSignalement`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       if (response.status === 200) {
         redirect("/procedure");
@@ -91,8 +96,8 @@ const Plainte = ({ userId }: { userId: string }) => {
     redirect("/emotion-tracker");
   };
 
-  const handleSelect = (id: string) => {
-    setReceiverId(id); // Set the selected receiver ID
+  const handleSelect = (id: number) => {
+    // setReceiverId(id); // Set the selected receiver ID
     console.log(`Selected receiver ID: ${id}`);
   };
 
