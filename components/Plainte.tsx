@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import AudioCapture from "./AudioCapture";
 import VideoCapture from "./VideoCapture";
@@ -27,6 +27,25 @@ const Plainte = ({ userId }: { userId: string }) => {
     null
   );
   const [aboutHour, setAboutHour] = useState("");
+  const [receiverId, setReceiverId] = useState(""); // Added receiverId state
+  const [searchQuery, setSearchQuery] = useState<string>(""); // Added search query state
+  const [results, setResults] = useState<any[]>([]); // To store search results
+  const [noResults, setNoResults] = useState<boolean>(false); // State to manage no results message
+  const [securityUsers, setSecurityUsers] = useState<any[]>([]); // State to store users with "securite" role
+
+  useEffect(() => {
+    // Fetch users with role "securite" when the component mounts
+    const fetchSecurityUsers = async () => {
+      try {
+        const response = await axios.get(`/api/users?role=securite`);
+        setSecurityUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching security users:", error);
+      }
+    };
+
+    fetchSecurityUsers();
+  }, []);
 
   const handleFileChange = (event: FileChangeEvent) => {
     const selectedFile = event.target.files?.[0] || null;
@@ -40,6 +59,10 @@ const Plainte = ({ userId }: { userId: string }) => {
     formData.append("cause", cause);
     formData.append("country", aboutCountry);
     formData.append("city", aboutCity);
+    formData.append("fullName", fullName);
+    formData.append("date", aboutDate);
+    formData.append("hour", aboutHour);
+    formData.append("receiverId", receiverId); // Added receiverId to formData
     if (file) {
       formData.append("file", file);
     }
@@ -59,15 +82,22 @@ const Plainte = ({ userId }: { userId: string }) => {
       alert("An error occurred while submitting your complaint.");
     }
   };
+
   const handleLangue = () => {
     redirect("/langueSigne");
   };
+
   const handleBack = () => {
     redirect("/emotion-tracker");
   };
 
+  const handleSelect = (id: string) => {
+    setReceiverId(id); // Set the selected receiver ID
+    console.log(`Selected receiver ID: ${id}`);
+  };
+
   return (
-    <div className=" h-screen bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center p-4">
+    <div className="h-screen bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center p-4">
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-2xl p-8 relative">
         <button
           onClick={handleBack}
@@ -77,7 +107,7 @@ const Plainte = ({ userId }: { userId: string }) => {
         </button>
 
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          <h1 className="text-3xl font-bold text-gray-800 mb -2">
             Submit Your Complaint
           </h1>
           <p className="text-gray-500">Share your experience confidentially</p>
@@ -85,7 +115,7 @@ const Plainte = ({ userId }: { userId: string }) => {
         <div>
           <button
             onClick={handleLangue}
-            className="  p-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center"
+            className="p-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center"
           >
             Langue des signes
           </button>
@@ -186,6 +216,56 @@ const Plainte = ({ userId }: { userId: string }) => {
                 </span>
               </div>
             </label>
+          </div>
+
+          <div className="mb-4">
+            <label className="font-normal text-3sm mb-2">
+              Sélectionner un récepteur :
+            </label>
+            <div className="mt-4">
+              <ul className="flex flex-col space-y-2">
+                {securityUsers.map((user) => (
+                  <li
+                    key={user.id}
+                    className="flex items-center space-x-2 border-b pb-2"
+                  >
+                    <div>
+                      <div className="flex items-center space-x-20 mb-2">
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleSelect(user.id);
+                          }}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="rounded-full overflow-hidden w-12 h-12">
+                              <img
+                                src={user.photo_path || "/default-avatar.png"}
+                                alt="Avatar"
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                            <div className="flex">
+                              <span className="font-semibold">
+                                {user.username}
+                              </span>
+                            </div>
+                          </div>
+                        </a>
+                        <button
+                          type="button"
+                          className="bg-socialBlue text-white px-2 py-1 rounded-md"
+                          onClick={() => handleSelect(user.id)}
+                        >
+                          Select
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div className="flex space-x-4">
