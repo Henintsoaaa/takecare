@@ -44,71 +44,11 @@ interface UserProfileResponse {
   posts: Post[];
   contacts: Contact[];
 }
+
 interface ContactResponse {
   status: string;
   contacts: Contact[];
 }
-
-// generic data
-const data: UserProfileResponse = {
-  status: "success",
-  user: {
-    id: 1,
-    username: "John Doe",
-    role: "admin",
-    email: "john@gmail.com",
-    created_at: new Date(),
-    profilePhoto: "/profile.jpg",
-    coverPhoto: "/cover.jpg",
-  },
-  about: {
-    user_id: 1,
-    description: "I am a software engineer",
-  },
-  posts: [
-    {
-      entry_id: 1,
-      user_id: 1,
-      emotion_id: "happy",
-      well_being_score: 5,
-      notes: "I am happy today",
-      positive_moment: "I got a new job",
-      created_at: new Date(),
-      isAnonyme: false,
-    },
-    {
-      entry_id: 2,
-      user_id: 1,
-      emotion_id: "sad",
-      well_being_score: 2,
-      notes: "I am sad today",
-      positive_moment: "I lost my job",
-      created_at: new Date(),
-      isAnonyme: false,
-    },
-  ],
-  contacts: [
-    {
-      id: 1,
-      username: "Jane Doe",
-      profilePhoto: "/jane.jpg",
-    },
-    {
-      id: 2,
-      username: "Alice",
-      profilePhoto: "/alice.jpg",
-    },
-    {
-      id: 3,
-      username: "Bob",
-      profilePhoto: "/bob.jpg",
-    },
-  ],
-};
-
-const _response = {
-  data: data,
-};
 
 const Page = () => {
   const userId = usePathname().split("/")[2];
@@ -117,11 +57,13 @@ const Page = () => {
   if (document.cookie)
     user_id = parseInt(document.cookie.split(";")[0].split("=")[1]);
 
+  console.log(userId, user_id);
+
   const [username, setUsername] = useState<string>("");
   const [about, setAbout] = useState<string>("");
-  const [profilePhoto, setprofilePhoto] = useState<string>("");
-  const [contacts, setContacts] = useState<Contact[]>([]);
-  const [posts, setposts] = useState<Post[]>([]);
+  const [profilePhoto, setProfilePhoto] = useState<string>("");
+  const [contacts, setContacts] = useState<Contact[]>([]); // Initialize as empty array
+  const [posts, setPosts] = useState<Post[]>([]);
   const [activeTab, setActiveTab] = useState<string>("posts"); // State to manage the active tab
 
   useEffect(() => {
@@ -130,22 +72,22 @@ const Page = () => {
         const response = await axios.get<UserProfileResponse>(
           `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
         );
-        // const response = _response;
-        console.log(response.data);
 
         const userData = response.data.user;
         const aboutData = response.data.about;
         const postsData = response.data.posts;
+
+        // Fetch contacts
         const responseContact = await axios.get<ContactResponse>(
           `${process.env.NEXT_PUBLIC_IP_KEY}/contact?user_id=${userId}`
         );
-        const contactsData = responseContact.data.contacts;
+        const contactsData = responseContact.data.contacts || []; // Ensure it's an array
 
         setUsername(userData.username);
         setAbout(aboutData.description);
-        setprofilePhoto(userData.profilePhoto);
-        setposts(postsData);
-        setContacts(contactsData);
+        setProfilePhoto(userData.profilePhoto);
+        setPosts(postsData);
+        setContacts(contactsData); // Set contacts data
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -174,7 +116,7 @@ const Page = () => {
         {parseInt(userId) === user_id && (
           <button className="flex mt-2" onClick={onClickChangeProfile}>
             <FilePenLine />
-            <p className="hidden md:block">Modifier mon profile</p>
+            <p className="hidden md:block text-black">Modifier mon profile </p>
           </button>
         )}
         <div className="ml-4 text-black">
