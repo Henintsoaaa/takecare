@@ -76,7 +76,7 @@ export default function MessagesPage() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const endpoint = `${process.env.NEXT_PUBLIC_IP_KEY}/users`;
+      const endpoint = `${process.env.NEXT_PUBLIC_IP_KEY}/user`;
       try {
         const response = await axios.get(endpoint);
         if (response.data.status === "success") {

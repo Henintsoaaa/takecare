@@ -82,7 +82,7 @@ export function MessagingInterface() {
     const getUserName = async () => {
       try {
         const response = await axios.get<UsersResponse>(
-          `${process.env.NEXT_PUBLIC_IP_KEY}/users`
+          `${process.env.NEXT_PUBLIC_IP_KEY}/user`
         );
         if (response.data.status === "success") {
           // Fix: Correctly return the user object
