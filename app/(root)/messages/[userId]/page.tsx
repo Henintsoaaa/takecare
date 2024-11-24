@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
+import { usePathname } from "next/navigation";
 import { Card } from "@/components/ui/carde";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -24,9 +25,13 @@ export function MessagingInterface() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   let currentUserId: number;
-  let receiverId: number;
-  receiverId = 1;
-  currentUserId = 3;
+  let receiverId: number = 0;
+  currentUserId = parseInt(usePathname().split("/")[2]);
+
+  if (document.cookie) {
+    receiverId = parseInt(document.cookie.split(",")[0].split("=")[1]);
+  }
+
   useEffect(() => {
     const initSocket = async () => {
       socket.current = io("http://localhost:3001");
@@ -56,7 +61,7 @@ export function MessagingInterface() {
         socket.current.disconnect();
       }
     };
-  }, [currentUserId]);
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -69,18 +74,15 @@ export function MessagingInterface() {
 
     setLoading(true);
 
-    // Créer un message temporaire avec un ID temporaire
     const tempMessage: Message = {
-      id: Date.now(), // ID temporaire basé sur le timestamp
+      id: Date.now(),
       sender_id: currentUserId,
       content: newMessage,
       sent_at: new Date().toISOString(),
     };
 
-    // Ajouter immédiatement le message à l'interface
     setMessages((prev) => [...prev, tempMessage]);
 
-    // Envoyer le message au serveur
     socket.current.emit("private-message", {
       senderId: currentUserId,
       receiverId,
@@ -92,14 +94,14 @@ export function MessagingInterface() {
   };
 
   return (
-    <Card className="max-w-4xl mx-auto">
-      <div className="p-4 border-b">
+    <Card className="max-w-4xl mx-auto shadow-lg rounded-lg">
+      <div className="p-4 border-b border-gray-200">
         <div className="flex items-center space-x-4">
           <Avatar>
-            <User className="h-6 w-6" />
+            <User className="h-8 w-8 text-gray-600" />
           </Avatar>
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-xl font-semibold text-gray-800">
               Chat with User {receiverId}
             </h2>
             <p className="text-sm text-gray-500">Online</p>
@@ -107,7 +109,7 @@ export function MessagingInterface() {
         </div>
       </div>
 
-      <ScrollArea className="h-[500px] p-4" ref={scrollRef}>
+      <ScrollArea className="h-[500px] p-4 overflow-y-auto" ref={scrollRef}>
         <div className="space-y-4">
           {messages.map((message) => (
             <div
@@ -119,15 +121,18 @@ export function MessagingInterface() {
               }`}
             >
               <div
-                className={`max-w-[70%] px-4 py-2 rounded-lg ${
+                className={`max-w-[70%] px-4 py-2 rounded-lg shadow ${
                   message.sender_id === currentUserId
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-100 dark:bg-gray-200"
+                    ? " bg-gradient-to-r from-indigo-500 to-indigo-600 text-white"
+                    : "bg-gray-100 text-gray-800"
                 }`}
               >
                 <p>{message.content}</p>
-                <span className="text-xs opacity-70">
-                  {new Date(message.sent_at).toLocaleTimeString()}
+                <span className="text-xs text-gray-400">
+                  {new Date(message.sent_at).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </span>
               </div>
             </div>
@@ -135,16 +140,20 @@ export function MessagingInterface() {
         </div>
       </ScrollArea>
 
-      <div className="p-4 border-t">
+      <div className="p-4 border-t border-gray-200">
         <div className="flex space-x-2">
           <Input
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type your message..."
             onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-            className="flex-1"
+            className="flex-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <Button onClick={sendMessage} disabled={loading}>
+          <Button
+            onClick={sendMessage}
+            disabled={loading}
+            className="transition duration-200 ease-in-out transform hover:scale-105"
+          >
             {loading ? "Sending..." : <Send className="h-4 w-4" />}
           </Button>
         </div>
@@ -152,3 +161,5 @@ export function MessagingInterface() {
     </Card>
   );
 }
+
+export default MessagingInterface;
