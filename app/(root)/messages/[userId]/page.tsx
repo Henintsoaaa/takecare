@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar } from "@/components/ui/avatar";
 import { Send, User } from "lucide-react";
+import axios from "axios";
 
 interface Message {
   id: number;
@@ -17,19 +18,33 @@ interface Message {
   sent_at: string;
 }
 
+interface User {
+  id: number;
+  username: string;
+  email: string;
+  created_at: string;
+  role: string;
+}
+
+interface UsersResponse {
+  status: string;
+  data: User[];
+}
+
 export function MessagingInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const socket = useRef<any>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentUser, setCurrentUser] = useState<string>("");
 
   let currentUserId: number;
   let receiverId: number = 0;
   currentUserId = parseInt(usePathname().split("/")[2]);
 
   if (document.cookie) {
-    receiverId = parseInt(document.cookie.split(",")[0].split("=")[1]);
+    receiverId = parseInt(document.cookie.split(",")[1].split("=")[1]);
   }
 
   useEffect(() => {
@@ -62,6 +77,30 @@ export function MessagingInterface() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const getUserName = async () => {
+      try {
+        const response = await axios.get<UsersResponse>(
+          `${process.env.NEXT_PUBLIC_IP_KEY}/users`
+        );
+        if (response.data.status === "success") {
+          // Fix: Correctly return the user object
+          const user = response.data.data.find(
+            (user) => user.id === currentUserId
+          );
+          console.log(user);
+
+          if (user) {
+            setCurrentUser(user.username);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    getUserName();
+  }, [currentUserId]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -102,7 +141,7 @@ export function MessagingInterface() {
           </Avatar>
           <div>
             <h2 className="text-xl font-semibold text-gray-800">
-              Chat with User {receiverId}
+              {currentUser || "Loading..."}
             </h2>
             <p className="text-sm text-gray-500">Online</p>
           </div>
@@ -123,7 +162,7 @@ export function MessagingInterface() {
               <div
                 className={`max-w-[70%] px-4 py-2 rounded-lg shadow ${
                   message.sender_id === currentUserId
-                    ? " bg-gradient-to-r from-indigo-500 to-indigo-600 text-white"
+                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white"
                     : "bg-gray-100 text-gray-800"
                 }`}
               >
