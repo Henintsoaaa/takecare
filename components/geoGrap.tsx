@@ -1,14 +1,15 @@
+// GeographicDistributionChart.tsx
+"use client";
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   BarElement,
-  LinearScale,
   Title,
   Tooltip,
   Legend,
-  ArcElement,
+  LinearScale,
 } from "chart.js";
 import axios from "axios"; // Import Axios
 
@@ -16,11 +17,10 @@ import axios from "axios"; // Import Axios
 ChartJS.register(
   CategoryScale,
   BarElement,
-  LinearScale,
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  LinearScale
 );
 
 // Define the interface for the expected response from the API

@@ -1,3 +1,6 @@
+"use client";
+
+// SignalementCharts.tsx
 import React, { useEffect, useState } from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import {
@@ -15,7 +18,7 @@ import axios from "axios"; // Import Axios
 // Register necessary components
 ChartJS.register(
   CategoryScale,
-  LinearScale,
+  LinearScale, // Ensure LinearScale is registered
   BarElement,
   Title,
   Tooltip,
@@ -41,7 +44,7 @@ const statuses = [
   { label: "En attente de résolution", color: "rgba(249, 115, 22, 0.7)" },
   { label: "Résolu", color: "rgba(34, 197, 94, 0.7)" },
   { label: "Rejeté", color: "rgba(239, 68, 68, 0.7)" },
-  { label: "Assigné", color: "rgba(20, 184, 166, 0.7)" },
+  { label: "Assigné", color: "rgba(20, 184, 166, 0 .7)" },
   { label: "En cours de traitement", color: "rgba(168, 85, 247, 0.7)" },
   { label: "Reporté", color: "rgba(107, 114, 128, 0.7)" },
   { label: "En attente de documents", color: "rgba(99, 102, 241, 0.7)" },

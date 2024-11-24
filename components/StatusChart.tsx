@@ -2,6 +2,29 @@
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import axios from "axios"; // Import Axios
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+
+// Register the necessary components
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 // Define the mapping for statuses
 const statusMapping: Record<string, number> = {
@@ -123,6 +146,9 @@ const StatusChart: React.FC<StatusChartProps> = ({ signalementId }) => {
   // Modifier la configuration pour afficher les légendes sur l'axe Y
   const options = {
     scales: {
+      x: {
+        type: "category" as const, // Specify the x-axis as a category scale
+      },
       y: {
         ticks: {
           callback: function (tickValue: string | number) {

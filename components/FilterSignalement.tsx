@@ -1,8 +1,7 @@
-"use client";
 import React, { useState, useEffect } from "react";
-// import axios from 'axios'; // Import Axios
+import axios from "axios"; // Import Axios
 
-// Define types for the filter values
+// Define the type for the filters
 interface FiltersProps {
   onFilterChange: (filters: {
     status: string;
@@ -87,7 +86,7 @@ const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
   );
 };
 
-// Define types for complaint data
+// Define the type for complaints
 interface Complaint {
   id: number;
   current_status: string;
@@ -111,53 +110,53 @@ const ComplaintsBoard: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Commenting out the Axios call
-    /*
     const fetchComplaints = async () => {
-      try {
-        const response = await axios.get('http://localhost/Devoi_socila_media/src/backend/api/signalement/signalementBoard.php');
-        if (response.data.status === 'success' && Array.isArray(response.data.data)) {
-          setComplaints(response.data.data);
-          setFilteredComplaints(response.data.data);
-        } else {
-          console.error('Données non valides');
-        }
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données:', error);
-      }
+      // Uncomment the following lines to fetch data from the API
+      // try {
+      //   const response = await axios.get(
+      //     "http://localhost/Devoi_socila_media /src/backend/api/signalement/signalementBoard.php"
+      //   );
+      //   const data = response.data;
+      //   if (data.status === "success" && Array.isArray(data.data)) {
+      //     setComplaints(data.data);
+      //     setFilteredComplaints(data.data);
+      //   } else {
+      //     console.error("Données non valides");
+      //   }
+      // } catch (error) {
+      //   console.error("Erreur lors de la récupération des données:", error);
+      // }
     };
 
     fetchComplaints();
-    */
 
-    // Prototype data
+    // Prototype data for complaints
     const prototypeData: Complaint[] = [
       {
         id: 1,
         current_status: "Reçu",
         date: "2023-10-01",
-        description: "Description of complaint 1",
+        description: "Problème de connexion Internet",
         priority: "haute",
-        responsible_service: "Service A",
+        responsible_service: "Service Technique",
       },
       {
         id: 2,
         current_status: "En attente de résolution",
         date: "2023-10-02",
-        description: "Description of complaint 2",
+        description: "Erreur de facturation",
         priority: "moyenne",
-        responsible_service: "Service B",
+        responsible_service: "Service Client",
       },
       {
         id: 3,
         current_status: "Clôturé",
-        date: "2023-10-03",
-        description: "Description of complaint 3",
+        date: "2023-09-30",
+        description: "Demande de remboursement",
         priority: "faible",
-        responsible_service: "Service C",
+        responsible_service: "Service Financier",
       },
     ];
-
     setComplaints(prototypeData);
     setFilteredComplaints(prototypeData);
   }, []);
@@ -239,7 +238,7 @@ const ComplaintsBoard: React.FC = () => {
               </tbody>
             </table>
           ) : (
-            <p className="text-gray-600">Aucune plainte filtrée trouvée.</p>
+            <p className="text-gray-600">A ucune plainte filtrée trouvée.</p>
           )}
         </div>
       </section>

@@ -10,7 +10,7 @@ import ResourcesSection from "./ResourcesSection";
 import StatusForUser from "./StatusForUser";
 
 // Define the types for the tab options
-type Tab = "report" | "dashboard" | "proof" | "ressources";
+type Tab = "report" | "dashboardUser" | "proof" | "ressources";
 
 export default function FonctNavigationCard() {
   const pathname = usePathname();
@@ -19,23 +19,25 @@ export default function FonctNavigationCard() {
   const nonActiveElementClasses =
     "text-sm md:text-md flex gap-1 md:gap-3 py-2 my-2 hover:bg-[#FFF8E8] hover:bg-opacity-90 md:-mx-4 md:px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300";
 
-  const [activeTab, setActiveTab] = useState<Tab>("dashboard");
+  const [activeTab, setActiveTab] = useState<Tab>("dashboardUser");
 
   useEffect(() => {
     const currentPath = pathname.split("/").pop();
     if (
-      ["report", "dashboard", "proof", "ressources"].includes(currentPath || "")
+      ["report", "dashboardUser", "proof", "ressources"].includes(
+        currentPath || ""
+      )
     ) {
       setActiveTab(currentPath as Tab); // Cast currentPath to Tab type
     } else {
-      setActiveTab("dashboard");
+      setActiveTab("dashboardUser");
     }
   }, [pathname]);
 
   const handleTabChange = (tab: Tab) => {
     // Specify the type of tab parameter
     setActiveTab(tab);
-    window.history.pushState(null, "", `/home/fonctionnality/${tab}`);
+    window.history.pushState(null, "", `/${tab}`);
   };
 
   return (
@@ -55,9 +57,9 @@ export default function FonctNavigationCard() {
               🚨<span className="hidden md:block">Signalement</span>
             </button>
             <button
-              onClick={() => handleTabChange("dashboard")}
+              onClick={() => handleTabChange("dashboardUser")}
               className={
-                activeTab === "dashboard"
+                activeTab === "dashboardUser"
                   ? activeElementClasses
                   : nonActiveElementClasses
               }
@@ -95,7 +97,7 @@ export default function FonctNavigationCard() {
             <Plainte userId="someUserId" />
           </div>
         )}
-        {activeTab === "dashboard" && (
+        {activeTab === "dashboardUser" && (
           <div>
             <p>Tableau de bord</p>
             <StatusForUser />

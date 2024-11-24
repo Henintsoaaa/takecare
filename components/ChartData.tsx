@@ -1,7 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
-// import axios from "axios"; // Import Axios (commented out for now)
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
+// Register the necessary components
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Define the type for the data structure you expect from the API
 interface ReportData {

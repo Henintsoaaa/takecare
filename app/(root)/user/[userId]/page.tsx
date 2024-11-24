@@ -5,6 +5,7 @@ import axios from "axios";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Heart, Book, FilePenLine } from "lucide-react"; // Assuming you're using lucide-react for icons
 import { usePathname, redirect } from "next/navigation";
+import FonctNavigationCard from "@/components/UserFonctNav";
 
 interface Post {
   entry_id: number;
@@ -250,9 +251,7 @@ const Page = () => {
             </div>
           </TabsContent>
           <TabsContent value="statistics">
-            <div className="p-4 bg-white rounded-lg shadow-md">
-              <p>Statistics will be displayed here.</p>
-            </div>
+            <FonctNavigationCard />
           </TabsContent>
         </Tabs>
       </div>

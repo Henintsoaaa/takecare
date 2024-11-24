@@ -59,12 +59,7 @@ const Login = () => {
         document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
         // redirect to /emotion-tracker
         console.log("redirecting to /emotion-tracker");
-        if (cookie.role === "utilisateur") {
-          redirect("/emotion-tracker");
-        } else if (cookie.role === "securite") {
-          redirect("/juridique");
-        }
-        // redirect("/emotion-tracker");
+        redirect("/emotion-tracker");
       } else {
         setError(val.data.message);
       }

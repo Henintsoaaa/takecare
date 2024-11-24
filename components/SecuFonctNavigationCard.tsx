@@ -8,11 +8,12 @@ import SignalementBoard from "./SignalementBoard";
 import ComplaintsBoard from "./ComplaintsDashboard";
 import Statistiques from "./Statistique";
 import Dashboard from "./Dashboard";
-// import GeographicDistributionChart from "../SectionSecurity/secuGraph/geoGrap";
+import GeographicDistributionChart from "./geoGrap";
 import ReportsByPersonChart from "./ChartData";
 import SignalementCharts from "./SignalementBoard";
 import StatutHistoryChart from "./StatusChart";
 import PrivateChat from "./PrivateChat";
+// import ComplaintsBoard from "./FilterSignalement";
 
 const SecuFonctNavigationCard: React.FC = () => {
   const pathname = usePathname();
@@ -21,7 +22,7 @@ const SecuFonctNavigationCard: React.FC = () => {
   const nonActiveElementClasses =
     "text-sm md:text-md flex gap-1 md:gap-3 py-2 my-2 hover:bg-[#FFF8E8] hover:bg-opacity-90 md:-mx-4 md:px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300";
 
-  const [activeTab, setActiveTab] = useState<string>("dashboard"); // Specify the type of activeTab
+  const [activeTab, setActiveTab] = useState<string>("dashboardSec"); // Specify the type of activeTab
   const Id: number = 1; // Specify the type of Id
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const SecuFonctNavigationCard: React.FC = () => {
     if (
       [
         "manage",
-        "dashboard",
+        "dashboardSec",
         "proofAnalysis",
         "comments",
         "updateStatus",
@@ -45,7 +46,7 @@ const SecuFonctNavigationCard: React.FC = () => {
   const handleTabChange = (tab: string) => {
     // Specify the type of tab parameter
     setActiveTab(tab);
-    window.history.pushState(null, "", `/home/fonctionnality/${tab}`);
+    window.history.pushState(null, "", `/${tab}`);
   };
 
   return (
@@ -65,9 +66,9 @@ const SecuFonctNavigationCard: React.FC = () => {
               🛡️<span className="hidden md:block">Gérer les signalements</span>
             </button>
             <button
-              onClick={() => handleTabChange("dashboard")}
+              onClick={() => handleTabChange("dashboardSec")}
               className={
-                activeTab === "dashboard"
+                activeTab === "dashboardSec"
                   ? activeElementClasses
                   : nonActiveElementClasses
               }
@@ -75,20 +76,6 @@ const SecuFonctNavigationCard: React.FC = () => {
               📊
               <span className="hidden md:block">
                 Consulter le tableau de bord des cas
-              </span>
-            </button>
-
-            <button
-              onClick={() => handleTabChange("comments")}
-              className={
-                activeTab === "comments"
-                  ? activeElementClasses
-                  : nonActiveElementClasses
-              }
-            >
-              📝
-              <span className="hidden md:block">
-                Ajouter des commentaires ou des rapports
               </span>
             </button>
 
@@ -130,12 +117,13 @@ const SecuFonctNavigationCard: React.FC = () => {
             <SignalementBoard />
           </div>
         )}
-        {activeTab === "dashboard" && (
+        {activeTab === "dashboardSec" && (
           <div>
-            <p>Tableau de bord</p> <ComplaintsBoard />
+            <p>Tableau de bord</p>
+            <ComplaintsBoard />
             <Statistiques />
             <Dashboard />
-            {/* <GeographicDistributionChart /> */}
+            <GeographicDistributionChart />
             <ReportsByPersonChart />
             <SignalementCharts />
             <StatutHistoryChart signalementId={Id} />
@@ -144,11 +132,6 @@ const SecuFonctNavigationCard: React.FC = () => {
         {activeTab === "proofAnalysis" && (
           <div>
             <p>Analyser les preuves fournies</p>
-          </div>
-        )}
-        {activeTab === "comments" && (
-          <div>
-            <p>Ajouter des commentaires ou des rapports</p>
           </div>
         )}
         {activeTab === "updateStatus" && (
