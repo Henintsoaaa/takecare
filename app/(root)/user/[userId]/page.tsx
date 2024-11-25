@@ -68,50 +68,51 @@ const Page = () => {
 
     useEffect(() => {
       const fetchData = async () => {
-        try {
-          const userResponse = await axios.get<UserProfileResponse>(
-            `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
-          );
+        // try {
+        const userResponse = await axios.get<UserProfileResponse>(
+          `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
+        );
 
-          const userData = userResponse.data.user;
-          const aboutData = userResponse.data.about;
-          const postsData = userResponse.data.posts;
+        const userData = userResponse.data.user;
+        const aboutData = userResponse.data.about;
+        const postsData = userResponse.data.posts;
 
-          setUsername(userData.username);
-          setAbout(aboutData.description);
-          setProfilePhoto(userData.profilePhoto);
-          setPosts(postsData);
+        setUsername(userData.username);
+        setAbout(aboutData.description);
+        setProfilePhoto(userData.profilePhoto);
+        setPosts(postsData);
 
-          const friendsResponse = await axios.get<AllFriendsResponse>(
-            `${process.env.NEXT_PUBLIC_IP_KEY}/allfriend`
-          );
+        const friendsResponse = await axios.get<AllFriendsResponse>(
+          `${process.env.NEXT_PUBLIC_IP_KEY}/user/allfriend`
+        );
+        console.log(friendsResponse.data.data);
 
-          const followerIds = friendsResponse.data.data
-            .filter((friend) => friend.follower_id === userData.id)
-            .map((friend) => friend.followed_id);
+        const followerIds = friendsResponse.data.data
+          ?.filter((friend) => friend.follower_id === userData.id)
+          .map((friend) => friend.followed_id);
 
-          const followersDetails = await Promise.all(
-            followerIds.map(async (followerId) => {
-              const userDetailResponse = await axios.get<UserProfileResponse>(
-                `${process.env.NEXT_PUBLIC_IP_KEY}/user?id=${followerId}`
-              );
+        const followersDetails = await Promise.all(
+          followerIds?.map(async (followerId) => {
+            const userDetailResponse = await axios.get<UserProfileResponse>(
+              `${process.env.NEXT_PUBLIC_IP_KEY}/user?id=${followerId}`
+            );
 
-              const profilePhotoResponse = await axios.get(
-                `${process.env.NEXT_PUBLIC_IP_KEY}/profilePhoto?user_id=${followerId}`
-              );
+            const profilePhotoResponse = await axios.get(
+              `${process.env.NEXT_PUBLIC_IP_KEY}/profilePhoto?user_id=${followerId}`
+            );
 
-              return {
-                id: followerId,
-                username: userDetailResponse.data.user.username,
-                profilePhoto: profilePhotoResponse.data.path,
-              };
-            })
-          );
+            return {
+              id: followerId,
+              username: userDetailResponse.data.user.username,
+              profilePhoto: profilePhotoResponse.data.path,
+            };
+          })
+        );
 
-          setContacts(followersDetails);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
+        setContacts(followersDetails);
+        // } catch (error) {
+        //   console.error("Error fetching user data:", error);
+        // }
       };
 
       fetchData();
