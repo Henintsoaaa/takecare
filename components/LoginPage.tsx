@@ -57,7 +57,7 @@ const Login = () => {
         const cookie: cookieData = val.data.data;
         document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
 
-        redirect("/emotion-tracker");
+        redirect("/home");
       } else {
         const response = axios.post(
           `${process.env.NEXT_PUBLIC_IP_KEY}/signUp`,
@@ -77,7 +77,7 @@ const Login = () => {
           // log the session cookie
           console.log(document.cookie);
 
-          redirect("/emotion-tracker");
+          redirect("/home");
         } else {
           setError(val.data.message);
         }
