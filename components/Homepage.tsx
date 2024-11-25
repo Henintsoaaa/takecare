@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,8 +11,19 @@ import {
 } from "@/components/ui/card";
 import { UserCircle, Users, MessageCircle, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  const redirectToQuizz = () => {
+    redirect("/quizz");
+  };
+  const redirectToPub = () => {
+    redirect("emotion-tracker");
+  };
+
+  const redirectToPlainte = () => {
+    redirect("/plainte");
+  };
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
       <header className="bg-white shadow-sm">
@@ -48,9 +60,12 @@ export default function Home() {
               </p>
             </CardContent>
             <CardFooter>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+              <button
+                onClick={redirectToPlainte}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+              >
                 Soumettre
-              </Button>
+              </button>
             </CardFooter>
           </Card>
 
@@ -68,9 +83,12 @@ export default function Home() {
               </p>
             </CardContent>
             <CardFooter>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+              <button
+                onClick={redirectToPub}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+              >
                 Se connecter
-              </Button>
+              </button>
             </CardFooter>
           </Card>
 
@@ -89,9 +107,12 @@ export default function Home() {
               </p>
             </CardContent>
             <CardFooter>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+              <button
+                onClick={redirectToQuizz}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+              >
                 Commencer
-              </Button>
+              </button>
             </CardFooter>
           </Card>
         </div>
