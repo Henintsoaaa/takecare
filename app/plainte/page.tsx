@@ -1,19 +1,27 @@
 "use client";
-import Plainte from "@/components/Plainte";
 import { redirect } from "next/navigation";
+import PagePlainte from "@/components/PagePlainte";
+import Sidebar from "@/components/Sidebar";
 
 const Page = () => {
-  let user_id: string | undefined;
+  const handleClick = () => {
+    redirect("/formulaire");
+  };
 
-  if (!document.cookie) {
-    // Redirect to login page if user is not logged in
-    redirect("/login");
-  } else {
-    user_id = document.cookie.split(",")[1].split("=")[1];
-  }
+  const handleVideo = () => {
+    redirect("/video");
+  };
+
+  const handleLangue = () => {
+    redirect("/langueSigne");
+  };
+
   return (
-    <div>
-      <Plainte userId={user_id} />
+    <div className="flex bg-gray-100 min-h-screen">
+      <Sidebar />
+      <div className="flex-1 p-6">
+        <PagePlainte />
+      </div>
     </div>
   );
 };
