@@ -55,7 +55,7 @@ const Page = () => {
   let user_id: number = 0; // Assuming the user is logged in
   if (document.cookie) {
     if (document.cookie) {
-      user_id = parseInt(document.cookie.split(";")[0].split("=")[1]);
+      user_id = parseInt(document.cookie.split(",")[1].split("=")[1]);
     }
 
     const [username, setUsername] = useState<string>("");
@@ -88,11 +88,11 @@ const Page = () => {
         console.log(friendsResponse.data.data);
 
         const followerIds = friendsResponse.data.data
-          ?.filter((friend) => friend.follower_id === userData.id)
+          .filter((friend) => friend.follower_id === userData.id)
           .map((friend) => friend.followed_id);
 
         const followersDetails = await Promise.all(
-          followerIds?.map(async (followerId) => {
+          followerIds.map(async (followerId) => {
             const userDetailResponse = await axios.get<UserProfileResponse>(
               `${process.env.NEXT_PUBLIC_IP_KEY}/user?id=${followerId}`
             );
