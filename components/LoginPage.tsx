@@ -41,6 +41,8 @@ const Login = () => {
     setError(null);
 
     if (formType === "login") {
+      console.log("hhhhhh");
+
       // send login request with email and password, if  successful, get a cookie from the server and create a session with it
       const endPoint = `${process.env.NEXT_PUBLIC_IP_KEY}/signIn`;
       console.log(endPoint);
@@ -59,28 +61,27 @@ const Login = () => {
 
         redirect("/emotion-tracker");
       } else {
-        const response = axios.post(
-          `${process.env.NEXT_PUBLIC_IP_KEY}/signUp`,
-          {
-            username: username,
-            email: email,
-            password: password,
-          }
-        );
+        setError(val.data.message);
+      }
+    } else {
+      const response = axios.post(`${process.env.NEXT_PUBLIC_IP_KEY}/signUp`, {
+        username: username,
+        email: email,
+        password: password,
+      });
 
-        const val = await response;
-        // console.log(val);
-        if (val.data.status === "success") {
-          // create a session with the cookie
-          const cookie: cookieData = val.data.data;
-          document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
-          // log the session cookie
-          console.log(document.cookie);
+      const val = await response;
+      // console.log(val);
+      if (val.data.status === "success") {
+        // create a session with the cookie
+        const cookie: cookieData = val.data.data;
+        document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
+        // log the session cookie
+        console.log(document.cookie);
 
-          redirect("/emotion-tracker");
-        } else {
-          setError(val.data.message);
-        }
+        redirect("/emotion-tracker");
+      } else {
+        setError(val.data.message);
       }
     }
   };
