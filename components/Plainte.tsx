@@ -4,11 +4,20 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, FileText, MapPin, Upload, Send } from "lucide-react";
 
-const Plainte = ({ userId }: { userId: string }) => {
+const Plainte = () => {
   const router = useRouter();
   const redirect = (path: string) => {
     router.push(path);
   };
+
+  let user_id: string | undefined;
+
+  if (!document.cookie) {
+    // Redirect to login page if user is not logged in
+    redirect("/login");
+  } else {
+    user_id = document.cookie.split(",")[1].split("=")[1];
+  }
 
   const [cause, setCause] = useState("");
   const [aboutCountry, setAboutCountry] = useState("");
@@ -32,6 +41,9 @@ const Plainte = ({ userId }: { userId: string }) => {
     formData.append("hour", aboutHour);
     formData.append("description", cause);
     formData.append("date", aboutDate);
+    if (user_id) {
+      formData.append("user_id", user_id);
+    }
     if (file) {
       formData.append("file_path", file);
     }
