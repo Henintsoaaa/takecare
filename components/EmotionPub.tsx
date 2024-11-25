@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, CardContent } from "./ui/card";
@@ -12,6 +11,13 @@ import {
 import { redirect } from "next/navigation"; // Keep this for server-side context
 import { Search } from "lucide-react";
 
+interface Comment {
+  user_id: number;
+  content: string;
+  created_at: string;
+  username: string; // Add username to display who commented
+}
+
 interface Post {
   entry_id: number;
   user_id: number;
@@ -19,6 +25,7 @@ interface Post {
   notes: string;
   created_at: string;
   isAnonyme: number;
+  comments: Comment[]; // Add comments structure
 }
 
 const EmotionShare = () => {
@@ -46,6 +53,7 @@ const EmotionShare = () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_IP_KEY}/posts`
       );
+      // Assuming the response includes comments for each post
       setPosts(response.data.data.reverse() as Post[]);
     } catch (error) {
       setError("Error fetching data. Please try again later.");
@@ -89,7 +97,7 @@ const EmotionShare = () => {
 
     try {
       // Send the comment to the backend
-      await axios.post(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_IP_KEY}/comment/create`,
         commentData,
         {
@@ -99,21 +107,21 @@ const EmotionShare = () => {
         }
       );
 
-      // Optionally, you can send a notification to the post owner here
-      const notificationData = {
-        entry_id: entryId,
-        user_id: user_id, // The user who commented
-        notification_type: "comment", // Type of notification
+      // Assuming the response returns the newly created comment
+      const newComment: Comment = {
+        user_id: Number(user_id),
+        content: commentText,
+        created_at: new Date().toISOString(), // Use current date for local display
+        username: "Your Username", // Replace with actual username if available
       };
 
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_IP_KEY}/notification/create`,
-        notificationData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      // Update the post with the new comment
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.entry_id === entryId
+            ? { ...post, comments: [...post.comments, newComment] } // Append the new comment
+            : post
+        )
       );
 
       // Clear the comment input and hide the input area
@@ -129,6 +137,7 @@ const EmotionShare = () => {
       console.error("Error submitting comment:", error);
     }
   };
+
   const toggleCommentInput = (entryId: number) => {
     setShowCommentInput((prev) => ({
       ...prev,
@@ -253,7 +262,7 @@ const EmotionShare = () => {
                 </div>
                 <div className="flex items-center">
                   <FaComment
-                    className="text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
+                    className="text-indigo-600 cursor-pointer hover:text-indigo- 800 transition duration-200"
                     onClick={() => toggleCommentInput(post.entry_id)}
                   />
                   <span
@@ -286,6 +295,22 @@ const EmotionShare = () => {
                 />
               </div>
             )}
+            {post.comments &&
+              post.comments.map((comment) => (
+                <div key={comment.created_at} className="mt-2">
+                  <span className="font-bold text-gray-800">
+                    {comment.username}
+                  </span>
+                  <p className="text-gray-600">{comment.content}</p>
+                  <small className="text-gray-500">
+                    {new Date(comment.created_at).toLocaleString("fr-FR", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </small>
+                </div>
+              ))}
           </CardContent>
         </Card>
       ))}

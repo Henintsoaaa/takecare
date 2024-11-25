@@ -8,6 +8,7 @@ import {
   FilePlus,
   MessageCircle,
 } from "lucide-react"; // Import Lucid Icons
+import { redirect } from "next/navigation";
 
 interface Actor {
   id: number;
@@ -26,71 +27,6 @@ interface Notification {
   signalment_id: number;
   post_owner: number;
 }
-
-// Sample notifications data
-const _notifications: Notification[] = [
-  {
-    id: 1,
-    user_id: 1,
-    actor_id: 2,
-    user_name: "user1",
-    type: "new_post",
-    is_read: false,
-    created_at: new Date(),
-    post_id: 1,
-    signalment_id: 1,
-    post_owner: 1,
-  },
-  {
-    id: 2,
-    user_id: 1,
-    actor_id: 3,
-    user_name: "user1",
-    type: "comment",
-    is_read: false,
-    created_at: new Date(),
-    post_id: 1,
-    signalment_id: 1,
-    post_owner: 1,
-  },
-  {
-    id: 3,
-    user_id: 1,
-    actor_id: 4,
-    user_name: "user1",
-    type: "reaction",
-    is_read: false,
-    created_at: new Date(),
-    post_id: 1,
-    signalment_id: 1,
-    post_owner: 1,
-  },
-  {
-    id: 4,
-    user_id: 1,
-    actor_id: 2,
-    user_name: "user1",
-    type: "comment_reaction",
-    is_read: false,
-    created_at: new Date(),
-    post_id: 1,
-    signalment_id: 1,
-    post_owner: 1,
-  },
-];
-
-const fetchActors = async (actorIds: number[]): Promise<Actor[]> => {
-  // Simulate fetching actor names from an API
-  return new Promise<Actor[]>((resolve) => {
-    setTimeout(() => {
-      resolve([
-        { id: 2, name: "acteur2" },
-        { id: 3, name: "acteur3" },
-        { id: 4, name: "acteur4" },
-      ]);
-    }, 1000);
-  });
-};
 
 const NotificationIcon = ({ type }: { type: Notification["type"] }) => {
   switch (type) {
@@ -157,18 +93,48 @@ const Notification = () => {
 
   useEffect(() => {
     const loadNotifications = async () => {
-      setNotifications(_notifications);
-      const actorIds = _notifications.map((n) => n.actor_id);
-      const fetchedActors = await fetchActors(actorIds);
-      const actorMap = Object.fromEntries(
-        fetchedActors.map((actor) => [actor.id, actor.name])
-      );
-      setActors(actorMap);
-      setLoading(false);
+      try {
+        // Replace with your API endpoint to fetch notifications for the logged-in user
+        let user_id: string | undefined;
+
+        if (!document.cookie) {
+          // Redirect to login page if user is not logged in
+          redirect("/login");
+        } else {
+          user_id = document.cookie.split(",")[1].split("=")[1];
+        }
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_IP_KEY}/notifications?user_id=${user_id}`
+        );
+        setNotifications(response.data); // Assuming response.data is an array of notifications
+
+        // Fetch actor names
+        const actorIds = response.data.map((n: Notification) => n.actor_id);
+        const fetchedActors = await fetchActors(actorIds);
+        const actorMap = Object.fromEntries(
+          fetchedActors.map((actor) => [actor.id, actor.name])
+        );
+        setActors(actorMap);
+      } catch (error) {
+        console.error("Error loading notifications:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadNotifications();
   }, []);
+
+  const fetchActors = async (actorIds: number[]): Promise<Actor[]> => {
+    // Simulate fetching actor names from an API
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_IP_KEY}/actors`,
+      {
+        params: { ids: actorIds },
+      }
+    );
+    return response.data; // Assuming the response contains an array of actors
+  };
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -198,19 +164,23 @@ const Notification = () => {
         className="text-indigo-600 hover:text-indigo-700 transition-colors duration-200 flex gap-2 justify-center items-center"
       >
         <Bell size={24} className="md:w-[30px] md:h-[30px]" />
-        <span className=" hidden md:block">Notifications</span>
+        <span className="hidden md:block">Notifications</span>
       </button>
 
       {isOpen && (
         <div className="absolute right-0 z-10 w-80 md:w-96 mt-2 bg-white shadow-lg rounded-xl">
           <div className="max-h-96 overflow-y-auto rounded-xl">
-            {notifications.map((notification) => (
-              <NotificationItem
-                key={notification.id}
-                notification={notification}
-                actorName={actors[notification.actor_id] || "Acteur Inconnu"}
-              />
-            ))}
+            {loading ? (
+              <p className="text-center p-4">Loading notifications...</p>
+            ) : (
+              notifications.map((notification) => (
+                <NotificationItem
+                  key={notification.id}
+                  notification={notification}
+                  actorName={actors[notification.actor_id] || "Acteur Inconnu"}
+                />
+              ))
+            )}
           </div>
         </div>
       )}

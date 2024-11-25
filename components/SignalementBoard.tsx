@@ -100,7 +100,7 @@ export default function SignalementBoard() {
         //   `${process.env.NEXT_PUBLIC_IP_KEY}/signalement?id=${currentSignalementId}`
         // );
         // setSignalement(res.data);
-        setSignalement(prototypeSignalement); // Set prototype data
+        setSignalement(prototypeSignalement);
       } catch (err) {
         // if (axios.isAxiosError(err)) {
         //   console.error(err.message);

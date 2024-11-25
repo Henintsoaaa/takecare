@@ -17,6 +17,14 @@ import {
 interface FileChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
 
 const Plainte = ({ userId }: { userId: string }) => {
+  let user_id: string | undefined;
+
+  if (!document.cookie) {
+    // Redirect to login page if user is not logged in
+    redirect("/login");
+  } else {
+    user_id = document.cookie.split(",")[1].split("=")[1];
+  }
   const [cause, setCause] = useState("");
   const [aboutCountry, setAboutCountry] = useState("");
   const [aboutCity, setAboutCity] = useState("");
@@ -57,26 +65,23 @@ const Plainte = ({ userId }: { userId: string }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("cause", cause);
-    formData.append("country", aboutCountry);
+    formData.append("user_id", userId);
+    formData.append("description", cause);
+    formData.append("location", aboutCountry);
     formData.append("city", aboutCity);
-    formData.append("fullName", fullName);
+    formData.append("full_name", fullName);
     formData.append("date", aboutDate);
     formData.append("hour", aboutHour);
-    formData.append("receiverId", receiverId.toString());
+    formData.append("receiver_id", receiverId.toString());
     if (file) {
-      formData.append("file", file);
+      formData.append("file_path", file);
     }
 
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_IP_KEY}/signalement/createSignalement`,
         formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        {}
       );
 
       if (response.status === 200) {
@@ -273,7 +278,7 @@ const Plainte = ({ userId }: { userId: string }) => {
             </div>
           </div>
 
-          <div className="flex space-x-4">
+          {/* <div className="flex space-x-4">
             <button
               type="button"
               onClick={() =>
@@ -305,7 +310,7 @@ const Plainte = ({ userId }: { userId: string }) => {
           </div>
 
           {activeMedia === "audio" && <AudioCapture />}
-          {activeMedia === "video" && <VideoCapture />}
+          {activeMedia === "video" && <VideoCapture />} */}
 
           <button
             type="submit"
