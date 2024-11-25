@@ -120,21 +120,24 @@ export default function MessagesPage() {
             You can start a conversation with any of the following users:
           </h1>
           <div className="space-y-4">
-            {allUsers.map((user) => (
-              <Link key={user.id} href={`/messages/${user.id}`}>
-                <div className="flex items-center p-4 border rounded-lg shadow hover:bg-gray-100 transition duration-150 ease-in-out">
-                  <img
-                    src={profilePhotos[user.id] || "/default-avatar.svg"} // Fallback for profile photo
-                    alt={user.username}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div className="flex-1">
-                    <h2 className="font-semibold">{user.username}</h2>
-                    <p className="text-gray-600 ">{user.email}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
+            {allUsers.map(
+              (user) =>
+                user_id !== user.id && (
+                  <Link key={user.id} href={`/messages/${user.id}`}>
+                    <div className="flex items-center p-4 border rounded-lg shadow hover:bg-gray-100 transition duration-150 ease-in-out">
+                      <img
+                        src={profilePhotos[user.id] || "/default-avatar.svg"} // Fallback for profile photo
+                        alt={user.username}
+                        className="w-12 h-12 rounded-full mr-4"
+                      />
+                      <div className="flex-1">
+                        <h2 className="font-semibold">{user.username}</h2>
+                        <p className="text-gray-600 ">{user.email}</p>
+                      </div>
+                    </div>
+                  </Link>
+                )
+            )}
           </div>
         </>
       ) : (

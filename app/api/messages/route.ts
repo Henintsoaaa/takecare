@@ -3,7 +3,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const userId = searchParams.get("userId");
+  const userId = searchParams.get("senderId");
+  const receiverId = searchParams.get("receiverId");
+  console.log(receiverId);
 
   if (!userId) {
     return NextResponse.json({ error: "User ID is required" }, { status: 400 });
@@ -12,9 +14,11 @@ export async function GET(request: Request) {
   try {
     const conn = await createConnection();
     const [rows] = await conn.execute(
-      `SELECT * FROM private_messages 
-       WHERE sender_id = ? OR receiver_id = ?
-       ORDER BY sent_at ASC`,
+      `
+      SELECT * FROM private_messages 
+    WHERE (sender_id = ? ) 
+    OR ( receiver_id = ?)
+    ORDER BY sent_at ASC;`,
       [userId, userId]
     );
     await conn.end();

@@ -10,22 +10,17 @@ import {
 } from "lucide-react"; // Import Lucid Icons
 import { redirect } from "next/navigation";
 
-interface Actor {
-  id: number;
-  name: string;
-}
-
 interface Notification {
   id: number;
   user_id: number;
   actor_id: number;
-  user_name: string;
+  username: string;
   type: "new_post" | "comment" | "reaction" | "comment_reaction";
-  is_read: boolean;
   created_at: Date;
-  post_id: number;
+  is_read: boolean;
   signalment_id: number;
   post_owner: number;
+  entry_id: number;
 }
 
 const NotificationIcon = ({ type }: { type: Notification["type"] }) => {
@@ -64,6 +59,8 @@ const NotificationItem = ({
     comment_reaction: "Réaction au Commentaire",
   };
 
+  const createdAt = new Date(notification.created_at);
+
   return (
     <div
       className={`flex items-center p-4 border-b ${
@@ -77,7 +74,7 @@ const NotificationItem = ({
           {description[notification.type]}
         </p>
         <p className="text-xs text-gray-400">
-          {notification.created_at.toLocaleTimeString()}
+          {createdAt.toLocaleTimeString()}
         </p>
       </div>
     </div>
@@ -94,47 +91,30 @@ const Notification = () => {
   useEffect(() => {
     const loadNotifications = async () => {
       try {
-        // Replace with your API endpoint to fetch notifications for the logged-in user
-        let user_id: string | undefined;
-
-        if (!document.cookie) {
+        setLoading(true);
+        let user_id;
+        if (!document.cookie.includes("user_id")) {
           // Redirect to login page if user is not logged in
           redirect("/login");
         } else {
           user_id = document.cookie.split(",")[1].split("=")[1];
         }
+
+        console.log("Fetching notifications for user_id:", user_id);
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_IP_KEY}/notifications?user_id=${user_id}`
         );
         setNotifications(response.data); // Assuming response.data is an array of notifications
-
-        // Fetch actor names
-        const actorIds = response.data.map((n: Notification) => n.actor_id);
-        const fetchedActors = await fetchActors(actorIds);
-        const actorMap = Object.fromEntries(
-          fetchedActors.map((actor) => [actor.id, actor.name])
-        );
-        setActors(actorMap);
       } catch (error) {
         console.error("Error loading notifications:", error);
       } finally {
+        console.log("Setting loading to false");
         setLoading(false);
       }
     };
 
     loadNotifications();
   }, []);
-
-  const fetchActors = async (actorIds: number[]): Promise<Actor[]> => {
-    // Simulate fetching actor names from an API
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_IP_KEY}/actors`,
-      {
-        params: { ids: actorIds },
-      }
-    );
-    return response.data; // Assuming the response contains an array of actors
-  };
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -177,7 +157,7 @@ const Notification = () => {
                 <NotificationItem
                   key={notification.id}
                   notification={notification}
-                  actorName={actors[notification.actor_id] || "Acteur Inconnu"}
+                  actorName={notification.username || "Acteur Inconnu"}
                 />
               ))
             )}

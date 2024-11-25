@@ -20,9 +20,10 @@ app.use(express.json());
 
 // Route to fetch private messages
 app.get("/api/messages", async (req, res) => {
-  const userId = req.query.userId;
+  const senderId = req.query.senderId;
+  const receiverId = req.query.receiverId;
 
-  if (!userId) {
+  if (!senderId) {
     return res.status(400).json({ error: "User ID is required" });
   }
 
@@ -30,9 +31,10 @@ app.get("/api/messages", async (req, res) => {
     const conn = await createConnection();
     const [rows] = await conn.execute(
       `SELECT * FROM private_messages 
-       WHERE sender_id = ? OR receiver_id = ?
-       ORDER BY sent_at ASC`,
-      [userId, userId]
+    WHERE (sender_id = ? AND receiver_id = ?) 
+    OR (sender_id = ? AND receiver_id = ?)
+    ORDER BY sent_at ASC;`,
+      [7, 5, 5, 7]
     );
     await conn.end();
 
@@ -67,8 +69,8 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("join-user", (userId) => {
-    socket.join(`user_${userId}`);
+  socket.on("join-user", (senderId) => {
+    socket.join(`user_${senderId}`);
   });
 
   socket.on("disconnect", () => {

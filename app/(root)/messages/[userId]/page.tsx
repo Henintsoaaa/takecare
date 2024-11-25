@@ -14,6 +14,7 @@ import axios from "axios";
 interface Message {
   id: number;
   sender_id: number;
+  receiver_id: number;
   content: string;
   sent_at: string;
 }
@@ -49,7 +50,7 @@ export function MessagingInterface() {
 
   useEffect(() => {
     const initSocket = async () => {
-      socket.current = io("http://localhost:3001");
+      socket.current = io("http://192.168.1.198:3001"); // Change to your  server IP
       socket.current.emit("join-user", currentUserId);
 
       socket.current.on("new-message", (message: Message) => {
@@ -61,7 +62,10 @@ export function MessagingInterface() {
 
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`/api/messages?userId=${currentUserId}`);
+        console.log(receiverId);
+        console.log(currentUserId);
+
+        const response = await fetch(`/api/messages?senderId=${currentUserId}`);
         const data = await response.json();
         setMessages(data);
       } catch (error) {
@@ -116,15 +120,17 @@ export function MessagingInterface() {
     const tempMessage: Message = {
       id: Date.now(),
       sender_id: currentUserId,
+      receiver_id: receiverId,
       content: newMessage,
       sent_at: new Date().toISOString(),
     };
+    console.log(messages);
 
     setMessages((prev) => [...prev, tempMessage]);
 
     socket.current.emit("private-message", {
       senderId: currentUserId,
-      receiverId,
+      receiverId: receiverId,
       content: newMessage,
     });
 

@@ -21,6 +21,7 @@ const ioHandler = async (req: any, res: any) => {
           // Emit to specific user
           io.to(`user_${data.receiverId}`).emit("new-message", {
             id: result.insertId,
+            receiver_id: data.receiverId,
             sender_id: data.senderId,
             content: data.content,
             sent_at: new Date(),
