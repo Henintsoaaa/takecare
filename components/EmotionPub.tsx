@@ -191,6 +191,7 @@ const EmotionShare = () => {
           },
         }
       );
+      fetchPosts(); // Refetch posts to update the like state
     } catch (error) {
       console.error("Error updating reaction:", error);
       setLikes((prevLikes) => ({
