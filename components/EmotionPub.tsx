@@ -26,6 +26,9 @@ interface Post {
   created_at: string;
   isAnonyme: number;
   comments: Comment[]; // Add comments structure
+  reaction: {
+    isLiked: boolean;
+  };
 }
 
 const EmotionShare = () => {
@@ -51,7 +54,7 @@ const EmotionShare = () => {
   const fetchPosts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_IP_KEY}/posts`
+        `${process.env.NEXT_PUBLIC_IP_KEY}/posts?user_id=${user_id}`
       );
       // Assuming the response includes comments for each post
       setPosts(response.data.data.reverse() as Post[]);
@@ -248,7 +251,7 @@ const EmotionShare = () => {
             <div className="flex gap-2 items-center justify-between mt-4">
               <div className="flex gap-4">
                 <div className="flex items-center">
-                  {likes[post.entry_id] ? (
+                  {post.reaction.isLiked ? (
                     <FaHeart
                       className="text-red-600 cursor-pointer hover:text-red-800 transition duration-200"
                       onClick={() => handleReaction(post.entry_id)}
