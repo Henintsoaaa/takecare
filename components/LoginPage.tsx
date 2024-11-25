@@ -68,6 +68,7 @@ const Login = () => {
         username: username,
         email: email,
         password: password,
+        role: "utilisateur",
       });
 
       const val = await response;
