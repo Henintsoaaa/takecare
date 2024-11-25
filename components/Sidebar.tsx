@@ -14,7 +14,7 @@ const Sidebar = () => {
             <span className="text-gray-200 font-semibold">Plainte</span>
           </div>
         </Link>
-        <Link href="/communaute">
+        <Link href="/emotion-tracker">
           <div className="flex items-center p-3 hover:bg-indigo-700 transition-colors duration-200 cursor-pointer rounded-md">
             <MessageCircle className="mr-3 h-5 w-5" />
             <span className="text-gray-200 font-semibold">Communauté</span>
