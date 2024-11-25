@@ -18,7 +18,7 @@ const ReportsByPersonChart: React.FC = () => {
   useEffect(() => {
     // Use Axios to fetch the data
     /*
-    axios.get<ReportData[]>("http://localhost:3003/api/reports-by-person")
+    axios.get<ReportData[]>(`${process.env.NEXT_PUBLIC_IP_KEY}/reports-by-person`)
       .then((response) => {
         setData(response.data); // Set the data received from the API
       })
@@ -38,7 +38,7 @@ const ReportsByPersonChart: React.FC = () => {
     setData(mockData); // Set the mock data to state
   }, []);
 
-  if (!data) return <p>Chargement...</p>;
+  if (!data) return <p className="text-sm text-gray-600">Chargement...</p>;
 
   const chartData = {
     labels: data.map((item) => item.full_name),
@@ -56,9 +56,14 @@ const ReportsByPersonChart: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Nombre de signalements par personne</h2>
-      <Pie data={chartData} />
+    <div className="p-2 flex justify-center items-center flex-col">
+      <h2 className="text-lg font-semibold mb-2">Signalements par personne</h2>
+      <div
+        style={{ width: "300px", height: "300px" }}
+        className="md:w-[500px] md:h-[500px]"
+      >
+        <Pie data={chartData} className="text-center" />
+      </div>
     </div>
   );
 };

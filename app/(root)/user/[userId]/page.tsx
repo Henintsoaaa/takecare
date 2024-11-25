@@ -5,7 +5,9 @@ import axios from "axios";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Heart, Book, FilePenLine } from "lucide-react"; // Assuming you're using lucide-react for icons
 import { usePathname, redirect } from "next/navigation";
-import FonctNavigationCard from "@/components/UserFonctNav";
+import StatusForUser from "@/components/StatusForUser";
+import ProofSection from "@/components/ProofSection";
+import ResourcesSection from "@/components/ResourcesSection";
 
 interface Post {
   entry_id: number;
@@ -42,84 +44,27 @@ interface UserProfileResponse {
   posts: Post[];
   contacts: Contact[];
 }
+
 interface ContactResponse {
   status: string;
   contacts: Contact[];
 }
 
-// generic data
-const data: UserProfileResponse = {
-  status: "success",
-  user: {
-    id: 1,
-    username: "John Doe",
-    role: "admin",
-    email: "john@gmail.com",
-    created_at: new Date(),
-    profilePhoto: "/profile.jpg",
-    coverPhoto: "/cover.jpg",
-  },
-  about: {
-    user_id: 1,
-    description: "I am a software engineer",
-  },
-  posts: [
-    {
-      entry_id: 1,
-      user_id: 1,
-      emotion_id: "happy",
-      well_being_score: 5,
-      notes: "I am happy today",
-      positive_moment: "I got a new job",
-      created_at: new Date(),
-      isAnonyme: false,
-    },
-    {
-      entry_id: 2,
-      user_id: 1,
-      emotion_id: "sad",
-      well_being_score: 2,
-      notes: "I am sad today",
-      positive_moment: "I lost my job",
-      created_at: new Date(),
-      isAnonyme: false,
-    },
-  ],
-  contacts: [
-    {
-      id: 1,
-      username: "Jane Doe",
-      profilePhoto: "/jane.jpg",
-    },
-    {
-      id: 2,
-      username: "Alice",
-      profilePhoto: "/alice.jpg",
-    },
-    {
-      id: 3,
-      username: "Bob",
-      profilePhoto: "/bob.jpg",
-    },
-  ],
-};
-
-const _response = {
-  data: data,
-};
-
 const Page = () => {
-  const userId = usePathname().split("/")[2];
+  const userId = parseInt(usePathname().split("/")[2]);
 
   let user_id: number = 0; // Assuming the user is logged in
-  if (document.cookie)
+  if (document.cookie) {
     user_id = parseInt(document.cookie.split(";")[0].split("=")[1]);
+  }
+
+  console.log(userId, user_id);
 
   const [username, setUsername] = useState<string>("");
   const [about, setAbout] = useState<string>("");
-  const [profilePhoto, setprofilePhoto] = useState<string>("");
-  const [contacts, setContacts] = useState<Contact[]>([]);
-  const [posts, setposts] = useState<Post[]>([]);
+  const [profilePhoto, setProfilePhoto] = useState<string>("");
+  const [contacts, setContacts] = useState<Contact[]>([]); // Initialize as empty array
+  const [posts, setPosts] = useState<Post[]>([]);
   const [activeTab, setActiveTab] = useState<string>("posts"); // State to manage the active tab
 
   useEffect(() => {
@@ -128,22 +73,22 @@ const Page = () => {
         const response = await axios.get<UserProfileResponse>(
           `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
         );
-        // const response = _response;
-        console.log(response.data);
 
         const userData = response.data.user;
         const aboutData = response.data.about;
         const postsData = response.data.posts;
+
+        // Fetch contacts
         const responseContact = await axios.get<ContactResponse>(
           `${process.env.NEXT_PUBLIC_IP_KEY}/contact?user_id=${userId}`
         );
-        const contactsData = responseContact.data.contacts;
+        const contactsData = responseContact.data.contacts || []; // Ensure it's an array
 
         setUsername(userData.username);
         setAbout(aboutData.description);
-        setprofilePhoto(userData.profilePhoto);
-        setposts(postsData);
-        setContacts(contactsData);
+        setProfilePhoto(userData.profilePhoto);
+        setPosts(postsData);
+        setContacts(contactsData); // Set contacts data
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -169,10 +114,10 @@ const Page = () => {
           />
         </div>
         {/* Conditionally render the edit profile button */}
-        {parseInt(userId) === user_id && (
+        {userId === user_id && ( // Compare both as numbers
           <button className="flex mt-2" onClick={onClickChangeProfile}>
             <FilePenLine />
-            <p className="hidden md:block">Modifier mon profile</p>
+            <p className="hidden md:block text-black">Modifier mon profil</p>
           </button>
         )}
         <div className="ml-4 text-black">
@@ -193,7 +138,15 @@ const Page = () => {
                 icon: <Heart className="h-4 w-4" />,
               },
               {
-                value: "statistics",
+                value: "tableau de bord",
+                icon: <Book className="h-4 w-4" />,
+              },
+              {
+                value: "preuves",
+                icon: <Book className="h-4 w-4" />,
+              },
+              {
+                value: "ressources",
                 icon: <Book className="h-4 w-4" />,
               },
             ].map((tab) => (
@@ -250,8 +203,14 @@ const Page = () => {
               )}
             </div>
           </TabsContent>
-          <TabsContent value="statistics">
-            <FonctNavigationCard />
+          <TabsContent value="tableau de bord">
+            <StatusForUser />
+          </TabsContent>
+          <TabsContent value="preuves">
+            <ProofSection />
+          </TabsContent>
+          <TabsContent value="resources">
+            <ResourcesSection />
           </TabsContent>
         </Tabs>
       </div>

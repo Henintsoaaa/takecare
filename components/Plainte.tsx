@@ -17,6 +17,14 @@ import {
 interface FileChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
 
 const Plainte = ({ userId }: { userId: string }) => {
+  let user_id: string | undefined;
+
+  if (!document.cookie) {
+    // Redirect to login page if user is not logged in
+    redirect("/login");
+  } else {
+    user_id = document.cookie.split(",")[1].split("=")[1];
+  }
   const [cause, setCause] = useState("");
   const [aboutCountry, setAboutCountry] = useState("");
   const [aboutCity, setAboutCity] = useState("");
@@ -26,26 +34,27 @@ const Plainte = ({ userId }: { userId: string }) => {
   const [activeMedia, setActiveMedia] = useState<"audio" | "video" | null>(
     null
   );
+  const receiverId = 1; // Added receiverId state
   const [aboutHour, setAboutHour] = useState("");
-  const [receiverId, setReceiverId] = useState(""); // Added receiverId state
+  // const [receiverId, setReceiverId] = useState(0); // Added receiverId state
   const [searchQuery, setSearchQuery] = useState<string>(""); // Added search query state
   const [results, setResults] = useState<any[]>([]); // To store search results
   const [noResults, setNoResults] = useState<boolean>(false); // State to manage no results message
   const [securityUsers, setSecurityUsers] = useState<any[]>([]); // State to store users with "securite" role
 
-  useEffect(() => {
-    // Fetch users with role "securite" when the component mounts
-    const fetchSecurityUsers = async () => {
-      try {
-        const response = await axios.get(`/api/users?role=securite`);
-        setSecurityUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching security users:", error);
-      }
-    };
+  // useEffect(() => {
+  //   // Fetch users with role "securite" when the component mounts
+  //   const fetchSecurityUsers = async () => {
+  //     try {
+  //       const response = await axios.get(`/api/users?role=securite`);
+  //       setSecurityUsers(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching security users:", error);
+  //     }
+  //   };
 
-    fetchSecurityUsers();
-  }, []);
+  //   fetchSecurityUsers();
+  // }, []);
 
   const handleFileChange = (event: FileChangeEvent) => {
     const selectedFile = event.target.files?.[0] || null;
@@ -56,23 +65,24 @@ const Plainte = ({ userId }: { userId: string }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("cause", cause);
-    formData.append("country", aboutCountry);
+    formData.append("user_id", userId);
+    formData.append("description", cause);
+    formData.append("location", aboutCountry);
     formData.append("city", aboutCity);
-    formData.append("fullName", fullName);
+    formData.append("full_name", fullName);
     formData.append("date", aboutDate);
     formData.append("hour", aboutHour);
-    formData.append("receiverId", receiverId); // Added receiverId to formData
+    formData.append("receiver_id", receiverId.toString());
     if (file) {
-      formData.append("file", file);
+      formData.append("file_path", file);
     }
 
     try {
-      const response = await axios.post("/api/submit-complaint", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_IP_KEY}/signalement/createSignalement`,
+        formData,
+        {}
+      );
 
       if (response.status === 200) {
         redirect("/procedure");
@@ -91,8 +101,8 @@ const Plainte = ({ userId }: { userId: string }) => {
     redirect("/emotion-tracker");
   };
 
-  const handleSelect = (id: string) => {
-    setReceiverId(id); // Set the selected receiver ID
+  const handleSelect = (id: number) => {
+    // setReceiverId(id); // Set the selected receiver ID
     console.log(`Selected receiver ID: ${id}`);
   };
 
@@ -268,7 +278,7 @@ const Plainte = ({ userId }: { userId: string }) => {
             </div>
           </div>
 
-          <div className="flex space-x-4">
+          {/* <div className="flex space-x-4">
             <button
               type="button"
               onClick={() =>
@@ -300,7 +310,7 @@ const Plainte = ({ userId }: { userId: string }) => {
           </div>
 
           {activeMedia === "audio" && <AudioCapture />}
-          {activeMedia === "video" && <VideoCapture />}
+          {activeMedia === "video" && <VideoCapture />} */}
 
           <button
             type="submit"

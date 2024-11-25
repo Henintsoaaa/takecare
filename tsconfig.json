@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(root)/notifications"
+    "app/(root)/notifications",
+    ".next/types/app/dashboardSec/page.tsx"
   ],
   "exclude": ["node_modules"]
 }

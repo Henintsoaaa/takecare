@@ -97,10 +97,10 @@ export default function SignalementBoard() {
 
       try {
         // const res = await axios.get<Signalement>(
-        //   `http://localhost/Devoi_socila_media/src/backend/api/signalement/signalementDisplay.php?id=${currentSignalementId}`
+        //   `${process.env.NEXT_PUBLIC_IP_KEY}/signalement?id=${currentSignalementId}`
         // );
         // setSignalement(res.data);
-        setSignalement(prototypeSignalement); // Set prototype data
+        setSignalement(prototypeSignalement);
       } catch (err) {
         // if (axios.isAxiosError(err)) {
         //   console.error(err.message);
@@ -121,7 +121,7 @@ export default function SignalementBoard() {
         //   status: string;
         //   data: Complaint[];
         // }>(
-        //   "http://localhost/Devoi_socila_media/src/backend/api/signalement/signalementBoard.php"
+        //   "${process.env.NEXT_PUBLIC_IP_KEY}/signalement/signalementBoard.php"
         // );
         // if (response.data.status === "success" && Array.is ```javascript
         // Array.isArray(response.data.data)) {
