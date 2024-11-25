@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AudioCapture from "./AudioCapture";
 import VideoCapture from "./VideoCapture";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   FileText,
@@ -17,6 +17,10 @@ import {
 interface FileChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
 
 const Plainte = ({ userId }: { userId: string }) => {
+  const router = useRouter();
+  const redirect = (path: string) => {
+    router.push(path);
+  };
   let user_id: string | undefined;
 
   if (!document.cookie) {
@@ -24,6 +28,7 @@ const Plainte = ({ userId }: { userId: string }) => {
     redirect("/login");
   } else {
     user_id = document.cookie.split(",")[1].split("=")[1];
+    console.log(user_id);
   }
   const [cause, setCause] = useState("");
   const [aboutCountry, setAboutCountry] = useState("");
@@ -57,7 +62,7 @@ const Plainte = ({ userId }: { userId: string }) => {
   // }, []);
 
   const handleFileChange = (event: FileChangeEvent) => {
-    const selectedFile = event.target.files?.[0] || null;
+    const selectedFile = event.target.files ? event.target.files[0] : null;
     setFile(selectedFile);
   };
 
@@ -65,13 +70,15 @@ const Plainte = ({ userId }: { userId: string }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("user_id", user_id); // Use user_id from cookie
-    formData.append("description", cause);
-    formData.append("location", aboutCountry);
-    formData.append("city", aboutCity);
+    if (user_id) {
+      formData.append("user_id", user_id);
+    }
     formData.append("full_name", fullName);
-    formData.append("date", aboutDate);
+    formData.append("city", aboutCity);
+    formData.append("location", aboutCountry);
     formData.append("hour", aboutHour);
+    formData.append("description", cause);
+    formData.append("date", aboutDate);
     formData.append("receiver_id", receiverId.toString());
     if (file) {
       formData.append("file_path", file);
@@ -87,16 +94,14 @@ const Plainte = ({ userId }: { userId: string }) => {
           },
         }
       );
+      console.log("Response:", response);
 
-      if (response.status === 200) {
+      if (response.data.status === "success") {
         redirect("/procedure");
       }
     } catch (error) {
-      console.error("Error:", error);
-      const errorMessage =
-        (error as any).response?.data?.message ||
-        "An error occurred while submitting your complaint.";
-      alert(errorMessage);
+      console.log("Error:", error);
+      alert("An error occurred while submitting your complaint.");
     }
   };
 

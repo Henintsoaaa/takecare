@@ -9,7 +9,6 @@ interface cookieData {
   email: string;
   username: string;
   token: string;
-  role: string;
 }
 
 const empoweringQuotes = [
@@ -29,7 +28,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
+  // const [userType, setUserType] = useState("");
 
   useEffect(() => {
     const randomQuote =
@@ -56,20 +55,8 @@ const Login = () => {
       if (val.data.status === "success") {
         // create a session with the cookie
         const cookie: cookieData = val.data.data;
-        document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}, role=${cookie.role}`;
-        // redirect to /emotion-tracker
-        // if (document.cookie) {
-        //   let role = document.cookie.split(",")[4].split("=")[1];
-        //   if (role === "utilisateur") {
-        //     console.log("redirecting to /emotion-tracker");
-        //     redirect("/emotion-tracker");
-        //   } else if (role === "securite") {
-        //     console.log("redirecting to /juridique");
-        //     redirect("/juridique");
-        //   }
-        // } else {
-        //   setError(val.data.message);
-        // }
+        document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
+
         redirect("/emotion-tracker");
       } else {
         const response = axios.post(
@@ -78,7 +65,6 @@ const Login = () => {
             username: username,
             email: email,
             password: password,
-            role: userType,
           }
         );
 
@@ -87,21 +73,10 @@ const Login = () => {
         if (val.data.status === "success") {
           // create a session with the cookie
           const cookie: cookieData = val.data.data;
-          document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}, role=${cookie.role}`;
+          document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
           // log the session cookie
           console.log(document.cookie);
-          // if (document.cookie) {
-          //   let role = document.cookie.split(",")[4].split("=")[1];
-          //   if (role === "utilisateur") {
-          //     console.log("redirecting to /emotion-tracker");
-          //     redirect("/emotion-tracker");
-          //   } else if (role === "securite") {
-          //     console.log("redirecting to /juridique");
-          //     redirect("/juridique");
-          //   }
-          // } else {
-          //   setError(val.data.message);
-          // }
+
           redirect("/emotion-tracker");
         } else {
           setError(val.data.message);
@@ -224,38 +199,12 @@ const Login = () => {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
             placeholder="Enter your password"
           />
-          <label
-            htmlFor="userType"
-            className="block text-sm font-medium text-gray-700 mt-4"
-          >
-            Type d'utilisateur:
-          </label>
-          <select
-            id="userType"
-            name="userType"
-            value={userType}
-            onChange={(e) => setUserType(e.target.value)}
-            required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
-          >
-            <option value="" className="text-gray-700">
-              -- Sélectionnez un type --
-            </option>
-            <option value="utilisateur" className="text-gray-700">
-              Simple utilisateur
-            </option>
-            <option value="securite" className="text-gray-700">
-              Service de sécurité
-            </option>
-            <option value="sante" className="text-gray-700">
-              Service de santé
-            </option>
-          </select>
+
           <button
             type="submit"
             className="mt-6 w-full p-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition duration-200 shadow-md"
           >
-            {formType === "login" ? "Log in" : "Sign up"}
+            {formType === "login" ? "Log in" : "Signup"}
           </button>
         </motion.form>
       </motion.div>
