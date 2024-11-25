@@ -39,7 +39,7 @@ export default function MessagesPage() {
   if (document.cookie) {
     user_id = parseInt(document.cookie.split(",")[1].split("=")[1]);
   }
-
+  /*
   const getProfilePhoto = async (user_id: number) => {
     const endpoint = `${process.env.NEXT_PUBLIC_IP_KEY}/users/${user_id}`;
     try {
@@ -51,6 +51,7 @@ export default function MessagesPage() {
       console.error("Error fetching profile photo:", error);
     }
   };
+  */
 
   useEffect(() => {
     const endpoint = `${process.env.NEXT_PUBLIC_IP_KEY}/message?user_id=${user_id}`;
@@ -84,19 +85,19 @@ export default function MessagesPage() {
           setAllUsers(users);
 
           // Fetch profile photos for all users
-          const photos = await Promise.all(
-            users.map(async (user) => {
-              const photo = await getProfilePhoto(user.id);
-              return { id: user.id, photo };
-            })
-          );
+          // const photos = await Promise.all(
+          //   users.map(async (user) => {
+          //     const photo = await getProfilePhoto(user.id);
+          //     return { id: user.id, photo };
+          //   })
+          // );
 
-          const photoMap = photos.reduce((acc, { id, photo }) => {
-            acc[id] = photo;
-            return acc;
-          }, {} as { [key: number]: string });
+          // const photoMap = photos.reduce((acc, { id, photo }) => {
+          // acc[id] = photo;
+          // return acc;
+          // }, {} as { [key: number]: string });
 
-          setProfilePhotos(photoMap);
+          // setProfilePhotos(photoMap);
         }
       } catch (error) {
         console.error("Error fetching users:", error);
