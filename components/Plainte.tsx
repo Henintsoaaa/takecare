@@ -65,7 +65,7 @@ const Plainte = ({ userId }: { userId: string }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("user_id", userId);
+    formData.append("user_id", user_id); // Use user_id from cookie
     formData.append("description", cause);
     formData.append("location", aboutCountry);
     formData.append("city", aboutCity);
@@ -81,7 +81,11 @@ const Plainte = ({ userId }: { userId: string }) => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_IP_KEY}/signalement/createSignalement`,
         formData,
-        {}
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       if (response.status === 200) {
@@ -89,7 +93,10 @@ const Plainte = ({ userId }: { userId: string }) => {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while submitting your complaint.");
+      const errorMessage =
+        (error as any).response?.data?.message ||
+        "An error occurred while submitting your complaint.";
+      alert(errorMessage);
     }
   };
 
