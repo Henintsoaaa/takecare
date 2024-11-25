@@ -80,10 +80,9 @@ const Login = () => {
         // log the session cookie
         console.log(document.cookie);
 
-          redirect("/home");
-        } else {
-          setError(val.data.message);
-        }
+        redirect("/home");
+      } else {
+        setError(val.data.message);
       }
     }
   };
