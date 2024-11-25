@@ -59,7 +59,7 @@ const Login = () => {
         const cookie: cookieData = val.data.data;
         document.cookie = `session=${cookie.token}, user_id=${cookie.user_id}, email=${cookie.email}, username=${cookie.username}`;
 
-        redirect("/emotion-tracker");
+        redirect("/home");
       } else {
         setError(val.data.message);
       }
@@ -80,9 +80,10 @@ const Login = () => {
         // log the session cookie
         console.log(document.cookie);
 
-        redirect("/emotion-tracker");
-      } else {
-        setError(val.data.message);
+          redirect("/home");
+        } else {
+          setError(val.data.message);
+        }
       }
     }
   };

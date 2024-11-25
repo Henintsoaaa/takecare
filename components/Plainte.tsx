@@ -88,7 +88,11 @@ const Plainte = ({ userId }: { userId: string }) => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_IP_KEY}/signalement/createSignalement`,
         formData,
-        {}
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       console.log("Response:", response);
 

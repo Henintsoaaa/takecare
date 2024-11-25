@@ -47,32 +47,32 @@ const TechHerLandingPage: React.FC = () => {
   const featuresTabs = [
     {
       icon: <MessageCircle className="w-12 h-12" />,
-      title: "Santé Mentale",
+      title: "Traduction en langue des signes",
       description:
-        "Un espace de soutien psychologique personnalisé et confidentiel.",
+        "Une solution innovante pour inclure les femmes muettes ou sourdes.",
       features: [
-        "Forums de discussion sécurisés",
-        "Messagerie privée avec counseling",
-        "Bouton SOS pour support immédiat",
+        "Traduction à l'aide d'un video en temps réels des languages de signes",
+        "Soutient des femmes handicapées",
+        "Aide pour simplifiées leur plaintes",
         "Ressources de bien-être mental",
       ],
-      image: "/Mindfulness-amico.svg",
+      image: "Learning languages-amico.svg",
     },
     {
       icon: <Calendar className="w-12 h-12" />,
-      title: "Santé Physique",
-      description: "Suivi personnalisé de votre bien-être physique.",
+      title: "Porter plainte facilement",
+      description: "Soumettez une plainte avec preuves, bénéficiez de la reconnaissance des langues des signes et suivez son état en temps réel.",
       features: [
-        "Tracking du cycle menstruel",
-        "Quiz de santé personnalisés",
-        "Conseils nutritionnels adaptés",
-        "Assistance IA pour symptômes",
+        "Un suivi de près par les responsables",
+        "Soumettez facilement une plainte avec des preuves (texte, audio ou vidéo)",
+        "Utilisez la reconnaissance des langues des signes pour une accessibilité totale.",
+        "Suivez l’état de vos plaintes en temps réel.",
       ],
-      image: "/Healthy lifestyle-amico.svg",
+      image: "/Documents-amico.svg",
     },
     {
       icon: <Heart className="w-12 h-12" />,
-      title: "Communauté",
+      title: "Communauté de soutien",
       description: "Un réseau de soutien bienveillant et inclusif.",
       features: [
         "Partage d'expériences",
@@ -84,12 +84,12 @@ const TechHerLandingPage: React.FC = () => {
     },
     {
       icon: <Users className="w-12 h-12" />,
-      title: "Éducation",
-      description: "Accédez à des ressources éducatives sur la santé.",
+      title: "Quiz et recommandation",
+      description: "Accédez à des ressources éducatives sur l'harcèlement.",
       features: [
-        "Articles et blogs sur la santé",
-        "Webinaires avec des experts",
-        "Accès à des livres électroniques",
+        "Apprendre en résolvant les quiz",
+        "Recevez des recommandations personnalisées pour agir face aux situations difficiles.",
+        "Participez à des quizz interactifs pour reconnaître les différents types de harcèlement.",
         "Communauté d'apprentissage",
       ],
       image: "/Online Doctor-pana.svg",
@@ -196,14 +196,13 @@ const TechHerLandingPage: React.FC = () => {
       >
         <motion.div variants={itemVariants} className="space-y-8">
           <div className="inline-block bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm">
-            Nouvelle plateforme de santé féminine
+            Nouvelle plateforme de protection des droits  féminine
           </div>
           <h1 className="text-5xl font-bold text-indigo-900 leading-tight">
-            Votre Partenaire Santé Holistique
+          Un espace sûr, une voix pour toutes les femmes
           </h1>
           <p className="text-xl text-indigo-700 leading-relaxed">
-            Tech'Her offre un accompagnement personnalisé et bienveillant pour
-            votre bien-être physique, mental et émotionnel.
+            Découvrez une plateforme conçue pour protéger, soutenir, et autonomiser les femmes face au harcèlement.
           </p>
           <div className="flex space-x-4">
             <Link
@@ -338,7 +337,7 @@ const TechHerLandingPage: React.FC = () => {
             <ul className="space-y-4 mb-8">
               <li className="flex items-center space-x-3">
                 <UserCheck className="text-white w-6 h-6" />
-                <span>Analyse de vos données personnelles</span>
+                <span>Traduction des languages des signes d'un video en temps réels</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Globe className="text-white w-6 h-6" />
@@ -404,8 +403,7 @@ const TechHerLandingPage: React.FC = () => {
               <span className="text-xl font-bold">Tech'Her</span>
             </div>
             <p className="text-indigo-200">
-              Votre partenaire technologique pour un bien-être féminin
-              holistique.
+              Un espace sûr, une voix pour toutes les femmes
             </p>
           </div>
           <div>
