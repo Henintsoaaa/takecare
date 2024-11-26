@@ -61,7 +61,8 @@ const TechHerLandingPage: React.FC = () => {
     {
       icon: <Calendar className="w-12 h-12" />,
       title: "Porter plainte facilement",
-      description: "Soumettez une plainte avec preuves, bénéficiez de la reconnaissance des langues des signes et suivez son état en temps réel.",
+      description:
+        "Soumettez une plainte avec preuves, bénéficiez de la reconnaissance des langues des signes et suivez son état en temps réel.",
       features: [
         "Un suivi de près par les responsables",
         "Soumettez facilement une plainte avec des preuves (texte, audio ou vidéo)",
@@ -196,13 +197,14 @@ const TechHerLandingPage: React.FC = () => {
       >
         <motion.div variants={itemVariants} className="space-y-8">
           <div className="inline-block bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm">
-            Nouvelle plateforme de protection des droits  féminine
+            Nouvelle plateforme de protection des droits de la femme
           </div>
-          <h1 className="text-5xl font-bold text-indigo-900 leading-tight">
-          Un espace sûr, une voix pour toutes les femmes
+          <h1 className="text-4xl font-bold text-indigo-900 leading-tight">
+            Brisons les chaînes du harcèlement, liberons notre feu intérieur
           </h1>
           <p className="text-xl text-indigo-700 leading-relaxed">
-            Découvrez une plateforme conçue pour protéger, soutenir, et autonomiser les femmes face au harcèlement.
+            Une plateforme conçue pour protéger, soutenir, et autonomiser les
+            femmes face au harcèlement.
           </p>
           <div className="flex space-x-4">
             <Link
@@ -337,7 +339,9 @@ const TechHerLandingPage: React.FC = () => {
             <ul className="space-y-4 mb-8">
               <li className="flex items-center space-x-3">
                 <UserCheck className="text-white w-6 h-6" />
-                <span>Traduction des languages des signes d'un video en temps réels</span>
+                <span>
+                  Traduction des languages des signes d'un video en temps réels
+                </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Globe className="text-white w-6 h-6" />
@@ -373,7 +377,7 @@ const TechHerLandingPage: React.FC = () => {
             className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-3xl p-12"
           >
             <h2 className="text-4xl font-bold mb-6">
-              Commencez Votre Parcours de Bien-être
+              Accordez nous votre confiance
             </h2>
             <p className="text-xl text-purple-100 max-w-3xl mx-auto mb-8">
               Rejoignez une communauté qui vous comprend, vous soutient et vous
