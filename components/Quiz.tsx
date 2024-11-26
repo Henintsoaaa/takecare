@@ -42,7 +42,7 @@ const Quiz = () => {
 
   if (!questionsData) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-200">
+      <div className="flex justify-center items-center h-full bg-gray-200">
         <p className="text-gray-700 text-xl">Loading questions...</p>
       </div>
     );
@@ -78,7 +78,7 @@ const Quiz = () => {
 
   if (selectedDomainIndex === null) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white">
+      <div className="flex flex-col justify-center items-center h-full bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white">
         <div className="text-center mb-10">
           <h1 className="text-5xl font-extrabold mb-4">
             🎓 Welcome to the Quiz
@@ -110,7 +110,7 @@ const Quiz = () => {
 
   if (quizFinished) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white text-center">
+      <div className="flex flex-col justify-center items-center h-full bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white text-center">
         <h1 className="text-4xl font-bold mb-4">Quiz Finished!</h1>
         <p className="text-2xl">Your final score is:</p>
         <p className="text-5xl font-bold mt-2">
@@ -127,7 +127,7 @@ const Quiz = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div className="min-h-full bg-gray-100 flex items-center justify-center">
       <div className="w-full max-w-3xl bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
           {currentDomain.domain}

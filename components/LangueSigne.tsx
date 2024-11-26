@@ -2,12 +2,26 @@
 
 import React, { useRef, useState, useEffect } from "react";
 
+// Configuration for button colors
+const buttonColors = {
+  start: {
+    default: "bg-green-500",
+    hover: "bg-green-600",
+  },
+  stop: {
+    default: "bg-red-500",
+    hover: "bg-red-600",
+  },
+};
+
 const VideoCapture = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [screenshot, setScreenshot] = useState<string | null>(null);
+  const [fullshot, setFullshot] = useState<string | null>(null);
   const [prediction, setPrediction] = useState("");
   const [isCapturing, setIsCapturing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const startCamera = async () => {
@@ -20,6 +34,7 @@ const VideoCapture = () => {
         }
       } catch (error) {
         console.error("Erreur lors de l'accès à la caméra :", error);
+        setError("Erreur lors de l'accès à la caméra.");
       }
     };
 
@@ -49,8 +64,9 @@ const VideoCapture = () => {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
     }
     const imageData = canvas.toDataURL("image/png");
-    setScreenshot(imageData);
+    setFullshot(imageData);
 
+    setLoading(true); // Set loading state before sending the image
     canvas.toBlob(async (blob) => {
       if (!blob) return;
 
@@ -69,21 +85,24 @@ const VideoCapture = () => {
         setPrediction((prev) => prev + (data.prediction || ""));
       } catch (error) {
         console.error("Erreur lors de l'envoi de l'image :", error);
+        setError("Erreur lors de l'envoi de l'image.");
+      } finally {
+        setLoading(false); // Reset loading state after the request
       }
     }, "image/png");
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">
+    <div className="min-h-full flex flex-col items-center justify-center p-6 bg-gray-50">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">
         Capture automatique des frames vidéo
       </h1>
-      <div className="relative">
+      <div className="relative mb-4">
         <video
           ref={videoRef}
           autoPlay
           playsInline
-          className="w-80 h-60 border border-gray-300 rounded shadow-md"
+          className="w-full max-w-md h-auto border border-gray-300 rounded-lg shadow-lg"
         ></video>
         <canvas
           ref={canvasRef}
@@ -95,20 +114,30 @@ const VideoCapture = () => {
       <div className="mt-4">
         <button
           onClick={() => setIsCapturing((prev) => !prev)}
-          className={`px-4 py-2 font-semibold rounded shadow ${
+          className={`px-6 py-3 font-semibold rounded-lg shadow-lg transition duration-300 ease-in-out ${
             isCapturing
-              ? "bg-red-500 hover:bg-red-600"
-              : "bg-green-500 hover:bg-green-600"
+              ? `${buttonColors.stop.default} hover:${buttonColors.stop.hover}`
+              : `${buttonColors.start.default} hover:${buttonColors.start.hover}`
           } text-white`}
         >
           {isCapturing ? "Arrêter la capture" : "Commencer la capture"}
         </button>
       </div>
-      {screenshot && (
+      {loading && (
+        <div className="mt-4 text-center">
+          <p className="text-lg text-blue-600">Envoi en cours...</p>
+        </div>
+      )}
+      {error && (
+        <div className="mt-4 text-center">
+          <p className="text-lg text-red-600">{error}</p>
+        </div>
+      )}
+      {fullshot && (
         <img
-          src={screenshot}
-          alt="Screenshot"
-          className="mt-4 border border-gray-300 rounded shadow-md"
+          src={fullshot}
+          alt="fullshot"
+          className="mt-4 border border-gray-300 rounded-lg shadow-lg"
         />
       )}
       {prediction && (

@@ -50,7 +50,7 @@ export function MessagingInterface() {
 
   useEffect(() => {
     const initSocket = async () => {
-      socket.current = io("http://192.168.1.198:3001"); // Change to your  server IP
+      socket.current = io("http://192.168.1.198:3003"); // Change to your  server IP
       socket.current.emit("join-user", currentUserId);
 
       socket.current.on("new-message", (message: Message) => {

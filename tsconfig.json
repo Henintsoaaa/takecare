@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(sidebar)/(root)/notifications",
-    ".next/types/app/dashboardSec/page.tsx"
+    ".next/types/app/dashboardSec/page.tsx",
+    ".next/types/app/jeu/page.tsx"
   ],
   "exclude": ["node_modules"]
 }

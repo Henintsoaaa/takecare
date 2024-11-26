@@ -140,7 +140,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-6 p-8 bg-gradient-to-r from-indigo-100 to-blue-200 rounded-lg shadow-lg max-w-lg mx-auto">
+    <div className="flex flex-col items-center mt-6 p-8 bg-gradient-to-r from-indigo-100 to-blue-200 rounded-lg shadow-lg max-w-lg mx-auto h-full">
       {/* Profile Header with Profile Picture */}
       <div className="flex flex-col items-center w-full bg-white rounded-lg shadow-md p-6 mb-6 relative">
         {/* Profile Image Section */}

@@ -35,7 +35,7 @@ export default function Home() {
     redirect("/actualite");
   };
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
+    <div className="min-h-full flex flex-col bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
       <header className="bg-white shadow-sm flex gap-5 md:pl-24 pl-10 items-center">
         <Heart className="w-12 h-12 text-secondary-light" />
         <p className="text-secondary-light  font-semibold text-xl py-5 hidden md:block">

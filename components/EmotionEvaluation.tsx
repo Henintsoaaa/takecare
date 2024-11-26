@@ -22,7 +22,7 @@ const EmotionEvaluation = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-full bg-gray-100">
       {/* Sidebar */}
 
       {/* Main Content Area */}

@@ -13,7 +13,7 @@ const ResourcesSection: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-3">
+    <div className="min-h-full flex items-center justify-center bg-gray-100 p-3">
       <section className="w-full max-w-6xl bg-white p-8 rounded-xl shadow-lg mt-6 space-y-8">
         <h2 className="text-3xl font-semibold text-gray-800 flex items-center">
           📚 Section Ressources

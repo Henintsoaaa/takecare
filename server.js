@@ -232,9 +232,9 @@ app.post("/api/save-feedback", (req, res) => {
   });
 });
 
-// API pour vérifier si deux util
+// API pour vérifier si deux utilsateurs sont amis
 
 // Start the server
-server.listen(3001, () => {
-  console.log("Server is running on port 3001");
+server.listen(3003, () => {
+  console.log("Server is running on port 3003");
 });

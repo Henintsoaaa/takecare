@@ -11,7 +11,6 @@ const VideoCapture = () => {
 
   const toggleWebcam = async () => {
     if (webcamActive) {
-      // Arrêter la webcam
       if (videoRef.current) {
         const stream = videoRef.current.srcObject;
         if (stream) {
@@ -75,33 +74,54 @@ const VideoCapture = () => {
   };
 
   return (
-    <div className="p-4 border-2 border-gray-400 rounded-lg shadow-lg bg-white">
-      <div className="relative mb-4">
-        <video
-          ref={videoRef}
-          className="w-full h-auto border-2 border-gray-300 rounded-lg"
-        />
-      </div>
+    <div className="p-4 border-2 border-gray-400 rounded-lg shadow-lg bg-white max-h-full overflow-auto">
+      {webcamActive && (
+        <div className="flex flex-col mb-4">
+          <div className="relative mb-2">
+            <video
+              ref={videoRef}
+              className="w-full h-auto max-h-60 border-2 border-gray-300 rounded-lg"
+            />
+          </div>
+          <div className="flex gap-4">
+            {recording ? (
+              <button
+                onClick={handleVideoRecording}
+                className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Arrêter enregistrement
+              </button>
+            ) : (
+              <button
+                onClick={handleVideoRecording}
+                className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              >
+                Démarrer enregistrement
+              </button>
+            )}
+          </div>
+        </div>
+      )}
       {videoURL && (
         <div className="mt-4">
           <video
             src={videoURL}
             controls
-            className="w-full h-auto border-2 border-gray-300 rounded-lg"
+            className="w-full h-auto max-h-60 border-2 border-gray-300 rounded-lg"
           />
           <div className="flex gap-4 mt-2">
-            <button
+            {/* <button
               onClick={handleCloseVideo}
               className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
             >
               Fermer la vidéo
-            </button>
-            <button
+            </button> */}
+            {/* <button
               onClick={handleDownloadVideo}
               className="p-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
             >
               Télécharger la vidéo
-            </button>
+            </button> */}
           </div>
         </div>
       )}
@@ -112,14 +132,6 @@ const VideoCapture = () => {
         >
           {webcamActive ? "Fermer webcam" : "Démarrer webcam"}
         </button>
-        {webcamActive && (
-          <button
-            onClick={handleVideoRecording}
-            className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-          >
-            {recording ? "Arrêter enregistrement" : "Démarrer enregistrement"}
-          </button>
-        )}
       </div>
     </div>
   );

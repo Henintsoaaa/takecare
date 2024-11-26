@@ -109,7 +109,7 @@ const TechHerLandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-indigo-50 to-purple-100 min-h-screen">
+    <div className="bg-gradient-to-br from-indigo-50 to-purple-100 min-h-full">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">

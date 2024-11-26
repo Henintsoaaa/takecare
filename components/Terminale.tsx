@@ -12,7 +12,7 @@ const Terminale = () => {
 
   if (isFirstTime === "logout") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[url('/image/bgTerminale.png')] bg-cover bg-center bg-no-repeat">
+      <div className="min-h-full flex items-center justify-center bg-[url('/image/bgTerminale.png')] bg-cover bg-center bg-no-repeat">
         {/* Fenêtre du terminal */}
         <div className="bg-[#DDB1C7] w-full max-w-4xl mx-5 rounded-lg">
           {/* En-tête du terminal */}
@@ -64,7 +64,7 @@ const Terminale = () => {
     );
   } else {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[url('/image/bgTerminale.png')] bg-cover bg-center bg-no-repeat">
+      <div className="min-h-full flex items-center justify-center bg-[url('/image/bgTerminale.png')] bg-cover bg-center bg-no-repeat">
         {/* Fenêtre du terminal */}
         <div className="bg-[#DDB1C7] w-full max-w-4xl mx-5 rounded-lg">
           {/* En-tête du terminal */}

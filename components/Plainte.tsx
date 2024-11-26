@@ -73,57 +73,52 @@ const Plainte = () => {
   };
 
   return (
-    <div className="flex items-center justify-center p-4">
-      <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-4 relative overflow-y-auto">
-        <button
-          onClick={handleBack}
-          className="absolute top-4 left-4 text-primary-light hover:text-indigo-800 transition-all duration-300 p-1 rounded-full hover:bg-indigo-50"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </button>
-
+    <div className="flex items-center justify-center p-4 w-full">
+      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-6 relative overflow-y-auto">
         <div className="text-center mb-4">
-          <h1 className="text-xl font-semibold text-gray-800 mb-1 text-primary-dark">
+          <h1 className="text-2xl font-semibold text-gray-800 mb-1 text-primary-dark">
             Submit Your Complaint
           </h1>
-          <p className="text-gray-500 text-xs">
+          <p className="text-gray-500 text-sm">
             Share your experience confidentially
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex-1">
             <label className="font-medium text-sm">Nom Complet :</label>
             <input
               type="text"
-              className="w-full p-1 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full p-2 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-black"
               placeholder="Entrez votre nom complet"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
             />
           </div>
-
-          <div>
-            <label className="font-medium text-sm">Date :</label>
-            <input
-              type="date"
-              className="w-full p-1 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-black"
-              value={aboutDate}
-              onChange={(e) => setAboutDate(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label className="font-medium text-sm">Heure :</label>
-            <input
-              type="time"
-              className="w-full p-1 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-black"
-              value={aboutHour}
-              onChange={(e) => setAboutHour(e.target.value)}
-              required
-            />
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <label className="font-medium text-sm">Date :</label>
+              <input
+                type="date"
+                className="w-full p-2 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-black"
+                value={aboutDate}
+                onChange={(e) => setAboutDate(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex">
+              <div className="flex-1">
+                <label className="font-medium text-sm">Heure :</label>
+                <input
+                  type="time"
+                  className="w-full p-2 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-black"
+                  value={aboutHour}
+                  onChange={(e) => setAboutHour(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
           </div>
 
           <div>
@@ -134,14 +129,14 @@ const Plainte = () => {
             <textarea
               value={cause}
               onChange={(e) => setCause(e.target.value)}
-              className="w-full p-1 border border-gray-200 rounded-md text-black focus:ring-2 focus:ring-indigo-300 transition-all duration-300"
+              className="w-full p-2 border border-gray-200 rounded-md text-black focus:ring-2 focus:ring-indigo-300 transition-all duration-300"
               placeholder="Provide details about your complaint..."
-              rows={2}
+              rows={3}
               required
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-1">
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="flex items-center text-gray-700 font-semibold">
                 <MapPin className="mr-2 text-accent-light" size={18} />
@@ -151,7 +146,7 @@ const Plainte = () => {
                 type="text"
                 value={aboutCountry}
                 onChange={(e) => setAboutCountry(e.target.value)}
-                className="w-full p-1 border border-gray-200 rounded-md text-black focus:ring-2 focus:ring-green-300 transition-all duration-300"
+                className="w-full p-2 border border-gray-200 rounded-md text-black focus:ring-2 focus:ring-green-300 transition-all duration-300"
                 placeholder="Your country"
                 required
               />
@@ -165,7 +160,7 @@ const Plainte = () => {
                 type="text"
                 value={aboutCity}
                 onChange={(e) => setAboutCity(e.target.value)}
-                className="w-full p-1 border border-gray-200 rounded-md text-black focus:ring-2 focus:ring-blue-300 transition-all duration-300"
+                className="w-full p-2 border border-gray-200 rounded-md text-black focus:ring-2 focus:ring-blue-300 transition-all duration-300"
                 placeholder="Your city"
                 required
               />
@@ -179,7 +174,7 @@ const Plainte = () => {
                 className="hidden"
                 onChange={handleFileChange}
               />
-              <div className="flex items-center justify-center p-1 border-2 border-dashed border-indigo-200 rounded-lg hover:bg-indigo-50 transition-all">
+              <div className="flex items-center justify-center p-2 border-2 border-dashed border-indigo-200 rounded-lg hover:bg-indigo-50 transition-all">
                 <Upload className="mr-2 text-primary-light" size={18} />
                 <span className="text-gray-600">
                   {file ? file.name : "Upload Document"}
@@ -190,7 +185,7 @@ const Plainte = () => {
 
           <button
             type="submit"
-            className="w-full bg-primary-light text-white p-2 rounded-lg hover:bg-secondary-black transition-all duration-300 flex items-center justify-center"
+            className="w-full bg-primary-light text-white p-3 rounded-lg hover:bg-secondary-black transition-all duration-300 flex items-center justify-center"
           >
             <Send className="mr-2" size={18} />
             Submit Complaint

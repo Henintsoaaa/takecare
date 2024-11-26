@@ -1,4 +1,6 @@
+"use client";
 import React, { useRef, useState } from "react";
+import { redirect } from "next/navigation";
 
 const EnregistrementVideo: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -34,7 +36,7 @@ const EnregistrementVideo: React.FC = () => {
       setMediaRecorder(recorder);
       setWebcamActive(true);
     } catch (error) {
-      console.error("Error accessing webcam:", error);
+      console.error("Erreur d'accès à la webcam :", error);
     }
   };
 
@@ -61,14 +63,24 @@ const EnregistrementVideo: React.FC = () => {
     if (videoURL) {
       const a = document.createElement("a");
       a.href = videoURL;
-      a.download = "recorded-video.mp4";
+      a.download = "enregistrement-video.mp4";
       a.click();
     }
   };
 
+  const handleEnvoyer = () => {
+    // Logic to handle sending the video
+    redirect("/procedure");
+    console.log("Video envoyé:", videoURL);
+    // You can implement the actual sending logic here
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="p-6 border-2 border-gray-400 rounded-lg shadow-lg bg-white">
+    <div className="flex flex-col justify-center h-full">
+      <h1 className="text-center text-2xl font-bold mb-4">
+        Exprimez-vous en vidéo
+      </h1>
+      <div className="p-6 border-2 border-gray-400 rounded-lg shadow-lg bg-white flex flex-col items-center">
         <div className="relative mb-4">
           <video
             ref={videoRef}
@@ -84,18 +96,18 @@ const EnregistrementVideo: React.FC = () => {
               controls
               className="w-96 h-auto border-2 border-gray-300 rounded-lg"
             />
-            <div className="flex gap-4 mt-2">
-              <button
-                onClick={handleCloseVideo}
-                className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-              >
-                Close Video
-              </button>
+            <div className="flex gap-4 mt-4">
               <button
                 onClick={handleDownloadVideo}
-                className="p-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                className="p-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
               >
-                Download Video
+                Télécharger
+              </button>
+              <button
+                onClick={handleEnvoyer}
+                className="p-2 bg-success text-white rounded-lg hover:bg-success-dark"
+              >
+                Envoyer
               </button>
             </div>
           </div>
@@ -103,16 +115,24 @@ const EnregistrementVideo: React.FC = () => {
         <div className="flex gap-4 mt-4">
           <button
             onClick={toggleWebcam}
-            className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            className="p-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
           >
-            {webcamActive ? "Close Webcam" : "Start Webcam"}
+            {webcamActive ? "Fermer la Webcam" : "Démarrer la Webcam"}
           </button>
-          {webcamActive && (
+          {webcamActive && !recording && (
             <button
               onClick={handleVideoRecording}
-              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              className="p-2 bg-secondary text-white rounded-lg hover:bg-secondary-dark"
             >
-              {recording ? "Stop Recording" : "Start Recording"}
+              Démarrer l'enregistrement
+            </button>
+          )}
+          {recording && (
+            <button
+              onClick={handleVideoRecording}
+              className="p-2 bg-danger text-white rounded-lg hover:bg-danger-dark"
+            >
+              Arrêter l'enregistrement
             </button>
           )}
         </div>

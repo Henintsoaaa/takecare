@@ -11,7 +11,7 @@ import {
 
 const Sidebar = () => {
   return (
-    <div className="relative w-64 h-screen bg-primary text-white border-r flex flex-col items-center gap-6">
+    <div className="relative w-64 h-full bg-primary text-white border-r flex flex-col items-center gap-6">
       {/* Black to white blur gradient overlay */}
       {/* <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-30 backdrop-blur-lg rounded-lg"></div> */}
 
@@ -24,7 +24,7 @@ const Sidebar = () => {
       <div className="pl-3 relative z-10">
         <nav className="mt-10">
           <Link href="/plainte">
-            <div className="flex items-center p-3 hover:bg-secondary-light transition-colors duration-200 cursor-pointer rounded-md">
+            <div className="flex items-center p-3 hover:bg-primary-black transition-colors duration-200 cursor-pointer rounded-md">
               <Clipboard className="mr-3 h-5 w-5 text-white" />
               <span className="text-white font-semibold hidden md:block">
                 Plainte
@@ -32,7 +32,7 @@ const Sidebar = () => {
             </div>
           </Link>
           <Link href="/emotion-tracker">
-            <div className="flex items-center p-3 hover:bg-secondary-light transition-colors duration-200 cursor-pointer rounded-md">
+            <div className="flex items-center p-3 hover:bg-primary-black transition-colors duration-200 cursor-pointer rounded-md">
               <MessageCircle className="mr-3 h-5 w-5 text-white" />
               <span className="text-white font-semibold hidden md:block">
                 Communauté

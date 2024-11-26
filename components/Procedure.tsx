@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react"; // Import the ArrowLeft icon from luci
 
 const Procedure = () => {
   const handleBack = () => {
-    redirect("/emotion-tracker"); // Redirect to the emotion-tracker page
+    redirect("/plainte"); // Redirect to the emotion-tracker page
   };
 
   return (

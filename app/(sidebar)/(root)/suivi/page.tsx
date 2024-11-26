@@ -2,7 +2,7 @@ import StatusChartEvolution from "@/components/Graphe_case_evolution";
 
 const Page = () => {
   return (
-    <div>
+    <div className="h-full">
       <StatusChartEvolution />
     </div>
   );

@@ -7,7 +7,7 @@ import RecentForm from "./RecentForm";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-full bg-gray-100 p-6">
       <div className="container mx-auto bg-white p-6 rounded-lg shadow-md">
         <Card>
           <div>

@@ -85,7 +85,7 @@ const WatchSignalement: React.FC<WatchSignalementProps> = ({
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="flex justify-center items-center h-full bg-gray-100">
         <p className="text-lg font-semibold text-gray-500">Chargement...</p>
       </div>
     );
@@ -93,7 +93,7 @@ const WatchSignalement: React.FC<WatchSignalementProps> = ({
 
   if (error) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="flex justify-center items-center h-full bg-gray-100">
         <p className="text-lg font-semibold text-red-500">{error}</p>
       </div>
     );
@@ -101,7 +101,7 @@ const WatchSignalement: React.FC<WatchSignalementProps> = ({
 
   return (
     <div>
-      <div className="min-h-screen bg-white py-10 px-6">
+      <div className="min-h-full bg-white py-10 px-6">
         <div className="max-w-4xl mx-auto bg-gray-50 shadow-lg rounded-lg overflow-hidden">
           <div className="p-8">
             <h1 className="text-2xl font-bold text-gray-800 mb-6">

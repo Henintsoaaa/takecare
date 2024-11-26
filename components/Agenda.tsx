@@ -76,7 +76,7 @@ const Agenda: React.FC = () => {
   }, []); // Empty array means this effect runs once on mount
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-primary-dark text-white">
+    <div className="min-h-full bg-gradient-to-br from-gray-900 to-primary-dark text-white">
       <div className="container mx-auto py-10 px-5">
         <h1 className="text-4xl font-bold text-center mb-10 text-white drop-shadow-lg">
           Agenda Futuriste

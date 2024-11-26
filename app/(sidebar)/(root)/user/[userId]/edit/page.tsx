@@ -160,7 +160,7 @@ const EditProfile: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
+    <div className="container mx-auto p-6 bg-gray-100 h-full">
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
         <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
           Edit Profile

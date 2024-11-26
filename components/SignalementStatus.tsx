@@ -71,7 +71,7 @@ const StatusForUser: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-full bg-gray-100">
         <h1 className="text-2xl font-semibold text-gray-800">Chargement...</h1>
       </div>
     );
@@ -79,7 +79,7 @@ const StatusForUser: React.FC = () => {
 
   if (error || !data) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-full bg-gray-100">
         <h1 className="text-2xl font-semibold text-gray-800">
           {error || "Aucune donnée disponible."}
         </h1>
@@ -91,7 +91,7 @@ const StatusForUser: React.FC = () => {
     data;
 
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <div className="min-h-full bg-white text-gray-800">
       <div className="max-w-5xl mx-auto py-12 px-6">
         <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
           Détails du Signalement
