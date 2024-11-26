@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Menu, Watch } from "lucide-react";
 import EmotionTracker from "@/components/Emotion-tracker";
 import PublicationStyle from "@/components/PublicationStyle";
+import Sidebar from "@/components/Sidebar";
 
 const Page = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,8 +35,8 @@ const Page = () => {
       </div>
 
       {/* Sidebar for PublicationStyle */}
-      <div className="p-4 w-full md:w-1/5 bg-gray-100 hidden md:block h-full overflow-y-auto">
-        <PublicationStyle />
+      <div className="top-0">
+        <Sidebar />
       </div>
 
       {/* Emotion Tracker occupying the rest of the space */}

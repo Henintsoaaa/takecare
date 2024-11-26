@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 import { useState } from "react"; // Adjust the import path as necessary
 import { FaCalendar, FaHeart, FaBook } from "react-icons/fa"; // Adjust the import path as necessary
 import { redirect } from "next/navigation";
+import EnregistrementVideo from "./EnregistrementVideo";
 
 const PagePlainte = () => {
   const [activeTab, setActiveTab] = useState("Plainte"); // Set initial state to match one of the tabs
@@ -55,11 +56,11 @@ const PagePlainte = () => {
         {/* Tab Contents */}
         <TabsContent value="Plainte">
           <div className="flex justify-center items-center">
-            <Plainte userId={user_id || "someUser Id"} /> {/* Pass userId */}
+            <Plainte /> {/* Pass userId */}
           </div>
         </TabsContent>
         <TabsContent value="Video">
-          <VideoCapture />
+          <EnregistrementVideo />
         </TabsContent>
         <TabsContent value="Language des signes">
           <VideoCapture />

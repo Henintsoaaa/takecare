@@ -25,7 +25,7 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
 
-  // Récupérer les données JSON depuis le dossier public
+  // Fetching JSON data from the public folder
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -33,7 +33,7 @@ const Quiz = () => {
         const data = await response.json();
         setQuestionsData(data.quiz);
       } catch (error) {
-        console.error("Erreur lors du chargement des questions :", error);
+        console.error("Error loading questions:", error);
       }
     };
 
@@ -43,7 +43,7 @@ const Quiz = () => {
   if (!questionsData) {
     return (
       <div className="flex justify-center items-center h-screen bg-gray-200">
-        <p className="text-gray-700 text-xl">Chargement des questions...</p>
+        <p className="text-gray-700 text-xl">Loading questions...</p>
       </div>
     );
   }
@@ -61,7 +61,6 @@ const Quiz = () => {
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
-
     if (currentQuestionIndex < currentDomain.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -79,13 +78,18 @@ const Quiz = () => {
 
   if (selectedDomainIndex === null) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-purple-400 to-blue-500 text-white">
-        <h1 className="text-4xl font-bold mb-8">Choisissez un type de quiz</h1>
-        <div className="space-y-4">
+      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white">
+        <div className="text-center mb-10">
+          <h1 className="text-5xl font-extrabold mb-4">
+            🎓 Welcome to the Quiz
+          </h1>
+          <p className="text-lg">Choose a domain to start!</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {questionsData.map((domain: Domain, index: number) => (
             <button
               key={index}
-              className="px-6 py-3 bg-white text-blue-600 font-bold rounded-lg shadow-md hover:bg-gray-100 transition"
+              className="px-8 py-6 bg-white text-indigo-600 font-semibold text-lg rounded-lg shadow-md hover:scale-105 transform transition duration-300"
               onClick={() => handleStartQuiz(index)}
             >
               {domain.domain}
@@ -106,17 +110,17 @@ const Quiz = () => {
 
   if (quizFinished) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-green-400 to-blue-500 text-white text-center">
-        <h1 className="text-4xl font-bold mb-4">Quiz Terminé !</h1>
-        <p className="text-2xl">Votre score final est de :</p>
+      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white text-center">
+        <h1 className="text-4xl font-bold mb-4">Quiz Finished!</h1>
+        <p className="text-2xl">Your final score is:</p>
         <p className="text-5xl font-bold mt-2">
           {score} / {currentDomain.questions.length}
         </p>
         <button
-          className="mt-6 px-6 py-3 bg-white text-green-600 font-bold rounded-lg shadow-md hover:bg-gray-100 transition"
+          className="mt-6 px-6 py-3 bg-white text-indigo-600 font-bold rounded-lg shadow-md hover:scale-105 transform transition"
           onClick={handleRestartQuiz}
         >
-          Recommencer le quiz
+          Restart Quiz
         </button>
       </div>
     );
@@ -131,7 +135,6 @@ const Quiz = () => {
         <h2 className="text-xl font-semibold text-gray-700">
           {currentQuestion.question}
         </h2>
-
         <div className="mt-6">
           {Object.entries(currentQuestion.options).map(([key, option]) => (
             <button
@@ -152,22 +155,20 @@ const Quiz = () => {
             </button>
           ))}
         </div>
-
         {selectedAnswer !== null && (
           <div className="mt-4">
             {isCorrectAnswer ? (
-              <p className="text-green-600 font-bold">Bonne réponse ! 🎉</p>
+              <p className="text-green-600 font-bold">Correct answer! 🎉</p>
             ) : (
               <p className="text-red-600 font-bold">
-                Mauvaise réponse. La bonne réponse était : {correctAnswerText}.
+                Wrong answer. The correct answer was: {correctAnswerText}.
               </p>
             )}
-
             <button
-              className="mt-6 w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+              className="mt-6 w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
               onClick={handleNextQuestion}
             >
-              Question Suivante
+              Next Question
             </button>
           </div>
         )}

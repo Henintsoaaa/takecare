@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 const Page = () => {
   const handleClick = () => {
-    redirect("/quizz");
+    redirect("/jeu");
   };
 
   const redirectToAssistance = () => {
