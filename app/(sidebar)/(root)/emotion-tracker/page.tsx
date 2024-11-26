@@ -15,7 +15,7 @@ const Page = () => {
   return (
     <div className="flex flex-col md:flex-row h-full">
       {/* Mobile Menu Icon */}
-      <div className="md:hidden relative top-4">
+      <div className="md:hidden h-full relative top-4">
         <button onClick={toggleMenu} className="p-2">
           <Menu />
         </button>

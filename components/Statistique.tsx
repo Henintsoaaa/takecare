@@ -81,24 +81,28 @@ export default function Statistiques() {
   }, []);
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-2xl max-w-4xl mx-auto space-y-6">
-      <h1 className="text-4xl font-bold text-blue-600 mb-6 flex items-center justify-center">
-        🌍 Statistiques à Madagascar
-      </h1>
-
+    <div className="grid grid-cols-2 gap-4">
       {/* Nombre total de plaintes */}
-      <div className="bg-purple-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+      <div className=" bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
           📊 Nombre total de plaintes
         </h2>
         <p className="text-xl text-gray-600">{total} plaintes signalées</p>
       </div>
 
+      {/* Temps moyen de traitement */}
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+          ⏱ Temps moyen de traitement
+        </h2>
+        <p className="text-xl text-gray-600">{tempsMoyen} heures</p>
+      </div>
+
       {/* Répartition par statut des plaintes */}
-      <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
-        📊 Répartition des plaintes par statut
-      </h2>
-      <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="bg-white p-6 rounded-lg shadow-md col-span-2">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+          📊 Répartition des plaintes par statut
+        </h2>
         <ul>
           {statusPlaintes.map((status, index) => {
             const statusInfo = statuses.find(
@@ -121,8 +125,8 @@ export default function Statistiques() {
       </div>
 
       {/* Répartition par région */}
-      <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
           📍 Répartition par région
         </h2>
         <ul className="space-y-3">
@@ -136,8 +140,8 @@ export default function Statistiques() {
       </div>
 
       {/* Types de violences */}
-      <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
           🔴 Types de violences signalées
         </h2>
         <ul className="space-y-3">
@@ -151,8 +155,8 @@ export default function Statistiques() {
       </div>
 
       {/* Statistiques par jour */}
-      <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
           📅 Statistiques par jour
         </h2>
         <ul className="space-y-3">
@@ -163,14 +167,6 @@ export default function Statistiques() {
             </li>
           ))}
         </ul>
-      </div>
-
-      {/* Temps moyen de traitement */}
-      <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
-          ⏱ Temps moyen de traitement
-        </h2>
-        <p className="text-xl text-gray-600">{tempsMoyen} heures</p>
       </div>
     </div>
   );
