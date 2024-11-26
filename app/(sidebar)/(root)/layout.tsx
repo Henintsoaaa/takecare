@@ -14,9 +14,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="flex flex-col text-black">
+    <div className="flex flex-col max-h-full text-black">
       <Navbar />
-      <div className="flex-grow min-h-screen bg-gray-100">{children}</div>
+      <div className="flex-grow max-h-full bg-gray-100">{children}</div>
     </div>
   );
 };

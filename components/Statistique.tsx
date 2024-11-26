@@ -83,7 +83,7 @@ export default function Statistiques() {
   return (
     <div className="grid grid-cols-2 gap-4">
       {/* Nombre total de plaintes */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className=" bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
           📊 Nombre total de plaintes
         </h2>
