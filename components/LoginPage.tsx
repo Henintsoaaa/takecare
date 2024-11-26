@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ArrowRight } from "react-feather";
 import { redirect } from "next/navigation";
 
 interface cookieData {
@@ -91,7 +92,7 @@ const Login = () => {
     <AnimatePresence>
       <motion.div
         layout
-        className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 to-purple-400"
+        className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100"
       >
         <motion.div
           initial={{ opacity: 0, y: -50 }}
@@ -99,8 +100,8 @@ const Login = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Tech'her</h2>
-          <p className="text-white text-xl italic">&quot;{quote}&quot;</p>
+          <h2 className="text-4xl font-bold text-indigo-900 mb-4">Tech'her</h2>
+          <p className="text-indigo-700 text-xl italic">&quot;{quote}&quot;</p>
         </motion.div>
         <motion.form
           onSubmit={handleSubmit}
@@ -109,7 +110,7 @@ const Login = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-purple-600 mb-8">
+          <h1 className="text-3xl font-bold text-indigo-900 mb-8">
             Bienvenue sur Tech'her
           </h1>
           <div className="flex justify-between mt-6 gap-2 bg-gray-100 p-1 rounded-full">
@@ -118,7 +119,7 @@ const Login = () => {
               onClick={() => setFormType("login")}
               className={`w-1/2 p-2 rounded-full relative ${
                 formType === "login"
-                  ? "bg-white text-purple-600 shadow-md"
+                  ? "bg-indigo-600 text-white shadow-md"
                   : "text-gray-600"
               }`}
             >
@@ -129,7 +130,7 @@ const Login = () => {
               onClick={() => setFormType("signup")}
               className={`w-1/2 p-2 rounded-full relative ${
                 formType === "signup"
-                  ? "bg-white text-purple-600 shadow-md"
+                  ? "bg-indigo-600 text-white shadow-md"
                   : "text-gray-600"
               }`}
             >
@@ -163,7 +164,7 @@ const Login = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
                   placeholder="Enter your username"
                 />
               </motion.div>
@@ -182,7 +183,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
             placeholder="Enter your email"
           />
           <label
@@ -198,15 +199,16 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-purple-500"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
             placeholder="Enter your password"
           />
 
           <button
             type="submit"
-            className="mt-6 w-full p-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition duration-200 shadow-md"
+            className="mt-6 w-full p-3 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition duration-200 shadow-md flex items-center justify-center"
           >
-            {formType === "login" ? "Log in" : "Signup"}
+            {formType === "login" ? "Log in" : "Signup"}{" "}
+            <ArrowRight className="ml-2" />
           </button>
         </motion.form>
       </motion.div>
