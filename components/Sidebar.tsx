@@ -26,7 +26,7 @@ const Sidebar = () => {
             </span>
           </div>
         </Link>
-        <Link href="/decouverte">
+        <Link href="/quizz">
           <div className="flex items-center p-3 hover:bg-indigo-700 transition-colors duration-200 cursor-pointer rounded-md">
             <Home className="mr-3 h-5 w-5" />
             <span className="text-gray-200 font-semibold hidden md:block">

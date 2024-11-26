@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from "react";
 // import axios from "axios"; // Commented out Axios import
 import SecurityComplaintForm from "./SecurityComplaintForm";
-import Evaluations from "./Evaluations";
-
 interface Status {
   label: string;
   color: string;
@@ -296,7 +294,6 @@ export default function SignalementBoard() {
                               />
                             </div>
                           )}
-                          <Evaluations signalementId={signalement.id} />
                         </div>
                       </div>
                     </td>

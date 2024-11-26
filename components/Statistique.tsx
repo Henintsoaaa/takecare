@@ -1,21 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import {
-  fetchTotalPlaintes,
-  fetchRepartitionParRegion,
-  fetchTypesDeViolences,
-  fetchStatsParJour,
-  fetchTempsMoyen,
-  fetchTotalStatusPlaintes,
-} from "./Services";
 
-// Define types for the data structure
 interface Region {
   location: string;
   count: number;
 }
 
-interface TypeDeViolence {
+interface Type {
   description: string;
   count: number;
 }
@@ -25,19 +16,10 @@ interface StatutPlainte {
   count: number;
 }
 
-interface StatistiquesData {
-  total: number;
-  regions: Region[];
-  types: TypeDeViolence[];
-  parJour: { jour: string; count: number }[];
-  temps_moyen: number;
-  statusPlaintes: StatutPlainte[];
-}
-
 export default function Statistiques() {
   const [total, setTotal] = useState<number>(0);
   const [regions, setRegions] = useState<Region[]>([]);
-  const [types, setTypes] = useState<TypeDeViolence[]>([]);
+  const [types, setTypes] = useState<Type[]>([]);
   const [parJour, setParJour] = useState<{ jour: string; count: number }[]>([]);
   const [tempsMoyen, setTempsMoyen] = useState<number>(0);
   const [statusPlaintes, setStatusPlaintes] = useState<StatutPlainte[]>([]);
@@ -58,39 +40,65 @@ export default function Statistiques() {
   ];
 
   useEffect(() => {
-    fetchTotalPlaintes().then((data: { total: number }) =>
-      setTotal(data.total)
-    );
-    fetchRepartitionParRegion().then((data: Region[]) => setRegions(data));
-    fetchTypesDeViolences().then((data: TypeDeViolence[]) => setTypes(data));
-    fetchStatsParJour().then((data: { jour: string; count: number }[]) =>
-      setParJour(data)
-    );
-    fetchTempsMoyen().then((data: { temps_moyen: number }) =>
-      setTempsMoyen(data.temps_moyen)
-    );
-    fetchTotalStatusPlaintes().then((data: StatutPlainte[]) =>
-      setStatusPlaintes(data)
-    );
+    // Données factices
+    setTotal(1200); // Nombre total de plaintes
+
+    setRegions([
+      { location: "Antananarivo", count: 320 },
+      { location: "Toamasina", count: 200 },
+      { location: "Fianarantsoa", count: 150 },
+      { location: "Mahajanga", count: 100 },
+      { location: "Toliara", count: 120 },
+      { location: "Antsiranana", count: 90 },
+    ]);
+
+    setTypes([
+      { description: "Harcèlement verbal", count: 500 },
+      { description: "Harcèlement physique", count: 300 },
+      { description: "Harcèlement en ligne", count: 250 },
+      { description: "Discrimination au travail", count: 150 },
+    ]);
+
+    setParJour([
+      { jour: "2024-11-20", count: 25 },
+      { jour: "2024-11-21", count: 30 },
+      { jour: "2024-11-22", count: 40 },
+      { jour: "2024-11-23", count: 35 },
+      { jour: "2024-11-24", count: 45 },
+    ]);
+
+    setTempsMoyen(72); // Temps moyen en heures
+
+    setStatusPlaintes([
+      { current_status: "Reçu", count: 200 },
+      { current_status: "En vérification", count: 150 },
+      { current_status: "En attente de résolution", count: 100 },
+      { current_status: "Résolu", count: 250 },
+      { current_status: "Rejeté", count: 50 },
+      { current_status: "Assigné", count: 80 },
+      { current_status: "En cours de traitement", count: 20 },
+    ]);
   }, []);
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-2xl max-w-4xl mx-auto space-y-6">
-      <h1 className="text-4xl font-bold text-blue-600 mb-6 text-center">
-        🌍 Statistiques Globales
+      <h1 className="text-4xl font-bold text-blue-600 mb-6 flex items-center justify-center">
+        🌍 Statistiques à Madagascar
       </h1>
 
+      {/* Nombre total de plaintes */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800">
+        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
           📊 Nombre total de plaintes
         </h2>
         <p className="text-xl text-gray-600">{total} plaintes signalées</p>
       </div>
 
+      {/* Répartition par statut des plaintes */}
+      <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
+        📊 Répartition des plaintes par statut
+      </h2>
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800">
-          📊 Répartition des plaintes par statut
-        </h2>
         <ul>
           {statusPlaintes.map((status, index) => {
             const statusInfo = statuses.find(
@@ -104,8 +112,7 @@ export default function Statistiques() {
                   }`}
                 ></span>
                 <span>
-                  {status.current_status}:{" "}
-                  <span className="font-bold">{status.count}</span>
+                  {status.current_status}: {status.count}
                 </span>
               </li>
             );
@@ -113,8 +120,9 @@ export default function Statistiques() {
         </ul>
       </div>
 
+      {/* Répartition par région */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800">
+        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
           📍 Répartition par région
         </h2>
         <ul className="space-y-3">
@@ -127,8 +135,9 @@ export default function Statistiques() {
         </ul>
       </div>
 
+      {/* Types de violences */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800">
+        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
           🔴 Types de violences signalées
         </h2>
         <ul className="space-y-3">
@@ -141,8 +150,9 @@ export default function Statistiques() {
         </ul>
       </div>
 
+      {/* Statistiques par jour */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800">
+        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
           📅 Statistiques par jour
         </h2>
         <ul className="space-y-3">
@@ -155,11 +165,12 @@ export default function Statistiques() {
         </ul>
       </div>
 
+      {/* Temps moyen de traitement */}
       <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-2xl font-semibold text-gray-800">
+        <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
           ⏱ Temps moyen de traitement
         </h2>
-        <p className="text-xl text-gray-600">{tempsMoyen} minutes</p>
+        <p className="text-xl text-gray-600">{tempsMoyen} heures</p>
       </div>
     </div>
   );

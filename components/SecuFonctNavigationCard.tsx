@@ -8,7 +8,7 @@ import SignalementBoard from "./SignalementBoard";
 import ComplaintsBoard from "./ComplaintsDashboard";
 import Statistiques from "./Statistique";
 import Dashboard from "./Dashboard";
-import GeographicDistributionChart from "./geoGrap";
+import GeographicDistributionChart from "./geoGraph";
 import ReportsByPersonChart from "./ChartData";
 import SignalementCharts from "./SignalementBoard";
 import StatutHistoryChart from "./StatusChart";
@@ -126,7 +126,7 @@ const SecuFonctNavigationCard: React.FC = () => {
             <GeographicDistributionChart />
             <ReportsByPersonChart />
             <SignalementCharts />
-            <StatutHistoryChart signalementId={Id} />
+            <StatutHistoryChart />
           </div>
         )}
         {activeTab === "proofAnalysis" && (

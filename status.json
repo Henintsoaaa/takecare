@@ -1,0 +1,26 @@
+[
+  {
+    "status": "En vérification",
+    "nextStep": "enquete",
+    "nextDate": "2024-11-23",
+    "serviceComments": "merci",
+    "responsibleService": "Oreki",
+    "priority": "haute"
+  },
+  {
+    "status": "En attente de documents",
+    "nextStep": "appel_a_temoin",
+    "nextDate": "2024-11-24",
+    "serviceComments": "fool",
+    "responsibleService": "Oreki",
+    "priority": "haute"
+  },
+  {
+    "status": "En cours de traitement",
+    "nextStep": "interview",
+    "nextDate": "2024-11-26",
+    "serviceComments": "en avance",
+    "responsibleService": "Oreki",
+    "priority": "haute"
+  }
+]

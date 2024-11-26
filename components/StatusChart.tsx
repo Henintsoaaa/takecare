@@ -1,173 +1,144 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import axios from "axios"; // Import Axios
+import React, { useState } from "react";
+import { Bar, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  LineElement,
-  PointElement,
-  LinearScale,
   CategoryScale,
+  LinearScale,
+  BarElement,
   Title,
   Tooltip,
   Legend,
-  Filler,
+  ArcElement,
 } from "chart.js";
+import { Card } from "./ui/card";
+import { TabsContent } from "./ui/tabs";
 
-// Register the necessary components
+// Register necessary Chart.js components
 ChartJS.register(
-  LineElement,
-  PointElement,
-  LinearScale,
   CategoryScale,
+  LinearScale,
+  BarElement,
   Title,
   Tooltip,
   Legend,
-  Filler
+  ArcElement
 );
 
-// Define the mapping for statuses
-const statusMapping: Record<string, number> = {
-  Reçu: 0,
-  "En vérification": 1,
-  "En attente de documents": 2,
-  Assigné: 3,
-  "En cours de traitement": 4,
-  "En attente de résolution": 5,
-  Reporté: 6,
-  Résolu: 7,
-  Rejeté: 8,
-  "En appel": 9,
-  Escalade: 10,
-  Clôturé: 11,
-};
-
-// Define the labels for the statuses
-const statusLabels: string[] = [
-  "Reçu",
-  "En vérification",
-  "En attente de documents",
-  "Assigné",
-  "En cours de traitement",
-  "En attente de résolution",
-  "Reporté",
-  "Résolu",
-  "Rejeté",
-  "En appel",
-  "Escalade",
-  "Clôturé",
-];
-
-// Define the props for the StatusChart component
-interface StatusChartProps {
-  signalementId: number; // Assuming signalementId is a number
+// Define colors for different statuses
+interface Status {
+  label: string;
+  color: string;
 }
 
-const StatusChart: React.FC<StatusChartProps> = ({ signalementId }) => {
-  const [data, setData] = useState<any[]>([]); // Initialisez data comme un tableau vide
-  const [chartData, setChartData] = useState<{
-    labels: string[];
-    datasets: {
-      label: string;
-      data: number[];
-      fill: boolean;
-      borderColor: string;
-      tension: number;
-    }[];
-  }>({
-    labels: [], // Labels pour l'axe X
+const statuses: Status[] = [
+  { label: "Reçu", color: "rgba(59, 130, 246, 0.7)" },
+  { label: "En vérification", color: "rgba(234, 179, 8, 0.7)" },
+  { label: "En attente de résolution", color: "rgba(249, 115, 22, 0.7)" },
+  { label: "Résolu", color: "rgba(34, 197, 94, 0.7)" },
+  { label: "Rejeté", color: "rgba(239, 68, 68, 0.7)" },
+  { label: "Assigné", color: "rgba(20, 184, 166, 0.7)" },
+  { label: "En cours de traitement", color: "rgba(168, 85, 247, 0.7)" },
+  { label: "Reporté", color: "rgba(107, 114, 128, 0.7)" },
+  { label: "En attente de documents", color: "rgba(99, 102, 241, 0.7)" },
+  { label: "En appel", color: "rgba(236, 72, 153, 0.7)" },
+  { label: "Clôturé", color: "rgba(16, 185, 129, 0.7)" },
+  { label: "Escalade", color: "rgba(185, 28, 28, 0.7)" },
+];
+
+// Colors for priorities
+const priorityColors: Record<string, string> = {
+  Haute: "rgba(239, 68, 68, 0.7)",
+  Moyenne: "rgba(234, 179, 8, 0.7)",
+  Faible: "rgba(34, 197, 94, 0.7)",
+};
+
+// Function to get status color
+const getStatusColor = (status: string): string => {
+  const matchedStatus = statuses.find((item) => item.label === status);
+  return matchedStatus ? matchedStatus.color : "rgba(107, 114, 128, 0.7)";
+};
+
+// Function to get priority color
+const getPriorityColor = (priority: string): string => {
+  const normalizedPriority =
+    priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase();
+  return priorityColors[normalizedPriority] || "rgba(107, 114, 128, 0.7)";
+};
+
+// Main chart component
+const StatusChart: React.FC = () => {
+  const [currentStatusData] = useState<
+    { current_status: string; count: number }[]
+  >([
+    { current_status: "Reçu", count: 120 },
+    { current_status: "En vérification", count: 90 },
+    { current_status: "En attente de résolution", count: 60 },
+    { current_status: "Résolu", count: 150 },
+    { current_status: "Rejeté", count: 30 },
+    { current_status: "Assigné", count: 80 },
+    { current_status: "En cours de traitement", count: 70 },
+    { current_status: "Reporté", count: 20 },
+    { current_status: "En attente de documents", count: 50 },
+    { current_status: "En appel", count: 40 },
+    { current_status: "Clôturé", count: 100 },
+    { current_status: "Escalade", count: 10 },
+  ]);
+
+  const [priorityData] = useState<{ priority: string; count: number }[]>([
+    { priority: "Haute", count: 200 },
+    { priority: "Moyenne", count: 150 },
+    { priority: "Faible", count: 100 },
+  ]);
+
+  const currentStatusChartData = {
+    labels: currentStatusData.map((item) => item.current_status),
     datasets: [
       {
-        label: "Historique des statuts",
-        data: [], // Données pour l'axe Y
-        fill: false,
-        borderColor: "rgba(75,192,192,1)",
-        tension: 0.1,
+        label: "Répartition par État",
+        data: currentStatusData.map((item) => item.count),
+        backgroundColor: currentStatusData.map((item) =>
+          getStatusColor(item.current_status)
+        ),
       },
     ],
-  });
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log("Tentative de récupération des données...");
-        // Commenting out the Axios logic
-        /*
-        const response = await axios.get(`http://localhost:3003/api/status-history/${signalementId}`);
-        const result = response.data; // Directly use the data from the response
-        console.log('Données récupérées:', result);
-        */
-
-        // Prototype data
-        const prototypeData = [
-          { change_date: "2023-10-01", new_status: "Reçu" },
-          { change_date: "2023-10-05", new_status: "En vérification" },
-          { change_date: "2023-10-10", new_status: "Assigné" },
-          { change_date: "2023-10-15", new_status: "En cours de traitement" },
-          { change_date: "2023-10-20", new_status: "Résolu" },
-        ];
-
-        const result = prototypeData; // Use prototype data instead of fetched data
-        console.log("Données récupérées:", result);
-
-        if (Array.isArray(result) && result.length > 0) {
-          const dates = result.map(
-            (item: { change_date: string }) => item.change_date
-          );
-          const statusCodes = result.map(
-            (item: { new_status: string }) => statusMapping[item.new_status]
-          );
-
-          setData(result); // Met à jour les données
-
-          setChartData({
-            labels: dates,
-            datasets: [
-              {
-                label: "Historique des statuts",
-                data: statusCodes, // Utiliser les codes de statut
-                fill: false,
-                borderColor: "rgba(75,192,192,1)",
-                tension: 0.1,
-              },
-            ],
-          });
-        } else {
-          console.log("Aucune donnée trouvée.");
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données :", error);
-      }
-    };
-
-    fetchData();
-  }, [signalementId]); // L'effet se déclenche lorsque signalementId change
-
-  // Modifier la configuration pour afficher les légendes sur l'axe Y
-  const options = {
-    scales: {
-      x: {
-        type: "category" as const, // Specify the x-axis as a category scale
+  const priorityChartData = {
+    labels: priorityData.map(
+      (item) =>
+        item.priority.charAt(0).toUpperCase() +
+        item.priority.slice(1).toLowerCase()
+    ),
+    datasets: [
+      {
+        label: "Répartition par Priorité",
+        data: priorityData.map((item) => item.count),
+        backgroundColor: priorityData.map((item) =>
+          getPriorityColor(item.priority)
+        ),
       },
-      y: {
-        ticks: {
-          callback: function (tickValue: string | number) {
-            return statusLabels[tickValue as number]; // Afficher le nom du statut en utilisant statusLabels
-          },
-        },
-        // Option pour adapter l'échelle
-        min: 0,
-        max: 11,
-        stepSize: 1,
-      },
-    },
+    ],
   };
 
   return (
-    <div>
-      <h2>Historique des statuts pour le signalement {signalementId}</h2>
-      <Line data={chartData} options={options} />
-    </div>
+    <TabsContent value="overview" className="space-y-6">
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+          <h3 className="font-semibold mb-4">État des signalements</h3>
+          <div className="h-[300px]">
+            <Bar data={currentStatusChartData} />
+          </div>
+        </Card>
+
+        <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+          <h3 className="font-semibold mb-4">Priorité des signalements</h3>
+          <div className="h-[300px]">
+            <Pie data={priorityChartData} />
+          </div>
+        </Card>
+      </div>
+    </TabsContent>
   );
 };
 
