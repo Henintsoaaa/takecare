@@ -73,17 +73,17 @@ const Plainte = () => {
   };
 
   return (
-    <div className=" bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center p-4">
+    <div className="flex items-center justify-center p-4">
       <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-4 relative overflow-y-auto">
         <button
           onClick={handleBack}
-          className="absolute top-4 left-4 text-indigo-600 hover:text-indigo-800 transition-all duration-300 p-1 rounded-full hover:bg-indigo-50"
+          className="absolute top-4 left-4 text-primary-light hover:text-indigo-800 transition-all duration-300 p-1 rounded-full hover:bg-indigo-50"
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
 
         <div className="text-center mb-4">
-          <h1 className="text-xl font-semibold text-gray-800 mb-1">
+          <h1 className="text-xl font-semibold text-gray-800 mb-1 text-primary-dark">
             Submit Your Complaint
           </h1>
           <p className="text-gray-500 text-xs">
@@ -128,7 +128,7 @@ const Plainte = () => {
 
           <div>
             <label className="flex items-center text-gray-700 font-semibold">
-              <FileText className="mr-2 text-indigo-500" size={18} />
+              <FileText className="mr-2 text-primary-light" size={18} />
               Describe Your Complaint
             </label>
             <textarea
@@ -144,7 +144,7 @@ const Plainte = () => {
           <div className="grid grid-cols-2 gap-1">
             <div>
               <label className="flex items-center text-gray-700 font-semibold">
-                <MapPin className="mr-2 text-green-500" size={18} />
+                <MapPin className="mr-2 text-accent-light" size={18} />
                 Country
               </label>
               <input
@@ -158,7 +158,7 @@ const Plainte = () => {
             </div>
             <div>
               <label className="flex items-center text-gray-700 font-semibold">
-                <MapPin className="mr-2 text-blue-500" size={18} />
+                <MapPin className="mr-2 text-accent-light" size={18} />
                 City
               </label>
               <input
@@ -180,7 +180,7 @@ const Plainte = () => {
                 onChange={handleFileChange}
               />
               <div className="flex items-center justify-center p-1 border-2 border-dashed border-indigo-200 rounded-lg hover:bg-indigo-50 transition-all">
-                <Upload className="mr-2 text-indigo-500" size={18} />
+                <Upload className="mr-2 text-primary-light" size={18} />
                 <span className="text-gray-600">
                   {file ? file.name : "Upload Document"}
                 </span>
@@ -190,7 +190,7 @@ const Plainte = () => {
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center"
+            className="w-full bg-primary-light text-white p-2 rounded-lg hover:bg-secondary-black transition-all duration-300 flex items-center justify-center"
           >
             <Send className="mr-2" size={18} />
             Submit Complaint

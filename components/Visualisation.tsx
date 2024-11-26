@@ -53,7 +53,7 @@ const Visualisation: React.FC<VisualisationProps> = ({ userId }) => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center">
-            <LineChart className="h-5 w-5 mr-2 text-indigo-600" />
+            <LineChart className="h-5 w-5 mr-2 text-primary-light" />
             Évolution du bien-être
           </CardTitle>
         </CardHeader>

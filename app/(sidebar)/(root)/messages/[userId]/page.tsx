@@ -168,7 +168,7 @@ export function MessagingInterface() {
               <div
                 className={`max-w-[70%] px-4 py-2 rounded-lg shadow ${
                   message.sender_id === currentUserId
-                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white"
+                    ? "bg-gradient-to-r from-primary-light to-primary-light text-white"
                     : "bg-gray-100 text-gray-800"
                 }`}
               >

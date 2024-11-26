@@ -55,7 +55,7 @@ const EmotionList: React.FC<{
           key={emotion.emotion_id}
           className={`p-2 rounded-lg flex flex-col items-center transition-all duration-200 ${
             selectedEmotion === emotion.emotion_name
-              ? "bg-indigo-200 border-2 border-indigo-600 text-gray-600"
+              ? "bg-indigo-200 border-2 border-primary-light text-gray-600"
               : "bg-gray-50 hover:bg-gray-100 text-gray-600"
           }`}
           onClick={() => onSelectEmotion(emotion.emotion_name)}

@@ -62,7 +62,7 @@ const UserMenu: React.FC = () => {
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="text-indigo-600 hover:text-indigo-700 transition-colors duration-200 flex gap-2 justify-center items-center"
+        className="text-primary-light hover:text-primary-light transition-colors duration-200 flex gap-2 justify-center items-center"
       >
         <User size={24} className="md:w-[30px] md:h-[30px]" />
         <span className="hidden md:block">User Menu</span>

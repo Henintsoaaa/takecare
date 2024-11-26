@@ -81,7 +81,7 @@ const EmotionForm: React.FC<{
                   type="button"
                   className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center ${
                     wellbeingLevel === level
-                      ? "bg-indigo-600 text-white"
+                      ? "bg-primary-light text-white"
                       : "bg-gray-100 hover:bg-gray-100 text-gray-700"
                   }`}
                   onClick={() => setWellbeingLevel(level)}
@@ -114,7 +114,7 @@ const EmotionForm: React.FC<{
           </div>
           <button
             type="submit"
-            className="w-full py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 text-sm md:text-base"
+            className="w-full py-2 rounded-lg bg-primary-light text-white hover:bg-primary-light text-sm md:text-base"
           >
             Enregistrer
           </button>

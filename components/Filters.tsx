@@ -40,7 +40,7 @@ const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-            className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+            className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-primary-light focus:border-primary-light transition-all duration-300"
           >
             <option value="">Tous</option>
             <option value="Reçu">Reçu</option>
@@ -62,7 +62,7 @@ const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+            className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-primary-light focus:border-primary-light transition-all duration-300"
           />
         </div>
 
@@ -74,7 +74,7 @@ const Filters: React.FC<FiltersProps> = ({ onFilterChange }) => {
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
-            className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+            className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-primary-light focus:border-primary-light transition-all duration-300"
           >
             <option value="">Tous</option>
             <option value="faible">Faible</option>

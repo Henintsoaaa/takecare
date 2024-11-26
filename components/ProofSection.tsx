@@ -22,7 +22,7 @@ const ProofSection: React.FC = () => {
         <div className="mt-3">
           <input
             type="file"
-            className="block w-full text-sm text-gray-600 file:mr-4 file:py-3 file:px-5 file:rounded-xl file:border file:border-gray-300 file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="block w-full text-sm text-gray-600 file:mr-4 file:py-3 file:px-5 file:rounded-xl file:border file:border-gray-300 file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-light"
             multiple
           />
         </div>
@@ -33,7 +33,7 @@ const ProofSection: React.FC = () => {
       </div>
 
       {/* Liste des fichiers téléchargés */}
-      <div className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300">
+      <div className="mt-2 block w-full bg-gray-50 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:ring-primary-light focus:border-primary-light transition-all duration-300">
         <h3 className="text-xl font-semibold text-gray-800">
           Fichiers téléchargés
         </h3>

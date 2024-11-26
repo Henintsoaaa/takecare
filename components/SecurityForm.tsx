@@ -18,9 +18,9 @@ const SecurityComplaintForm: React.FC<SecurityComplaintFormProps> = ({
   const statuses = [
     { label: "Reçu", color: "bg-blue-500" },
     { label: "En vérification", color: "bg-yellow-500" },
-    { label: "En attente de documents", color: "bg-indigo-500" },
+    { label: "En attente de documents", color: "bg-primary-light" },
     { label: "Assigné", color: "bg-teal-500" },
-    { label: "En cours de traitement", color: "bg-purple-500" },
+    { label: "En cours de traitement", color: "bg-secondary-light" },
     { label: "En attente de résolution", color: "bg-orange-500" },
     { label: "Reporté", color: "bg-gray-500" },
     { label: "Résolu", color: "bg-green-500" },

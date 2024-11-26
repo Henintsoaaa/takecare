@@ -76,12 +76,12 @@ const EmotionTracker = () => {
             Comment vous sentez-vous aujourd'hui?
           </label>
           <div className="flex gap-2 justify-center items-center">
-            <Smile size={24} className="text-indigo-500" />
+            <Smile size={24} className="text-primary-light" />
             <input
               type="text"
               name="entrie"
               placeholder="Comment vous sentez-vous aujourd'hui?"
-              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full"
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-primary-light w-full"
               onClick={handleClick}
             />
           </div>

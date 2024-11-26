@@ -76,7 +76,7 @@ const Agenda: React.FC = () => {
   }, []); // Empty array means this effect runs once on mount
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-indigo-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-primary-dark text-white">
       <div className="container mx-auto py-10 px-5">
         <h1 className="text-4xl font-bold text-center mb-10 text-white drop-shadow-lg">
           Agenda Futuriste
@@ -89,7 +89,7 @@ const Agenda: React.FC = () => {
             locale="fr"
             editable={false}
             eventContent={(eventInfo) => (
-              <div className="bg-indigo-600 text-white px-2 py-1 rounded shadow-md text-sm truncate hover:scale-105 transform transition-all">
+              <div className="bg-primary-light text-white px-2 py-1 rounded shadow-md text-sm truncate hover:scale-105 transform transition-all">
                 {eventInfo.event.title}
               </div>
             )}

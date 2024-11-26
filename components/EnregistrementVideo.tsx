@@ -67,7 +67,7 @@ const EnregistrementVideo: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="p-6 border-2 border-gray-400 rounded-lg shadow-lg bg-white">
         <div className="relative mb-4">
           <video

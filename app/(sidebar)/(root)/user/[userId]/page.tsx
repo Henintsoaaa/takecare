@@ -144,7 +144,7 @@ const Page = () => {
       {/* Profile Header with Profile Picture */}
       <div className="flex flex-col items-center w-full bg-white rounded-lg shadow-md p-6 mb-6 relative">
         {/* Profile Image Section */}
-        <div className="absolute -top-16 w-32 h-32 rounded-full overflow-hidden border-4 border-indigo-500 bg-white">
+        <div className="absolute -top-16 w-32 h-32 rounded-full overflow-hidden border-4 border-primary-light bg-white">
           <Image
             src={profilePhoto || "/default-avatar.svg"}
             alt="Profile picture"
@@ -172,7 +172,7 @@ const Page = () => {
           </p>
           <button
             onClick={toggleAbout}
-            className="mt-2 text-indigo-600 hover:underline"
+            className="mt-2 text-primary-light hover:underline"
             aria-expanded={isAboutExpanded}
           >
             {isAboutExpanded ? "Show Less" : "Read More"}
@@ -183,7 +183,7 @@ const Page = () => {
         {parseInt(userId.toString()) === user_id && (
           <button
             onClick={onClickChangeProfile}
-            className="flex items-center mt-4 text-indigo-600 hover:text-indigo-800 transition duration-200"
+            className="flex items-center mt-4 text-primary-light hover:text-indigo-800 transition duration-200"
           >
             <FilePenLine />
             <span className="hidden md:inline-block ml-2">Edit Profile</span>

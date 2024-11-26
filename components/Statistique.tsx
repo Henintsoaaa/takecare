@@ -31,9 +31,9 @@ export default function Statistiques() {
     { label: "Résolu", color: "bg-green-500" },
     { label: "Rejeté", color: "bg-red-500" },
     { label: "Assigné", color: "bg-teal-500" },
-    { label: "En cours de traitement", color: "bg-purple-500" },
+    { label: "En cours de traitement", color: "bg-secondary-light" },
     { label: "Reporté", color: "bg-gray-500" },
-    { label: "En attente de documents", color: "bg-indigo-500" },
+    { label: "En attente de documents", color: "bg-primary-light" },
     { label: "En appel", color: "bg-pink-500" },
     { label: "Clôturé", color: "bg-green-700" },
     { label: "Escalade", color: "bg-red-700" },
@@ -87,7 +87,7 @@ export default function Statistiques() {
       </h1>
 
       {/* Nombre total de plaintes */}
-      <div className="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="bg-purple-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
         <h2 className="text-2xl font-semibold text-gray-800 flex items-center">
           📊 Nombre total de plaintes
         </h2>

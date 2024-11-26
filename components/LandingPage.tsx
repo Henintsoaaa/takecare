@@ -114,31 +114,33 @@ const TechHerLandingPage: React.FC = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Heart className="text-indigo-600 w-8 h-8" />
-            <span className="text-xl font-bold text-indigo-900">Tech'Her</span>
+            <Heart className="text-primary-light w-8 h-8" />
+            <span className="text-xl font-bold text-primary-dark">
+              Tech'Her
+            </span>
           </div>
           <div className="hidden md:flex space-x-6">
             <a
               href="#"
-              className="text-indigo-700 hover:text-indigo-900 transition"
+              className="text-primary-light hover:text-primary-dark transition"
             >
               Accueil
             </a>
             <a
               href="#"
-              className="text-indigo-700 hover:text-indigo-900 transition"
+              className="text-primary-light hover:text-primary-dark transition"
             >
               Fonctionnalités
             </a>
             <a
               href="#"
-              className="text-indigo-700 hover:text-indigo-900 transition"
+              className="text-primary-light hover:text-primary-dark transition"
             >
               À propos
             </a>
             <Link
               href="/login"
-              className="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition"
+              className="bg-primary-light text-white px-4 py-2 rounded-full hover:bg-primary-light transition"
             >
               Connexion
             </Link>
@@ -146,7 +148,7 @@ const TechHerLandingPage: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-indigo-700"
+              className="text-primary-light"
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -161,25 +163,25 @@ const TechHerLandingPage: React.FC = () => {
             <div className="flex flex-col items-center py-4">
               <a
                 href="#"
-                className="text-indigo-700 hover:text-indigo-900 transition py-2"
+                className="text-primary-light hover:text-primary-dark transition py-2"
               >
                 Accueil
               </a>
               <a
                 href="#"
-                className="text-indigo-700 hover:text-indigo-900 transition py-2"
+                className="text-primary-light hover:text-primary-dark transition py-2"
               >
                 Fonctionnalités
               </a>
               <a
                 href="#"
-                className="text-indigo-700 hover:text-indigo-900 transition py-2"
+                className="text-primary-light hover:text-primary-dark transition py-2"
               >
                 À propos
               </a>
               <a
                 href="#"
-                className="text-indigo-600 px-4 py-2 rounded-full hover:bg-indigo-700 transition"
+                className="text-primary-light px-4 py-2 rounded-full hover:bg-primary-light transition"
               >
                 Connexion
               </a>
@@ -199,23 +201,23 @@ const TechHerLandingPage: React.FC = () => {
           <div className="inline-block bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm">
             Nouvelle plateforme de protection des droits de la femme
           </div>
-          <h1 className="text-4xl font-bold text-indigo-900 leading-tight">
+          <h1 className="text-4xl font-bold text-primary-dark leading-tight">
             Brisons les chaînes du harcèlement, liberons notre feu intérieur
           </h1>
-          <p className="text-xl text-indigo-700 leading-relaxed">
+          <p className="text-xl text-primary-light leading-relaxed">
             Une plateforme conçue pour protéger, soutenir, et autonomiser les
             femmes face au harcèlement.
           </p>
           <div className="flex space-x-4">
             <Link
               href="/login"
-              className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center"
+              className="bg-primary-light text-white px-6 py-3 rounded-lg hover:bg-primary-light transition flex items-center"
             >
               Commencer <ArrowRight className="ml-2" />
             </Link>
             <Link
               href="/login"
-              className="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-50 transition"
+              className="border border-primary-light text-primary-light px-6 py-3 rounded-lg hover:bg-indigo-50 transition"
             >
               Découvrir
             </Link>
@@ -231,8 +233,10 @@ const TechHerLandingPage: React.FC = () => {
           <div className="absolute -bottom-8 -right-8 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg flex items-center space-x-4">
             <Star className="text-yellow-500 w-8 h-8" />
             <div>
-              <p className="font-semibold text-indigo-900">4.8/5 Évaluations</p>
-              <p className="text-sm text-indigo-700">
+              <p className="font-semibold text-primary-dark">
+                4.8/5 Évaluations
+              </p>
+              <p className="text-sm text-primary-light">
                 Plus de 10,000 utilisatrices
               </p>
             </div>
@@ -243,10 +247,10 @@ const TechHerLandingPage: React.FC = () => {
       {/* Features Section */}
       <div className="container mx-auto px-6 py-16">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-indigo-900 mb-4">
+          <h2 className="text-4xl font-bold text-primary-dark mb-4">
             Nos Fonctionnalités Principales
           </h2>
-          <p className="text-xl text-indigo-700 max-w-3xl mx-auto">
+          <p className="text-xl text-primary-light max-w-3xl mx-auto">
             Une approche innovante qui combine technologie et empathie pour
             répondre aux besoins uniques des femmes.
           </p>
@@ -266,7 +270,7 @@ const TechHerLandingPage: React.FC = () => {
                 p-6 rounded-2xl cursor-pointer transition 
                 ${
                   activeTab === index
-                    ? "bg-white shadow-2xl border-2 border-indigo-600"
+                    ? "bg-white shadow-2xl border-2 border-primary-light"
                     : "bg-white/50 hover:bg -white/80 border border-transparent"
                 }
               `}
@@ -276,17 +280,17 @@ const TechHerLandingPage: React.FC = () => {
                 w-16 h-16 rounded-full flex items-center justify-center mb-4
                 ${
                   activeTab === index
-                    ? "bg-indigo-600 text-white"
-                    : "bg-indigo-100 text-indigo-600"
+                    ? "bg-primary-light text-white"
+                    : "bg-indigo-100 text-primary-light"
                 }
               `}
               >
                 {tab.icon}
               </div>
-              <h3 className="text-xl font-semibold text-indigo-900 mb-3">
+              <h3 className="text-xl font-semibold text-primary-dark mb-3">
                 {tab.title}
               </h3>
-              <p className="text-indigo-700 mb-4">{tab.description}</p>
+              <p className="text-primary-light mb-4">{tab.description}</p>
             </motion.div>
           ))}
         </div>
@@ -301,13 +305,13 @@ const TechHerLandingPage: React.FC = () => {
             className="grid md:grid-cols-2 gap-8 items-center"
           >
             <div>
-              <h3 className="text-2xl font-bold text-indigo-900 mb-6">
+              <h3 className="text-2xl font-bold text-primary-dark mb-6">
                 {featuresTabs[activeTab].title}
               </h3>
               <ul className="space-y-4">
                 {featuresTabs[activeTab].features.map((feature, index) => (
                   <li key={index} className="flex items-center space-x-3">
-                    <Star className="text-indigo-600 w-5 h-5 " />
+                    <Star className="text-primary-light w-5 h-5 " />
                     <span className="text-indigo-800">{feature}</span>
                   </li>
                 ))}
@@ -325,7 +329,7 @@ const TechHerLandingPage: React.FC = () => {
       </div>
 
       {/* AI Tools Section */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-16">
+      <div className="bg-gradient-to-r from-secondary-light to-primary-light text-white py-16">
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <div className="flex items-center space-x-4 mb-6">
@@ -352,7 +356,7 @@ const TechHerLandingPage: React.FC = () => {
                 <span>Confidentialité et sécurité des données</span>
               </li>
             </ul>
-            <button className="bg-white text-indigo-700 px-6 py-3 rounded-lg hover:bg-purple-50 transition">
+            <button className="bg-white text-primary-light px-6 py-3 rounded-lg hover:bg-purple-50 transition">
               En savoir plus
             </button>
           </div>
@@ -374,7 +378,7 @@ const TechHerLandingPage: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-3xl p-12"
+            className="bg-gradient-to-br from-primary-light to-secondary-light text-white rounded-3xl p-12"
           >
             <h2 className="text-4xl font-bold mb-6">
               Accordez nous votre confiance
@@ -386,11 +390,11 @@ const TechHerLandingPage: React.FC = () => {
             <div className="flex justify-center space-x-4">
               <Link
                 href="/login"
-                className="bg-white text-indigo-700 px-8 py-3 rounded-lg hover:bg-purple-50 transition"
+                className="bg-white text-primary-light px-8 py-3 rounded-lg hover:bg-purple-50 transition"
               >
                 S'inscrire Gratuitement
               </Link>
-              <button className="border border-white text-white px-8 py-3 rounded-lg hover:bg-indigo-700/20 transition">
+              <button className="border border-white text-white px-8 py-3 rounded-lg hover:bg-primary-light/20 transition">
                 En savoir plus
               </button>
             </div>
@@ -399,7 +403,7 @@ const TechHerLandingPage: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-indigo-900 text-white py-12">
+      <footer className="bg-primary-dark text-white py-12">
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
@@ -471,7 +475,7 @@ const TechHerLandingPage: React.FC = () => {
             </ul>
           </div>
         </div>
-        <div className="container mx-auto px-6 mt-8 pt-8 border-t border-indigo-700 text-center">
+        <div className="container mx-auto px-6 mt-8 pt-8 border-t border-primary-light text-center">
           <p className="text-indigo-300">
             &copy; 2024 Tech'Her. Tous droits réservés.
           </p>

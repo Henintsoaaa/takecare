@@ -2,13 +2,13 @@ import React from "react";
 import Plainte from "./Plainte";
 import VideoCapture from "./LangueSigne";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
-import { useState } from "react"; // Adjust the import path as necessary
-import { FaCalendar, FaHeart, FaBook } from "react-icons/fa"; // Adjust the import path as necessary
+import { useState } from "react";
+import { FaCalendar, FaHeart, FaBook } from "react-icons/fa";
 import { redirect } from "next/navigation";
 import EnregistrementVideo from "./EnregistrementVideo";
 
 const PagePlainte = () => {
-  const [activeTab, setActiveTab] = useState("Plainte"); // Set initial state to match one of the tabs
+  const [activeTab, setActiveTab] = useState("Plainte");
   let user_id: string | undefined;
 
   // Redirect to login page if user is not logged in
@@ -19,29 +19,31 @@ const PagePlainte = () => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
+    <div className="bg-white rounded-lg shadow-md p-4 h-full w-full mx-6">
       {/* Main Navigation */}
       <Tabs defaultValue="Plainte" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-blue-50 rounded-lg shadow-md mb-4">
+        <TabsList className="grid w-full grid-cols-3 bg-purple-200 rounded-lg shadow-md mb-4">
           {[
             {
               value: "Plainte",
-              icon: <FaCalendar className="h-4 w-4" />,
+              icon: <FaCalendar className="h-4 w-4 text-secondary-light" />,
             },
             {
               value: "Video",
-              icon: <FaHeart className="h-4 w-4" />,
+              icon: <FaHeart className="h-4 w-4 text-secondary-light" />,
             },
             {
               value: "Language des signes",
-              icon: <FaBook className="h-4 w-4" />,
+              icon: <FaBook className="h-4 w-4 text-secondary-light" />,
             },
           ].map((tab) => (
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className={`data-[state=active]:bg-blue-100 flex justify-center items-center p-3 rounded-lg transition-all duration-200 ${
-                activeTab === tab.value ? "bg-blue-200" : "hover:bg-blue-100"
+              className={`data-[state=active]:bg-purple-100 flex justify-center items-center p-3 rounded-lg transition-all duration-200 ${
+                activeTab === tab.value
+                  ? "bg-purple-300 text-secondary-dark"
+                  : "hover:bg-purple-100 text-secondary-light"
               }`}
               onClick={() => setActiveTab(tab.value)}
             >
@@ -56,7 +58,7 @@ const PagePlainte = () => {
         {/* Tab Contents */}
         <TabsContent value="Plainte">
           <div className="flex justify-center items-center">
-            <Plainte /> {/* Pass userId */}
+            <Plainte />
           </div>
         </TabsContent>
         <TabsContent value="Video">

@@ -49,31 +49,33 @@ const PublicationStyle = () => {
   return (
     <div className="space-y-6 p-6 rounded-lg">
       <div className="text-center shadow-lg hidden md:block">
-        <h2 className="text-2xl font-bold text-indigo-600 mb-2">Quizz</h2>
+        <h2 className="text-2xl font-bold text-primary-light mb-2">Quizz</h2>
         <p className="text-lg text-gray-700">
           Participer à des quiz intéressants
         </p>
         <button
           onClick={handleClick}
-          className="my-4 w-4/5 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
+          className="my-4 w-4/5 py-2 bg-primary-light text-white font-semibold rounded-lg shadow-md hover:bg-primary-light transition duration-300"
         >
           Commencer le Quizz
         </button>
       </div>
       <div className="text-center shadow-lg hidden md:block">
-        <h2 className="text-2xl font-bold text-indigo-600 mb-2">Assistance</h2>
+        <h2 className="text-2xl font-bold text-primary-light mb-2">
+          Assistance
+        </h2>
         <p className="text-lg text-gray-700">
           Bénéficier d'une assistance personnelle
         </p>
         <button
           onClick={redirectToAssistance}
-          className="my-4 w-4/5 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
+          className="my-4 w-4/5 py-2 bg-primary-light text-white font-semibold rounded-lg shadow-md hover:bg-primary-light transition duration-300"
         >
           Demarer
         </button>
       </div>
       <div className="shadow-lg">
-        <h2 className="text-2xl font-semibold text-indigo-600 text-center mb-4">
+        <h2 className="text-2xl font-semibold text-primary-light text-center mb-4">
           Inspiration du Jour
         </h2>
         <div className="grid grid-cols-1 gap-6">
@@ -93,7 +95,7 @@ const PublicationStyle = () => {
         {!showAll && (
           <button
             onClick={() => setShowAll(true)}
-            className="mt-4 w-full py-2 text-indigo-600 font-semibold rounded-lg shadow-md hover:underline transition duration-300"
+            className="mt-4 w-full py-2 text-primary-light font-semibold rounded-lg shadow-md hover:underline transition duration-300"
           >
             Voir Plus
           </button>
@@ -101,7 +103,7 @@ const PublicationStyle = () => {
         {showAll && (
           <button
             onClick={() => setShowAll(false)}
-            className="mt-4 w-full py-2 text-indigo-600 font-semibold rounded-lg shadow-md hover:underline transition duration-300"
+            className="mt-4 w-full py-2 text-primary-light font-semibold rounded-lg shadow-md hover:underline transition duration-300"
           >
             Voir moins
           </button>

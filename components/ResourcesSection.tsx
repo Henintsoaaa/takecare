@@ -37,19 +37,28 @@ const ResourcesSection: React.FC = () => {
             <ul className="space-y-2 text-lg">
               <li>
                 📖{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Guide d'utilisation
                 </a>
               </li>
               <li>
                 ❓{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   FAQ
                 </a>
               </li>
               <li>
                 🎥{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Tutoriels Vidéo
                 </a>
               </li>
@@ -68,19 +77,28 @@ const ResourcesSection: React.FC = () => {
             <ul className="space-y-2 text-lg">
               <li>
                 📝{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Modèles de Documents
                 </a>
               </li>
               <li>
                 💻{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Logiciels et Outils
                 </a>
               </li>
               <li>
                 📊{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Rapports et Études
                 </a>
               </li>
@@ -99,19 +117,28 @@ const ResourcesSection: React.FC = () => {
             <ul className="space-y-2 text-lg">
               <li>
                 📧{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Contactez le support
                 </a>
               </li>
               <li>
                 💬{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Forums et Discussions
                 </a>
               </li>
               <li>
                 👩‍💻{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Assistance en Ligne
                 </a>
               </li>
@@ -130,19 +157,28 @@ const ResourcesSection: React.FC = () => {
             <ul className="space-y-2 text-lg">
               <li>
                 📜{" "}
-                <a href="#" className=" text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className=" text-primary-light hover:text-indigo-800"
+                >
                   Termes et Conditions
                 </a>
               </li>
               <li>
                 🔒{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Politique de Confidentialité
                 </a>
               </li>
               <li>
                 📝{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Charte Éthique
                 </a>
               </li>
@@ -161,19 +197,28 @@ const ResourcesSection: React.FC = () => {
             <ul className="space-y-2 text-lg">
               <li>
                 🤝{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Partenaires et Collaborations
                 </a>
               </li>
               <li>
                 🌐{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Ressources externes (ex. blogs)
                 </a>
               </li>
               <li>
                 📚{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <a
+                  href="#"
+                  className="text-primary-light hover:text-indigo-800"
+                >
                   Documentation gouvernementale
                 </a>
               </li>

@@ -108,7 +108,7 @@ const VideoCapture = () => {
       <div className="flex gap-4 mt-4">
         <button
           onClick={toggleWebcam}
-          className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          className="p-2 bg-primary-light text-white rounded-lg hover:bg-primary-light"
         >
           {webcamActive ? "Fermer webcam" : "Démarrer webcam"}
         </button>

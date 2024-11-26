@@ -215,11 +215,11 @@ const EmotionShare = () => {
         <input
           type="text"
           placeholder="Search posts..."
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 hidden md:block"
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light hidden md:block"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <Search className="text-indigo-600 w-10 h-10 " />
+        <Search className="text-primary-light w-10 h-10 " />
       </div>
 
       {loading && (
@@ -235,7 +235,7 @@ const EmotionShare = () => {
           <CardContent className="p-4">
             <div>
               <span
-                className="font-bold text-xl text-indigo-600 cursor-pointer"
+                className="font-bold text-xl text-primary-light cursor-pointer"
                 onClick={() => handleUsernameClick(post.user_id)} // Add click handler
               >
                 {post.isAnonyme !== 1 ? post.username : "Anonymous"}
@@ -266,7 +266,7 @@ const EmotionShare = () => {
                 </div>
                 <div className="flex items-center">
                   <FaComment
-                    className="text-indigo-600 cursor-pointer hover:text-indigo- 800 transition duration-200"
+                    className="text-primary-light cursor-pointer hover:text-indigo- 800 transition duration-200"
                     onClick={() => toggleCommentInput(post.entry_id)}
                   />
                   <span
@@ -278,14 +278,14 @@ const EmotionShare = () => {
                 </div>
               </div>
               <FaShareAlt
-                className="ml-4 text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
+                className="ml-4 text-primary-light cursor-pointer hover:text-indigo-800 transition duration-200"
                 onClick={() => handleShare(post.entry_id)}
               />
             </div>
             {showCommentInput[post.entry_id] && (
               <div className="mt-2 flex items-center">
                 <textarea
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light"
                   rows={3}
                   placeholder="Add a comment..."
                   value={comments[post.entry_id] || ""}
@@ -294,7 +294,7 @@ const EmotionShare = () => {
                   }
                 />
                 <FaPaperPlane
-                  className="ml-2 text-indigo-600 cursor-pointer hover:text-indigo-800 transition duration-200"
+                  className="ml-2 text-primary-light cursor-pointer hover:text-indigo-800 transition duration-200"
                   onClick={() => handleCommentSubmit(post.entry_id)}
                 />
               </div>

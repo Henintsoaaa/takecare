@@ -183,7 +183,7 @@ const EditProfile: React.FC = () => {
               />
               <label
                 htmlFor="imageUpload"
-                className="absolute bottom-0 right-0 bg-purple-500 text-white p-2 rounded-full cursor-pointer"
+                className="absolute bottom-0 right-0 bg-secondary-light text-white p-2 rounded-full cursor-pointer"
               >
                 <ImageIcon size={20} />
                 <input
@@ -208,7 +208,7 @@ const EditProfile: React.FC = () => {
                 name="username"
                 value={userData.username}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded-md focus:outline-purple-500"
+                className="w-full p-2 border rounded-md focus:outline-secondary-light"
                 required
               />
             </div>
@@ -221,7 +221,7 @@ const EditProfile: React.FC = () => {
                 name="email"
                 value={userData.email}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded-md focus:outline-purple-500"
+                className="w-full p-2 border rounded-md focus:outline-secondary-light"
                 required
               />
             </div>
@@ -236,7 +236,7 @@ const EditProfile: React.FC = () => {
               name="description"
               value={userData.description}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded-md focus:outline-purple-500"
+              className="w-full p-2 border rounded-md focus:outline-secondary-light"
               rows={4}
             />
           </div>
@@ -303,7 +303,7 @@ const EditProfile: React.FC = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="flex items-center bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition duration-200"
+              className="flex items-center bg-secondary-light text-white px-4 py-2 rounded-md hover:bg-secondary-light transition duration-200"
             >
               <Save className="mr-2" /> Save Changes
             </button>

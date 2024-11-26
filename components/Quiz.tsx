@@ -78,7 +78,7 @@ const Quiz = () => {
 
   if (selectedDomainIndex === null) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white">
+      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white">
         <div className="text-center mb-10">
           <h1 className="text-5xl font-extrabold mb-4">
             🎓 Welcome to the Quiz
@@ -89,7 +89,7 @@ const Quiz = () => {
           {questionsData.map((domain: Domain, index: number) => (
             <button
               key={index}
-              className="px-8 py-6 bg-white text-indigo-600 font-semibold text-lg rounded-lg shadow-md hover:scale-105 transform transition duration-300"
+              className="px-8 py-6 bg-white text-primary-light font-semibold text-lg rounded-lg shadow-md hover:scale-105 transform transition duration-300"
               onClick={() => handleStartQuiz(index)}
             >
               {domain.domain}
@@ -110,14 +110,14 @@ const Quiz = () => {
 
   if (quizFinished) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 text-white text-center">
+      <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white text-center">
         <h1 className="text-4xl font-bold mb-4">Quiz Finished!</h1>
         <p className="text-2xl">Your final score is:</p>
         <p className="text-5xl font-bold mt-2">
           {score} / {currentDomain.questions.length}
         </p>
         <button
-          className="mt-6 px-6 py-3 bg-white text-indigo-600 font-bold rounded-lg shadow-md hover:scale-105 transform transition"
+          className="mt-6 px-6 py-3 bg-white text-primary-light font-bold rounded-lg shadow-md hover:scale-105 transform transition"
           onClick={handleRestartQuiz}
         >
           Restart Quiz
@@ -165,7 +165,7 @@ const Quiz = () => {
               </p>
             )}
             <button
-              className="mt-6 w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+              className="mt-6 w-full py-3 bg-primary-light text-white rounded-lg hover:bg-primary-light transition"
               onClick={handleNextQuestion}
             >
               Next Question
