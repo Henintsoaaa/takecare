@@ -25,7 +25,7 @@ const Login = () => {
 
     if (formType === "login") {
       // send login request with email and password, if  successful, get a cookie from the server and create a session with it
-      const response = axios.post("http://localhost/hacker-back/signIn", {
+      const response = axios.post("http://localhost/Hack4Her/signIn", {
         email,
         password,
       });
@@ -45,7 +45,7 @@ const Login = () => {
         setError(val.data.message);
       }
     } else {
-      const response = axios.post("http://localhost/hacker-back/signUp", {
+      const response = axios.post("http://localhost/Hack4Her/signUp", {
         username: username,
         email: email,
         password: password,
