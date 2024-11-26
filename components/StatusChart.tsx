@@ -12,7 +12,7 @@ import {
   ArcElement,
 } from "chart.js";
 import { Card } from "./ui/card";
-import { TabsContent } from "./ui/tabs";
+import { Tabs, TabsContent } from "./ui/tabs";
 
 // Register necessary Chart.js components
 ChartJS.register(
@@ -122,23 +122,25 @@ const StatusChart: React.FC = () => {
   };
 
   return (
-    <TabsContent value="overview" className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
-          <h3 className="font-semibold mb-4">État des signalements</h3>
-          <div className="h-[300px]">
-            <Bar data={currentStatusChartData} />
-          </div>
-        </Card>
+    <Tabs>
+      <TabsContent value="overview" className="space-y-6">
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+            <h3 className="font-semibold mb-4">État des signalements</h3>
+            <div className="h-[300px]">
+              <Bar data={currentStatusChartData} />
+            </div>
+          </Card>
 
-        <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
-          <h3 className="font-semibold mb-4">Priorité des signalements</h3>
-          <div className="h-[300px]">
-            <Pie data={priorityChartData} />
-          </div>
-        </Card>
-      </div>
-    </TabsContent>
+          <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+            <h3 className="font-semibold mb-4">Priorité des signalements</h3>
+            <div className="h-[300px]">
+              <Pie data={priorityChartData} />
+            </div>
+          </Card>
+        </div>
+      </TabsContent>
+    </Tabs>
   );
 };
 

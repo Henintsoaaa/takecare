@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import SecurityComplaintForm from "@/components/SecurityComplaintForm"; // Import the SecurityComplaintForm component
 
 // Enregistrez les éléments requis pour les graphiques
 ChartJS.register(
@@ -68,6 +69,8 @@ const StatusChartEvolution: React.FC = () => {
     ],
   });
 
+  const [showForm, setShowForm] = useState<boolean>(false); // State to manage form visibility
+
   const options = {
     scales: {
       y: {
@@ -109,10 +112,37 @@ const StatusChartEvolution: React.FC = () => {
       );
   }, []);
 
+  const handleToggleForm = () => {
+    setShowForm(!showForm); // Toggle the form visibility
+  };
+
   return (
-    <div>
-      <h2>Historique des statuts pour le signalement</h2>
-      <Line data={chartData} options={options} />
+    <div className="relative p-4">
+      {showForm ? (
+        <>
+          <SecurityComplaintForm signalementId={123} />{" "}
+          {/* Replace "some-id" with the actual signalementId */}
+          <button
+            onClick={handleToggleForm}
+            className="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
+          >
+            Retour
+          </button>
+        </>
+      ) : (
+        <>
+          <h2 className="text-xl font-semibold mb-4">
+            Historique des statuts pour le signalement
+          </h2>
+          <button
+            onClick={handleToggleForm}
+            className="absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          >
+            Mon Suivi
+          </button>
+          <Line data={chartData} options={options} />
+        </>
+      )}
     </div>
   );
 };

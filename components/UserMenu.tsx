@@ -28,7 +28,7 @@ const UserMenu: React.FC = () => {
   const handleSOSClick = () => {
     // Trigger SOS action
     console.log("SOS button clicked");
-    redirect("/plainte");
+    redirect("/suivi");
   };
 
   const handleLogoutClick = () => {
@@ -81,7 +81,7 @@ const UserMenu: React.FC = () => {
               onClick={handleSOSClick}
               className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
-              <AlertTriangle className="mr-2" /> SOS
+              <AlertTriangle className="mr-2" /> Suivi
             </button>
             <button
               onClick={handleLogoutClick}

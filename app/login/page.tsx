@@ -9,12 +9,12 @@ import React from "react";
 const Page = () => {
   return (
     <div className="text-black">
-      {/* <Login /> */}
-      <EvaluationForm />
+      <Login />
+      {/* <EvaluationForm />
       <Evaluations />
       <Agenda />
       <StatusChart />
-      <StatusChartEvolution />
+      <StatusChartEvolution /> */}
     </div>
   );
 };

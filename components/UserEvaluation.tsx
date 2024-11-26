@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import EvaluationForm from "@/components/Formulaire_status";
 
 // Define the interface for the evaluation data structure
 interface Evaluation {
@@ -12,7 +13,12 @@ interface Evaluation {
 }
 
 export default function Evaluations() {
-  const [evaluations, setEvaluations] = useState<Evaluation[]>([]); // Use the Evaluation type for state
+  const [evaluations, setEvaluations] = useState<Evaluation[]>([]);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleToggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   // Fetch evaluations from the server
   useEffect(() => {
@@ -101,6 +107,8 @@ export default function Evaluations() {
           <p>Aucune évaluation disponible.</p>
         )}
       </div>
+      <button onClick={handleToggleForm}>Donner un feed-back</button>
+      {showForm && <EvaluationForm />}
     </div>
   );
 }

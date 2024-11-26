@@ -8,6 +8,7 @@ import { usePathname, redirect } from "next/navigation";
 import StatusForUser from "@/components/StatusForUser";
 import ProofSection from "@/components/ProofSection";
 import ResourcesSection from "@/components/ResourcesSection";
+import Agenda from "@/components/Agenda";
 
 interface Post {
   entry_id: number;
@@ -197,7 +198,7 @@ const Page = () => {
             {[
               { value: "posts", icon: <Calendar className="h-5 w-5" /> },
               { value: "contacts", icon: <Heart className="h-5 w-5" /> },
-              { value: "statistics", icon: <Book className="h-5 w-5" /> },
+              { value: "agenda", icon: <Book className="h-5 w-5" /> },
             ].map((tab) => (
               <TabsTrigger
                 key={tab.value}
@@ -262,14 +263,14 @@ const Page = () => {
               )}
             </div>
           </TabsContent>
-          <TabsContent value="statistics">
-            <StatusForUser />
+          <TabsContent value="agenda">
+            <Agenda />
           </TabsContent>
           <TabsContent value="proofs">
             <ProofSection />
           </TabsContent>
           <TabsContent value="resources">
-            <ResourcesSection />
+            <Agenda />
           </TabsContent>
         </Tabs>
       </div>

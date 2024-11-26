@@ -24,6 +24,9 @@ export default function Home() {
   const redirectToPlainte = () => {
     redirect("/plainte");
   };
+  const redirectToActualite = () => {
+    redirect("/actualite");
+  };
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
       <header className="bg-white shadow-sm">
@@ -44,7 +47,7 @@ export default function Home() {
           défense des droits.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center text-2xl text-purple-700">
@@ -109,6 +112,29 @@ export default function Home() {
             <CardFooter>
               <button
                 onClick={redirectToQuizz}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+              >
+                Commencer
+              </button>
+            </CardFooter>
+          </Card>
+          <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl text-purple-700">
+                <MessageCircle className="mr-2" />
+                Actualité
+              </CardTitle>
+              <CardDescription>Soyez en </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-grow">
+              <p className="mb-4">
+                Découvrez en quelques questions comment mieux reconnaitre et
+                agir face au harcèlement
+              </p>
+            </CardContent>
+            <CardFooter>
+              <button
+                onClick={redirectToActualite}
                 className="w-full bg-purple-600 hover:bg-purple-700 text-white"
               >
                 Commencer

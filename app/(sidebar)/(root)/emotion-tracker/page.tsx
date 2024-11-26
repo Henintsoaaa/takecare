@@ -34,11 +34,6 @@ const Page = () => {
         )}
       </div>
 
-      {/* Sidebar for PublicationStyle */}
-      <div className="top-0">
-        <Sidebar />
-      </div>
-
       {/* Emotion Tracker occupying the rest of the space */}
       <div className="flex-grow p-4 bg-gray-50">
         <EmotionTracker />
