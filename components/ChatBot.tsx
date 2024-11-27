@@ -101,17 +101,18 @@ export default function Chat() {
           <XIcon onClick={() => setOpen(false)} className=" cursor-pointer" />
         </div>
         <div className="p-3 flex flex-col gap-2">
-          {discussion.map((chat) => (
+          {discussion.map((chat, index) => (
             <div
+              key={index} // Ensure each child has a unique key
               className={clsx(
                 "w-full flex",
-                chat.sender == "me" ? " justify-end" : ""
+                chat.sender === "me" ? " justify-end" : ""
               )}
             >
               <Text
                 className={clsx(
                   "max-w-52 rounded-md p-2",
-                  chat.sender == "me" ? "bg-secondary/40" : "bg-gray-200"
+                  chat.sender === "me" ? "bg-secondary/40" : "bg-gray-200"
                 )}
               >
                 {chat.message}
