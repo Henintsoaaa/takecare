@@ -1,7 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { MessageCircle, Pause, Send, Volume2, XIcon } from "lucide-react";
+import {
+  Bot,
+  BotIcon,
+  MessageCircle,
+  Pause,
+  Send,
+  Volume2,
+  XIcon,
+} from "lucide-react";
 import { useRef, useState } from "react";
 import { Popover, PopoverContent } from "@/components/ui/popover";
 import { PopoverTrigger } from "@radix-ui/react-popover";
@@ -52,37 +60,10 @@ export default function Chat() {
   return (
     <Popover open={open} onOpenChange={() => setOpen(!open)}>
       <PopoverTrigger>
-        <motion.div
-          animate={
-            open
-              ? {
-                  scale: 1,
-                  rotate: 0,
-                }
-              : {
-                  scale: [1, 2, 2, 1, 1],
-                  rotate: [0, 0, 180, 180, 0],
-                  borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-                }
-          }
-          transition={
-            open
-              ? {
-                  duration: 1,
-                }
-              : {
-                  duration: 2,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                  repeatDelay: 1,
-                }
-          }
-        >
-          <Button className="border-secondary border-2">
-            <MessageCircle />
-            Chat
-          </Button>
-        </motion.div>
+        <Button className="text-white">
+          <BotIcon />
+          Chatbot
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="bg-background flex flex-col justify-end mr-2 relative p-0 h-[400px] overflow-scroll">
         <div className="bg-primary px-5 py-3 rounded-t-lg flex justify-between items-center top-0 fixed z-10 w-full">

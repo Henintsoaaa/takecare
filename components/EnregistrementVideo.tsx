@@ -76,7 +76,7 @@ const EnregistrementVideo: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center h-full">
+    <div className="flex flex-col justify-center min-h-screen">
       <h1 className="text-center text-2xl font-bold mb-4">
         Exprimez-vous en vidéo
       </h1>

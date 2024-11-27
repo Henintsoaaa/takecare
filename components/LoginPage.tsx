@@ -123,7 +123,7 @@ const Login = () => {
               onClick={() => setFormType("login")}
               className={`w-1/2 p-2 rounded-full relative ${
                 formType === "login"
-                  ? "bg-secondary-dark text-white shadow-md"
+                  ? "bg-primary-dark text-white shadow-md"
                   : "text-gray-600"
               }`}
             >
@@ -134,7 +134,7 @@ const Login = () => {
               onClick={() => setFormType("signup")}
               className={`w-1/2 p-2 rounded-full relative ${
                 formType === "signup"
-                  ? "bg-secondary-dark text-white shadow-md"
+                  ? "bg-primary-dark text-white shadow-md"
                   : "text-gray-600"
               }`}
             >
@@ -209,7 +209,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="mt-6 w-full p-3 bg-secondary-dark text-white rounded-full hover:bg-secondary-dark transition duration-200 shadow-md flex items-center justify-center"
+            className="mt-6 w-full p-3 bg-primary-dark text-white rounded-full hover:bg-primary-dark transition duration-200 shadow-md flex items-center justify-center"
           >
             {formType === "login" ? "Log in" : "Signup"}{" "}
             <ArrowRight className="ml-2" />

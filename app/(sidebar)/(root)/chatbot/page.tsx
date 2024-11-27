@@ -3,7 +3,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <div>
+    <div className="flex justify-center items-center h-screen overflow-y-auto">
       <ChatBot />
     </div>
   );

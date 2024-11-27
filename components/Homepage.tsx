@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   Card,
   CardHeader,
@@ -37,7 +38,8 @@ export default function Home() {
   return (
     <div className="min-h-full flex flex-col bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
       <header className="bg-white shadow-sm flex gap-5 md:pl-24 pl-10 items-center">
-        <Heart className="w-12 h-12 text-primary-light" />
+        {/* <Heart className="w-12 h-12 text-primary-light" /> */}
+        <Image src="/logo1.svg" alt="Tech'Her Logo" width={56} height={56} />
         <p className="text-primary-light  font-semibold text-xl py-5 hidden md:block">
           Tech'Her
         </p>

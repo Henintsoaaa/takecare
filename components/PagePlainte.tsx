@@ -22,28 +22,28 @@ const PagePlainte = () => {
     <div className="bg-white rounded-lg shadow-md p-4 h-full w-full mx-6">
       {/* Main Navigation */}
       <Tabs defaultValue="Plainte" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-purple-200 rounded-lg shadow-md mb-4">
+        <TabsList className="grid w-full grid-cols-3 bg-blue-200 rounded-lg shadow-md mb-4">
           {[
             {
               value: "Plainte",
-              icon: <FaCalendar className="h-4 w-4 text-secondary-light" />,
+              icon: <FaCalendar className="h-4 w-4 text-primary-light" />,
             },
             {
               value: "Video",
-              icon: <FaHeart className="h-4 w-4 text-secondary-light" />,
+              icon: <FaHeart className="h-4 w-4 text-primary-light" />,
             },
             {
               value: "Language des signes",
-              icon: <FaBook className="h-4 w-4 text-secondary-light" />,
+              icon: <FaBook className="h-4 w-4 text-primary-light" />,
             },
           ].map((tab) => (
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className={`data-[state=active]:bg-purple-100 flex justify-center items-center p-3 rounded-lg transition-all duration-200 ${
+              className={`data-[state=active]:bg-blue-100 flex justify-center items-center p-3 rounded-lg transition-all duration-200 ${
                 activeTab === tab.value
-                  ? "bg-purple-300 text-secondary-dark"
-                  : "hover:bg-purple-100 text-secondary-light"
+                  ? "bg-blue-300 text-secondary-dark"
+                  : "hover:bg-blue-100 text-primary-light"
               }`}
               onClick={() => setActiveTab(tab.value)}
             >

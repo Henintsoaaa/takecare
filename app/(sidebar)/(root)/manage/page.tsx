@@ -3,7 +3,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <div>
+    <div className="h-screen overflow-y-auto">
       <SignalementBoard />
     </div>
   );

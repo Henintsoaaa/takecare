@@ -10,7 +10,7 @@ const Page = () => {
   };
 
   return (
-    <div className="min-h-full">
+    <div className="h-screen overflow-y-auto">
       <Evaluations />
     </div>
   );

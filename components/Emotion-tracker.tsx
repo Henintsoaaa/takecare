@@ -36,14 +36,7 @@ const EmotionTracker = () => {
   }, []);
 
   return (
-    <div className="p-4 space-y-6 h-full">
-      {/* <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-indigo-800 mb-2">
-          Partager vos idées, soyez à l'écoute !
-        </h1>
-        <p className="text-gray-600">Suivez votre bien-être jour après jour</p>
-      </div> */}
-
+    <div className="h-screen p-4 space-y-6">
       <div className="flex flex-col md:flex-row relative z-0 h-full">
         {isAppear && (
           <>
