@@ -11,7 +11,7 @@ export default {
       colors: {
         primary: {
           DEFAULT: "#191970", // Purple
-          light: "#191970", // Light Purple
+          light: "#3730a3", // Light Purple
           dark: "#1e3a8a", // Vivid Purple
         },
         secondary: {

@@ -24,7 +24,7 @@ const Sidebar = () => {
       <div className="pl-3 relative z-10">
         <nav className="mt-10">
           <Link href="/plainte">
-            <div className="flex items-center p-3 hover:bg-primary-black transition-colors duration-200 cursor-pointer rounded-md">
+            <div className="flex items-center p-3 hover:bg-primary-dark transition-colors duration-200 cursor-pointer rounded-md">
               <Clipboard className="mr-3 h-5 w-5 text-white" />
               <span className="text-white font-semibold hidden md:block">
                 Plainte
@@ -32,7 +32,7 @@ const Sidebar = () => {
             </div>
           </Link>
           <Link href="/emotion-tracker">
-            <div className="flex items-center p-3 hover:bg-primary-black transition-colors duration-200 cursor-pointer rounded-md">
+            <div className="flex items-center p-3 hover:bg-primary-dark transition-colors duration-200 cursor-pointer rounded-md">
               <MessageCircle className="mr-3 h-5 w-5 text-white" />
               <span className="text-white font-semibold hidden md:block">
                 Communauté
@@ -40,7 +40,7 @@ const Sidebar = () => {
             </div>
           </Link>
           <Link href="/quizz">
-            <div className="flex items-center p-3 hover:bg-secondary-light transition-colors duration-200 cursor-pointer rounded-md">
+            <div className="flex items-center p-3 hover:bg-primary-dark transition-colors duration-200 cursor-pointer rounded-md">
               <Compass className="mr-3 h-5 w-5 text-white" />
               <span className="text-white font-semibold hidden md:block">
                 Découverte
@@ -48,7 +48,7 @@ const Sidebar = () => {
             </div>
           </Link>
           <Link href="/actualite">
-            <div className="flex items-center p-3 hover:bg-secondary-light transition-colors duration-200 cursor-pointer rounded-md">
+            <div className="flex items-center p-3 hover:bg-primary-dark transition-colors duration-200 cursor-pointer rounded-md">
               <Newspaper className="mr-3 h-5 w-5 text-white" />
               <span className="text-white font-semibold hidden md:block">
                 Actualité
@@ -56,7 +56,7 @@ const Sidebar = () => {
             </div>
           </Link>
           <Link href="/feedback">
-            <div className="flex items-center p-3 hover:bg-secondary-light transition-colors duration-200 cursor-pointer rounded-md">
+            <div className="flex items-center p-3 hover:bg-primary-dark transition-colors duration-200 cursor-pointer rounded-md">
               <Cat className="mr-3 h-5 w-5 text-white" />
               <span className="text-white font-semibold hidden md:block">
                 Feed-back

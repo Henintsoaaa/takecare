@@ -55,7 +55,7 @@ const GeographicDistributionChart: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className=" h-100">
       <h2>Répartition des signalements par région</h2>
       <Bar data={chartData} />
     </div>

@@ -64,41 +64,44 @@ export default function Evaluations() {
   };
 
   return (
-    <div className="min-h-full bg-white p-6">
+    <div className="min-h-full bg-white p-6 flex flex-col justify-center items-center">
       <h1 className="text-3xl font-semibold text-center mb-6">Évaluations</h1>
-      <div className="grid w-full sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid w-full gap-6">
         {evaluations.length > 0 ? (
           evaluations.map((evaluation, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out"
+              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out flex items-center flex-col"
             >
-              <p className="text-gray-500 mb-4">
-                <strong>Commentaire:</strong>{" "}
-                {evaluation.comment || "Aucun commentaire"}
-              </p>
-              <div className="mb-4">
-                <strong>Clarté:</strong>
-                <div className="flex items-center space-x-1">
-                  {renderStars(evaluation.clarity)}
+              <div>
+                <p className="text-gray-500 mb-4">
+                  <strong>Commentaire:</strong>{" "}
+                  {evaluation.comment || "Aucun commentaire"}
+                </p>
+
+                <div className="mb-4">
+                  <strong>Clarté:</strong>
+                  <div className="flex items-center space-x-1">
+                    {renderStars(evaluation.clarity)}
+                  </div>
                 </div>
-              </div>
-              <div className="mb-4">
-                <strong>Effectivité:</strong>
-                <div className="flex items-center space-x-1">
-                  {renderStars(evaluation.effectiveness)}
+                <div className="mb-4">
+                  <strong>Effectivité:</strong>
+                  <div className="flex items-center space-x-1">
+                    {renderStars(evaluation.effectiveness)}
+                  </div>
                 </div>
-              </div>
-              <div className="mb-4">
-                <strong>Temps de réponse:</strong>
-                <div className="flex items-center space-x-1">
-                  {renderStars(evaluation.response_time)}
+                <div className="mb-4">
+                  <strong>Temps de réponse:</strong>
+                  <div className="flex items-center space-x-1">
+                    {renderStars(evaluation.response_time)}
+                  </div>
                 </div>
-              </div>
-              <div className="mb-4">
-                <strong>Empathie:</strong>
-                <div className="flex items-center space-x-1">
-                  {renderStars(evaluation.empathy)}
+                <div className="mb-4">
+                  <strong>Empathie:</strong>
+                  <div className="flex items-center space-x-1">
+                    {renderStars(evaluation.empathy)}
+                  </div>
                 </div>
               </div>
             </div>
@@ -107,7 +110,12 @@ export default function Evaluations() {
           <p>Aucune évaluation disponible.</p>
         )}
       </div>
-      <button onClick={handleToggleForm}>Donner un feed-back</button>
+      <button
+        onClick={handleToggleForm}
+        className="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out"
+      >
+        Donner un feed-back
+      </button>
       {showForm && <EvaluationForm />}
     </div>
   );

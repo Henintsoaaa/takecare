@@ -37,8 +37,8 @@ export default function Home() {
   return (
     <div className="min-h-full flex flex-col bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
       <header className="bg-white shadow-sm flex gap-5 md:pl-24 pl-10 items-center">
-        <Heart className="w-12 h-12 text-secondary-light" />
-        <p className="text-secondary-light  font-semibold text-xl py-5 hidden md:block">
+        <Heart className="w-12 h-12 text-primary-light" />
+        <p className="text-primary-light  font-semibold text-xl py-5 hidden md:block">
           Tech'Her
         </p>
       </header>
@@ -71,7 +71,7 @@ export default function Home() {
             <CardFooter>
               <button
                 onClick={redirectToPlainte}
-                className="flex items-center justify-center w-full py-3 px-4 bg-secondary-light hover:bg-secondary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-secondary-light focus:ring-opacity-50"
+                className="flex items-center justify-center w-full py-3 px-4 bg-primary-light hover:bg-primary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
               >
                 Soumettre
               </button>
@@ -94,7 +94,7 @@ export default function Home() {
             <CardFooter>
               <button
                 onClick={redirectToPub}
-                className="flex items-center justify-center w-full py-3 px-4 bg-secondary-light hover:bg-secondary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-secondary-light focus:ring-opacity-50"
+                className="flex items-center justify-center w-full py-3 px-4 bg-primary-light hover:bg-primary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
               >
                 Se connecter
               </button>
@@ -118,7 +118,7 @@ export default function Home() {
             <CardFooter>
               <button
                 onClick={redirectToQuizz}
-                className="flex items-center justify-center w-full py-3 px-4 bg-secondary-light hover:bg-secondary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-secondary-light focus:ring-opacity-50"
+                className="flex items-center justify-center w-full py-3 px-4 bg-primary-light hover:bg-primary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
               >
                 Commencer
               </button>
@@ -143,7 +143,7 @@ export default function Home() {
             <CardFooter>
               <button
                 onClick={redirectToActualite}
-                className="flex items-center justify-center w-full py-3 px-4 bg-secondary-light hover:bg-secondary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-secondary-light focus:ring-opacity-50"
+                className="flex items-center justify-center w-full py-3 px-4 bg-primary-light hover:bg-primary-light text-white font-semibold rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-light focus:ring-opacity-50"
               >
                 <span className="mr-2">Commencer</span>
               </button>
