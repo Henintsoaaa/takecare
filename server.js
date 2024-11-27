@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const http = require("http");
 const { Server } = require("socket.io");
-const { createConnection } = require("./lib/db");
+//const { createConnection } = require("./lib/db");
 
 const app = express();
 const server = http.createServer(app);
@@ -51,65 +51,67 @@ app.get("/", (req, res) => {
   res.send("<h1>Bienvenue sur le serveur!</h1>");
 });
 
-// Route to fetch private messages
-app.get("/api/messages", async (req, res) => {
-  const senderId = req.query.senderId;
-  const receiverId = req.query.receiverId;
 
-  if (!senderId) {
-    return res.status(400).json({ error: "User ID is required" });
-  }
 
-  try {
-    const conn = await createConnection();
-    const [rows] = await conn.execute(
-      `SELECT * FROM private_messages 
-    WHERE (sender_id = ? AND receiver_id = ?) 
-    OR (sender_id = ? AND receiver_id = ?)
-    ORDER BY sent_at ASC;`,
-      [7, 5, 5, 7]
-    );
-    await conn.end();
+// // Route to fetch private messages
+// app.get("/api/messages", async (req, res) => {
+//   const senderId = req.query.senderId;
+//   const receiverId = req.query.receiverId;
 
-    return res.json(rows);
-  } catch (error) {
-    console.error("Error fetching messages:", error);
-    return res.status(500).json({ error: "Internal server error" });
-  }
-});
+//   if (!senderId) {
+//     return res.status(400).json({ error: "User ID is required" });
+//   }
 
-// Socket.IO connection handling
-io.on("connection", (socket) => {
-  console.log("Client connected");
+//   try {
+//     const conn = await createConnection();
+//     const [rows] = await conn.execute(
+//       `SELECT * FROM private_messages 
+//     WHERE (sender_id = ? AND receiver_id = ?) 
+//     OR (sender_id = ? AND receiver_id = ?)
+//     ORDER BY sent_at ASC;`,
+//       [7, 5, 5, 7]
+//     );
+//     await conn.end();
 
-  socket.on("private-message", async (data) => {
-    try {
-      const conn = await createConnection();
-      const [result] = await conn.execute(
-        "INSERT INTO private_messages (sender_id, receiver_id, content) VALUES (?, ?, ?)",
-        [data.senderId, data.receiverId, data.content]
-      );
-      await conn.end();
+//     return res.json(rows);
+//   } catch (error) {
+//     console.error("Error fetching messages:", error);
+//     return res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
-      io.to(`user_${data.receiverId}`).emit("new-message", {
-        id: result.insertId,
-        sender_id: data.senderId,
-        content: data.content,
-        sent_at: new Date(),
-      });
-    } catch (error) {
-      console.error("Error saving message:", error);
-    }
-  });
+// // Socket.IO connection handling
+// io.on("connection", (socket) => {
+//   console.log("Client connected");
 
-  socket.on("join-user", (senderId) => {
-    socket.join(`user_${senderId}`);
-  });
+//   socket.on("private-message", async (data) => {
+//     try {
+//       const conn = await createConnection();
+//       const [result] = await conn.execute(
+//         "INSERT INTO private_messages (sender_id, receiver_id, content) VALUES (?, ?, ?)",
+//         [data.senderId, data.receiverId, data.content]
+//       );
+//       await conn.end();
 
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-  });
-});
+//       io.to(`user_${data.receiverId}`).emit("new-message", {
+//         id: result.insertId,
+//         sender_id: data.senderId,
+//         content: data.content,
+//         sent_at: new Date(),
+//       });
+//     } catch (error) {
+//       console.error("Error saving message:", error);
+//     }
+//   });
+
+//   socket.on("join-user", (senderId) => {
+//     socket.join(`user_${senderId}`);
+//   });
+
+//   socket.on("disconnect", () => {
+//     console.log("Client disconnected");
+//   });
+// });
 
 // Route pour récupérer les données du fichier status.json
 app.get("/api/Datastatus", (req, res) => {

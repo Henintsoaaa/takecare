@@ -3,7 +3,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <div className="h-full">
+    <div className="h-screen overflow-y-auto">
       <Quiz />
     </div>
   );
