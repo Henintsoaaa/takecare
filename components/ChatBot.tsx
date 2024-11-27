@@ -65,9 +65,9 @@ export default function Chat() {
           Chatbot
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="bg-background flex flex-col justify-end mr-2 relative p-0 h-[400px] overflow-scroll">
+      <PopoverContent className="bg-background flex flex-col justify-end mr-2 relative p-0 h-[400px] overflow-scroll bg-white">
         <div className="bg-primary px-5 py-3 rounded-t-lg flex justify-between items-center top-0 fixed z-10 w-full">
-          <Text>Assitant Tech'her</Text>
+          <span className="text-white">Assitant Tech'her</span>
           <audio
             ref={audioRef}
             src={audioSrc}
