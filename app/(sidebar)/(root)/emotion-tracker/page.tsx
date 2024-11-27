@@ -13,7 +13,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen overflow-y-auto">
+    <div className="flex flex-col md:flex-row h-full">
       {/* Mobile Menu Icon */}
       <div className="md:hidden h-full relative top-4">
         <button onClick={toggleMenu} className="p-2">
