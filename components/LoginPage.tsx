@@ -92,7 +92,7 @@ const Login = () => {
     <AnimatePresence>
       <motion.div
         layout
-        className="flex flex-col items-center justify-center min-h-full bg-gradient-to-br from-indigo-50 to-purple-100"
+        className="flex flex-col items-center justify-center min-h-full bg-gradient-to-br from-indigo-50 to-purple-100 "
       >
         <motion.div
           initial={{ opacity: 0, y: -50 }}
