@@ -22,7 +22,7 @@ const Page = () => {
           <SignalementCharts />
         </div>
         {/* Répartition Géographique spans 2 columns and 1 row */}
-        <div className="bg-white shadow-lg rounded-lg p-6 col-span-2 row-span-1">
+        <div className="bg-white shadow-lg rounded-lg p-6 col-span-2 row-span-1 h-100">
           <h2 className="text-xl font-semibold mb-4">
             Répartition Géographique
           </h2>

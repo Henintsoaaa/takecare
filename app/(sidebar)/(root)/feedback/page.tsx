@@ -10,7 +10,7 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-full">
       <Evaluations />
     </div>
   );

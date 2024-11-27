@@ -51,29 +51,19 @@ const EditProfile: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   useEffect(() => {
-    if (document.cookie) {
-      const id = parseInt(document.cookie.split("=")[1]);
-      setUserId(id);
-      console.log("User  ID:", id); // Log userId
-    }
-  }, []);
-
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get<UserProfileData>(
-        `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
-      );
-      console.log("Fetched User Data:", response.data); // Log the fetched data
-      setUserData(response.data);
-    } catch (error) {
-      console.error("Error fetching user data", error);
-    }
-  };
-
-  useEffect(() => {
-    if (userId !== null) {
-      fetchUserData();
-    }
+    const fetchUserData = async () => {
+      if (userId !== null) {
+        try {
+          const response = await axios.get<UserProfileData>(
+            `${process.env.NEXT_PUBLIC_IP_KEY}/profile?user_id=${userId}`
+          );
+          setUserData(response.data);
+        } catch (error) {
+          console.error("Error fetching user data", error);
+        }
+      }
+    };
+    fetchUserData();
   }, [userId]);
 
   const handleInputChange = (
@@ -110,19 +100,11 @@ const EditProfile: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Validate inputs
       if (newPassword.newPassword !== newPassword.confirmPassword) {
         alert("Passwords do not match");
         return;
       }
 
-      // Check if userData is populated
-      if (!userData || !userData.id) {
-        console.error("User  data is not available");
-        return;
-      }
-
-      // Prepare data for submission
       const formData = new FormData();
       formData.append("userId", userData.id.toString());
       formData.append("username", userData.username);
@@ -141,7 +123,6 @@ const EditProfile: React.FC = () => {
         formData.append("profilePicture", selectedImage);
       }
 
-      // Send the updated data to the backend
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_IP_KEY}/users/update`,
         formData,
@@ -153,22 +134,22 @@ const EditProfile: React.FC = () => {
       );
 
       console.log("Profile Updated", response.data);
-      router.push(`/user/${userData.id}`); // Redirect after successful update
+      router.push(`/user/${userData.id}`);
     } catch (error) {
       console.error("Error updating profile", error);
     }
   };
 
   return (
-    <div className="container mx-auto p-6 bg-gray-100 h-full">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 overflow-y-auto flex-1">
         <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
           Edit Profile
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Profile Picture Section */}
-          <div className="flex flex-col items-center mb-6">
+          <div className="flex flex-col items center mb-6">
             <div className="relative">
               <Image
                 src={
@@ -179,11 +160,11 @@ const EditProfile: React.FC = () => {
                 alt="Profile Picture"
                 width={150}
                 height={150}
-                className="rounded-full border-4 border-purple-200"
+                className="rounded-full border-4 border-purple-300 shadow-lg"
               />
               <label
                 htmlFor="imageUpload"
-                className="absolute bottom-0 right-0 bg-secondary-light text-white p-2 rounded-full cursor-pointer"
+                className="absolute bottom-0 right-0 bg-purple-500 text-white p-2 rounded-full cursor-pointer hover:bg-purple-600 transition duration-200"
               >
                 <ImageIcon size={20} />
                 <input
@@ -208,7 +189,7 @@ const EditProfile: React.FC = () => {
                 name="username"
                 value={userData.username}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded-md focus:outline-secondary-light"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 required
               />
             </div>
@@ -221,7 +202,7 @@ const EditProfile: React.FC = () => {
                 name="email"
                 value={userData.email}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded-md focus:outline-secondary-light"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 required
               />
             </div>
@@ -236,7 +217,7 @@ const EditProfile: React.FC = () => {
               name="description"
               value={userData.description}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded-md focus:outline-secondary-light"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               rows={4}
             />
           </div>
@@ -244,7 +225,7 @@ const EditProfile: React.FC = () => {
           {/* Password Change */}
           <div className="bg-gray-50 p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4 flex items-center">
-              <Lock className=" mr-2" /> Change Password
+              <Lock className="mr-2" /> Change Password
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
               <input
@@ -253,7 +234,7 @@ const EditProfile: React.FC = () => {
                 placeholder="Current Password"
                 value={newPassword.currentPassword}
                 onChange={handlePasswordChange}
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
               <input
                 type="password"
@@ -261,7 +242,7 @@ const EditProfile: React.FC = () => {
                 placeholder="New Password"
                 value={newPassword.newPassword}
                 onChange={handlePasswordChange}
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
               <input
                 type="password"
@@ -269,7 +250,7 @@ const EditProfile: React.FC = () => {
                 placeholder="Confirm Password"
                 value={newPassword.confirmPassword}
                 onChange={handlePasswordChange}
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
           </div>
@@ -295,7 +276,7 @@ const EditProfile: React.FC = () => {
                 onChange={() => handlePrivacyToggle("showEmotionHistory")}
                 className="mr-2"
               />
-              <label>Show my emotion history</label>
+              <label>Show my emotion history </label>
             </div>
           </div>
 
@@ -303,7 +284,7 @@ const EditProfile: React.FC = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="flex items-center bg-secondary-light text-white px-4 py-2 rounded-md hover:bg-secondary-light transition duration-200"
+              className="flex items-center bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition duration-200"
             >
               <Save className="mr-2" /> Save Changes
             </button>
