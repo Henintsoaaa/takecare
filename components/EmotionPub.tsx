@@ -43,12 +43,13 @@ const EmotionShare = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   let user_id: string | undefined;
+  let user_name: string | undefined;
 
   if (!document.cookie) {
     // Redirect to login page if user is not logged in
     redirect("/login");
   } else {
-    user_id = document.cookie.split(",")[1].split("=")[1];
+    user_name = document.cookie.split(",")[3].split("=")[1];
   }
 
   const fetchPosts = async () => {
@@ -115,7 +116,7 @@ const EmotionShare = () => {
         user_id: Number(user_id),
         content: commentText,
         created_at: new Date().toISOString(), // Use current date for local display
-        username: "Your Username", // Replace with actual username if available
+        username: user_name,
       };
 
       // Update the post with the new comment
@@ -210,7 +211,7 @@ const EmotionShare = () => {
   };
 
   return (
-    <div className="p-5 w-full flex flex-col gap-4">
+    <div className="p-5 w-full flex flex-col gap-4 min-h-full overflow-y-scroll">
       <div className="mb-4 flex gap-6 items-center flex-nowrap">
         <input
           type="text"

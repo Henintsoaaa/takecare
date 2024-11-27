@@ -15,8 +15,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="flex text-black max-h-full">
-      <div className="">
+    <div className="flex text-black max-h-screen">
+      <div className="h-full">
         <Sidebar />
       </div>
       <div className="flex-grow max-h-full bg-gray-100">{children}</div>

@@ -27,7 +27,7 @@ export default {
         neutral: {
           DEFAULT: "#6B7280", // Gray (unchanged)
           light: "#D1D5DB", // Light Gray (unchanged)
-          dark: "#374151", // Dark Gray (unchanged)
+          dark: "#FB4COD", // Dark Gray (unchanged)
         },
         success: {
           DEFAULT: "#34D399", // Green (unchanged)
