@@ -113,7 +113,7 @@ const TechHerLandingPage: React.FC = () => {
     <div className="bg-gradient-to-br from-indigo-50 to-purple-100 min-h-full">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-md">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-6 py-2 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             {/* <Heart className="text-primary-light w-8 h-8" /> */}
             <Image
@@ -121,10 +121,12 @@ const TechHerLandingPage: React.FC = () => {
               alt="Tech'Her Logo"
               width={56}
               height={56}
+              className="shadow-lg shadow-orange-500 rounded-full"
             />
-            <span className="text-xl font-bold text-primary-dark">
-              Tech'Her
-            </span>
+           <span className="text-xl font-bold text-primary-dark ">
+  Tech'Her
+</span>
+
           </div>
           <div className="hidden md:flex space-x-6">
             <a

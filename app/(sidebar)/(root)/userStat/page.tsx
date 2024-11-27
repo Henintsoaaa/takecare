@@ -2,7 +2,7 @@ import FonctNavigationCard from "@/components/UserFonctNav";
 
 const Page = () => {
   return (
-    <div>
+    <div className="h-screen overflow-y-auto">
       <FonctNavigationCard />
     </div>
   );

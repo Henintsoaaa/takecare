@@ -110,7 +110,7 @@ export default function MessagesPage() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 h-screen overflow-y-auto">
       <h1 className="text-2xl font-semibold mb-4">Messages</h1>
       {loading ? (
         <p>Loading messages...</p>

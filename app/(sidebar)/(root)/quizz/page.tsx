@@ -11,7 +11,7 @@ const Page = () => {
   };
 
   return (
-    <div className="h-full flex items-center justify-center bg-gray-100 pt-32">
+    <div className="flex items-center justify-center bg-gray-100 pt-32 h-screen overflow-y-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
         <div className="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105">
           <h2 className="text-3xl font-bold text-primary-light mb-2">Quizz</h2>
