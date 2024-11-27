@@ -11,7 +11,7 @@ import {
 
 const Sidebar = () => {
   return (
-    <div className="relative w-64 h-screen bg-primary text-white border-r flex flex-col items-center gap-6">
+    <div className="relative w-64 h-screen bg-primary text-white border-r flex flex-col items-center gap-6 fixed">
       {/* Black to white blur gradient overlay */}
       {/* <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-30 backdrop-blur-lg rounded-lg"></div> */}
 

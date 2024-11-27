@@ -15,7 +15,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="flex text-black h-screen">
+    <div className="flex text-black">
       <Sidebar />
       <div className="flex-grow h-screen bg-gray-100">{children}</div>
     </div>
