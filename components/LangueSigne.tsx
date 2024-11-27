@@ -93,7 +93,7 @@ const VideoCapture = () => {
   };
 
   return (
-    <div className="min-h-full flex flex-col items-center justify-center p-6 bg-gray-50">
+    <div className="h-full flex flex-col items-center justify-center p-6 bg-gray-50">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
         Capture automatique des frames vidéo
       </h1>

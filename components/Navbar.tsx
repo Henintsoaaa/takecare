@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { MessageCircle, Heart } from "lucide-react"; // Importing icons from lucide-react
+import { MessageCircle, Heart, Bot } from "lucide-react"; // Importing icons from lucide-react
 import Notification from "./Notification";
 import UserMenu from "./UserMenu"; // Import the UserMenu component
 
@@ -12,8 +12,8 @@ const Navbar = () => {
           href="/chatbot"
           className="text-primary-light hover:text-primary-light transition-colors duration-200 flex gap-3 justify-center items-center"
         >
-          <Heart size={24} className="md:w-[30px] md:h-[30px]" />
-          <span className="hidden md:block">Notifications</span>
+          <Bot size={24} className="md:w-[30px] md:h-[30px]" />
+          <span className="hidden md:block">Chatbot</span>
         </Link>
         <Link
           href="/messages"

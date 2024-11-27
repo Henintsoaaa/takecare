@@ -42,7 +42,7 @@ const Recommandation = () => {
     });
   };
   const handleBack = () => {
-    redirect("/emotion-tracker");
+    redirect("/quizz");
   };
 
   return (
@@ -54,7 +54,6 @@ const Recommandation = () => {
           className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
         >
           <ArrowLeft className="mr-2" />
-          Retour à Emotion Tracker
         </button>
 
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
@@ -96,7 +95,7 @@ const Recommandation = () => {
 
           <button
             onClick={handleGetRecommendations}
-            className="bg-green-500 text-white rounded-md py-2 hover:bg-green-600 transition duration-200 w-full font-semibold"
+            className="bg-primary-dark text-white rounded-md py-2 hover:bg-primary-light transition duration-200 w-full font-semibold"
           >
             Obtenir des recommandations
           </button>

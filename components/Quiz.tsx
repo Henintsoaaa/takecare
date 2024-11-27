@@ -78,12 +78,12 @@ const Quiz = () => {
 
   if (selectedDomainIndex === null) {
     return (
-      <div className="flex flex-col justify-center items-center h-full bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white">
+      <div className="flex flex-col justify-center items-center h-full pt-24">
         <div className="text-center mb-10">
-          <h1 className="text-5xl font-extrabold mb-4">
-            🎓 Welcome to the Quiz
+          <h1 className="text-5xl font-extrabold mb-4 text-primary-dark">
+            🎓 Bienvenue sur le quiz!
           </h1>
-          <p className="text-lg">Choose a domain to start!</p>
+          <p className="text-lg">Choisir une domaine pour commencer!</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {questionsData.map((domain: Domain, index: number) => (
@@ -110,9 +110,11 @@ const Quiz = () => {
 
   if (quizFinished) {
     return (
-      <div className="flex flex-col justify-center items-center h-full bg-gradient-to-br from-primary-light via-secondary-light to-pink-500 text-white text-center">
-        <h1 className="text-4xl font-bold mb-4">Quiz Finished!</h1>
-        <p className="text-2xl">Your final score is:</p>
+      <div className="flex flex-col justify-center items-center h-full text-center pt-32">
+        <h1 className="text-4xl font-bold mb-4 text-primary-dark">
+          Quiz fini!
+        </h1>
+        <p className="text-2xl">Votre score final est:</p>
         <p className="text-5xl font-bold mt-2">
           {score} / {currentDomain.questions.length}
         </p>
@@ -120,7 +122,7 @@ const Quiz = () => {
           className="mt-6 px-6 py-3 bg-white text-primary-light font-bold rounded-lg shadow-md hover:scale-105 transform transition"
           onClick={handleRestartQuiz}
         >
-          Restart Quiz
+          Recommencer Quiz
         </button>
       </div>
     );
@@ -158,17 +160,17 @@ const Quiz = () => {
         {selectedAnswer !== null && (
           <div className="mt-4">
             {isCorrectAnswer ? (
-              <p className="text-green-600 font-bold">Correct answer! 🎉</p>
+              <p className="text-green-600 font-bold">Bonne réponse! 🎉</p>
             ) : (
               <p className="text-red-600 font-bold">
-                Wrong answer. The correct answer was: {correctAnswerText}.
+                Mauvaise réponse. La bonne réponse était: {correctAnswerText}.
               </p>
             )}
             <button
               className="mt-6 w-full py-3 bg-primary-light text-white rounded-lg hover:bg-primary-light transition"
               onClick={handleNextQuestion}
             >
-              Next Question
+              Question suivante!
             </button>
           </div>
         )}

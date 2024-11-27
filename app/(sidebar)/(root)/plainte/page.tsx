@@ -17,7 +17,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex bg-gradient-to-br from-purple-50 via-pink-50 h-full justify-center items-center pt-5 h-full">
+    <div className="flex bg-gradient-to-br from-indigo-50 via-purple-50 h-full justify-center items-center pt-5 ">
       <PagePlainte />
     </div>
   );

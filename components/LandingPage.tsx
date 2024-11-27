@@ -16,6 +16,7 @@ import {
   X, // Import X icon for closing the menu
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const TechHerLandingPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -114,7 +115,13 @@ const TechHerLandingPage: React.FC = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Heart className="text-primary-light w-8 h-8" />
+            {/* <Heart className="text-primary-light w-8 h-8" /> */}
+            <Image
+              src="/logo1.svg"
+              alt="Tech'Her Logo"
+              width={56}
+              height={56}
+            />
             <span className="text-xl font-bold text-primary-dark">
               Tech'Her
             </span>
@@ -407,7 +414,13 @@ const TechHerLandingPage: React.FC = () => {
         <div className="container mx-auto px-6 grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Heart className="text-white w-8 h-8" />
+              {/* <Heart className="text-white w-8 h-8" /> */}
+              <Image
+                src="/logo2.svg"
+                alt="Tech'Her Logo"
+                width={56}
+                height={56}
+              />
               <span className="text-xl font-bold">Tech'Her</span>
             </div>
             <p className="text-indigo-200">
