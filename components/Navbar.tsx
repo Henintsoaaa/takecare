@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="flex space-x-4 items-center">
         <Link
           href="/chatbot"
-          className="text-primary-light hover:text-primary-light transition-colors duration-200 flex gap-2 justify-center items-center"
+          className="text-primary-light hover:text-primary-light transition-colors duration-200 flex gap-3 justify-center items-center"
         >
           <Heart size={24} className="md:w-[30px] md:h-[30px]" />
           <span className="hidden md:block">Notifications</span>
