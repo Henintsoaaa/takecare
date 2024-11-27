@@ -14,7 +14,7 @@ export const Text: React.FC<TextProps> = ({
   className,
 }) => {
   // Styles de base et variantes
-  const baseStyles = "text-gray-800";
+  const baseStyles = "text-white";
   const variants = {
     default: "text-base",
     title: "text-2xl font-bold",
