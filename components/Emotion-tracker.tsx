@@ -86,7 +86,7 @@ const EmotionTracker = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row flex-grow w-full justify-between px-5">
+        <div className="flex flex-col md:flex-row flex-grow w-full justify-between px-5 ">
           <div className="overflow-y-auto max-h-full w-full mx-auto">
             <EmotionShare />
           </div>
